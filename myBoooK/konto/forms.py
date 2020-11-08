@@ -1,5 +1,5 @@
 from django import forms
 
 class LogowanieForm(forms.Form):
-    nazwaUzytkownika = forms.CharField()
-    haslo = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)

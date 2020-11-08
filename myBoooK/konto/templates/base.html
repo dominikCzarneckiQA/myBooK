@@ -8,11 +8,10 @@
 </head>
 <body>
     <div id="header">
-        <img src="{% static 'myBooK.mp4' %}" alt="Logo">
         {% if request.user.is_authenticated %}
             <ul class="menu">
-                <li {% if section == "tablica" %} class="selected"{% endif %}>
-                    <a href="{% url "tablica" %}">Panel główny </a>
+                <li {% if section == "dashboard" %} class="selected"{% endif %}>
+                    <a href="{% url "dashboard" %}">Panel główny </a>
                 </li>
                 <li {% if section == "zdjecia" %}class="selected"{% endif %}>
                     <a href="#">Zdjęcia</a>
@@ -25,9 +24,9 @@
         <span class="user">
             {% if request.user.is_authenticated %}
                 Siemanko, {{ request.user.first_name }}!
-                    <a href="{% url 'wyloguj' %}">Wyloguj</a>
+                    <a href="{% url 'logout' %}">Wyloguj</a>
                 {% else  %}
-                    <a href="{% url 'zaloguj' %}">Zaloguj</a>
+                    <a href="{% url 'login' %}">Zaloguj</a>
             {% endif %}
         </span>
     </div>

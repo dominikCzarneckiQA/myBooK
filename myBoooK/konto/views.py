@@ -5,23 +5,31 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from .forms import LogowanieForm
 
+
 # podstawowy widok logowania użytkownika
 
-def logowanie_uzytkownik(request):
+@login_required
+def tablica(request):
+    return render(request,
+                  'dashboard.html',
+                  {'section': 'tablica'})
+
+
+def user_login(request):
     if request.method == "POST":
-        formularz = LogowanieForm(request.POST)
-        if formularz.is_valid():
-            cd = formularz.cleaned_data
-            user = authenticate(username=cd['nazwauzytko'],
-                                password=cd['haslo'])
+        form = LogowanieForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(username=cd['username'],
+                                password=cd['password'])
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponse('Hurra! Uwierzytelnienie pomyślne! :]')
+                    return HttpResponse('Uwierzytelnienie zakończyło się sukcesem!')
                 else:
-                    return HttpResponse("Niestety. Te konto jest niedostępne! :<")
+                    return HttpResponse("Niestety. Te konto jest zablokowane :(")
             else:
-                return HttpResponse("Przykro mi.. Te dane są nieprawidłowe :(")
+                return HttpResponse("Nieprawidłowe dane! Spróbuj ponownie. ")
     else:
-        formularz = LogowanieForm()
-    return render(request, 'konto/logowanie.html', {'form': formularz})
+        form = LogowanieForm()
+    return render(request, 'konto/login.html', {'form': form})
