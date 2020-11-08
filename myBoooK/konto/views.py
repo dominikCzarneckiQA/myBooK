@@ -24,4 +24,4 @@ def logowanie_uzytkownik(request):
                 return HttpResponse("Przykro mi.. Te dane są nieprawidłowe :(")
     else:
         formularz = LogowanieForm()
-    return render(request, 'konto/login.html', {'form': formularz})
+    return render(request, 'konto/logowanie.html', {'form': formularz})

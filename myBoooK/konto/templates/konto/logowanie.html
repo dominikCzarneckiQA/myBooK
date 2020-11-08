@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "glowny.html" %}
 
-</body>
-</html>
+{% block title %}
+    myBooK
+{% endblock %}
+
+{% block content %}
+    <form action="." method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+    <p><input type="submit" value="Zaloguj się"></p>
+    </form>
+{% endblock %}

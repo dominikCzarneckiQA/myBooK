@@ -1,10 +1,39 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% block title %} {% endblock %} </title>
+    <link rel="stylesheet" type="text/css" href="{% static "glowny.css" %}">
 </head>
 <body>
-
+    <div id="header">
+        <img src="{% static 'myBooK.mp4' %}" alt="Logo">
+        {% if request.user.is_authenticated %}
+            <ul class="menu">
+                <li {% if section == "tablica" %} class="selected"{% endif %}>
+                    <a href="{% url "tablica" %}">Panel główny </a>
+                </li>
+                <li {% if section == "zdjecia" %}class="selected"{% endif %}>
+                    <a href="#">Zdjęcia</a>
+                </li>
+                <li {% if section == "ziomki" %}class="selected"{% endif %}>
+                    <a href="#">Ziomki</a>
+                </li>
+            </ul>
+        {% endif %}
+        <span class="user">
+            {% if request.user.is_authenticated %}
+                Siemanko, {{ request.user.first_name }}!
+                    <a href="{% url 'wyloguj' %}">Wyloguj</a>
+                {% else  %}
+                    <a href="{% url 'zaloguj' %}">Zaloguj</a>
+            {% endif %}
+        </span>
+    </div>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
 </html>
