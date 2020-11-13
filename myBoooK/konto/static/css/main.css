@@ -1,0 +1,192 @@
+body
+{
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    background: #f8f9fa ;
+    color: #212529
+}
+/* PSEUDO-KLASY  HIPERLACZA */
+a:link
+{
+
+}
+
+a:visited
+{
+
+}
+
+a:focus
+{
+
+}
+
+a:hover
+{
+
+}
+
+/* ZNACZNIKI GLOBALNE */
+
+p
+{
+
+}
+
+ol,ul
+{
+    float:left;
+}
+
+li,ul
+{
+    padding: 10px;
+    float: left;
+    margin-right:10px;
+    list-style-type: none;
+}
+
+li ul {
+    margin-bottom: 0;
+    float: left;
+
+}
+h1,h2,h3
+{
+
+}
+
+form
+{
+
+}
+
+
+/* LOGOWANIE */
+.formularz-logowanie
+{
+    align-items: center;
+    background-color: #fff;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, .1), 0 11px 18px rgba(0, 0, 0, .1);
+    box-sizing: border-box;
+    margin: 130px 725px 0;
+    padding: 22px 0 29px;
+    width: 350px;
+    height: 270px;
+
+}
+
+
+
+/*EDYCJA obszaru text oraz haslo*/
+input[type=text],
+input[type=password]
+{
+
+    background: none;
+    display: block;
+    margin-right: 25px;
+    margin-top: 6px;
+    text-align: center;
+    border: 2px solid sandybrown;
+    padding: 14px 10px;
+    width: 280px;
+    outline: none;
+    color: #A42626;
+    border-radius: 7px;
+    float:right;
+    position: center;
+    cursor: text;
+
+}
+
+input[type=text]:focus,
+input[type=password]:focus
+{
+
+    border: 3px solid #eec9c9;
+    background-color: #edcaca;
+    color: lightslategray ;
+    font-weight: bold;
+
+
+}
+/* ############ EDYCJA PRZYCISKU SUBMIT############## */
+input[type=submit] {
+    width: 125px;
+    background-color: #c34f4f;
+    font-size: 22px;
+    color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    border: none;
+    transition: 0.25s;
+    border-radius: 5px;
+    margin-top: 44px;
+    position: fixed;
+    display: block;
+    margin-left: 120px;
+}
+
+/* STRONA GLOWNA */
+
+.user
+{
+    float:left;
+    font-size: 16px;
+    padding: 25px;
+
+    margin-right:10px;
+
+}
+
+
+/* BUDOWANIE STRONY */
+
+#container {
+
+    width: 100%;
+    padding: 0;
+    min-width: 990px;
+    position: relative;
+}
+
+#content {
+    padding: 40px 40px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+}
+
+
+.login #content
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+.dashboard #content {
+    width: 600px;
+}
+
+#content-main {
+    float: left;
+    width: 100%;
+}
+
+#content-related {
+    float: right;
+    width: 260px;
+    position: relative;
+    margin-right: -300px;
+}
+
+#footer {
+    clear: both;
+    padding: 10px;
+}

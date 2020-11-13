@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %} </title>
-    <link rel="stylesheet" type="text/css" href="{% static "glowny.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
 </head>
 <body>
     <div id="header">
@@ -26,7 +26,7 @@
                 Siemanko, {{ request.user.first_name }}!
                     <a href="{% url 'logout' %}">Wyloguj</a>
                 {% else  %}
-                    <a href="{% url 'login' %}">Zaloguj</a>
+                    <a href="{% url 'login' %}"></a>
             {% endif %}
         </span>
     </div>
