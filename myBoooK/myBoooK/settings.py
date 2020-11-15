@@ -116,7 +116,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Login / Logout
+# Login/ Logout / dashboard przekierowania
 
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
