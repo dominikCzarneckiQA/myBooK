@@ -9,29 +9,37 @@ body
 /* PSEUDO-KLASY  HIPERLACZA */
 a:link
 {
-
+    color: #993300;
+    text-decoration:none;
+    font-weight: bold;
 }
-
 a:visited
 {
-
+     color: #6DDCBD;
+    text-decoration:none;
+    font-weight: bold;
 }
 
 a:focus
 {
-
+    text-decoration: underline;
+    color: indianred;
+    font-weight: bold;
 }
 
 a:hover
 {
-
+    color: chartreuse;
+    font-weight: bold;
 }
 
 /* ZNACZNIKI GLOBALNE */
 
-p
-{
 
+
+ ol, ul, dl {
+    margin: 0;
+    float:left;
 }
 
 ol,ul
@@ -39,22 +47,32 @@ ol,ul
     float:left;
 }
 
+ul li {
+    padding: 12px;
+    float: left;
+    margin-left: 20%;
+    list-style-type: none;
+    line-height: 22px;
+    font-size: 20px;
+    text-align: center;
+
+}
+
 li,ul
 {
-    padding: 10px;
-    float: left;
-    margin-right:10px;
-    list-style-type: none;
-}
 
-li ul {
-    margin-bottom: 0;
-    float: left;
+   margin-bottom: 0;
+
 
 }
+
+
+
+
 h1,h2,h3
 {
-
+    text-align: center;
+    font-weight: bold;
 }
 
 form
@@ -63,7 +81,8 @@ form
 }
 
 
-/* LOGOWANIE */
+/* LOGOWANIE -login */
+
 .formularz-logowanie
 {
     align-items: center;
@@ -72,7 +91,7 @@ form
     border-radius: 8px;
     box-shadow: 0 4px 5px rgba(0, 0, 0, .1), 0 11px 18px rgba(0, 0, 0, .1);
     box-sizing: border-box;
-    margin: 130px 725px 0;
+    margin: 130px 525px 0;
     padding: 22px 0 29px;
     width: 350px;
     height: 270px;
@@ -132,17 +151,32 @@ input[type=submit] {
     margin-left: 120px;
 }
 
-/* STRONA GLOWNA */
+/* STRONA GLOWNA - base */
 
 .user
 {
-    float:left;
-    font-size: 16px;
-    padding: 25px;
 
-    margin-right:10px;
+    font-size: 17px;
+    padding: 26px;
+
+    background: sandybrown;
+    margin-top:10px;
+
+
+
 
 }
+
+.menu
+{
+    margin-left: 11px;
+    background: #5b80b2;
+    width: 80%;
+
+
+}
+
+
 
 
 /* BUDOWANIE STRONY */
@@ -190,3 +224,4 @@ input[type=submit] {
     clear: both;
     padding: 10px;
 }
+

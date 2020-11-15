@@ -25,8 +25,6 @@
             {% if request.user.is_authenticated %}
                 Siemanko, {{ request.user.first_name }}!
                     <a href="{% url 'logout' %}">Wyloguj</a>
-                {% else  %}
-                    <a href="{% url 'login' %}"></a>
             {% endif %}
         </span>
     </div>
