@@ -123,5 +123,10 @@ LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 
 # SERWER SMTP
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = 'djangoodominik@gmail.com'
+EMAIL_HOST_PASSWORD = 'django123$'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 EMAIL_BECKEND = 'django.core.mail.backends.console.EMailBackend'

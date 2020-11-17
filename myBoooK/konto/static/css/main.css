@@ -4,6 +4,7 @@ body
     padding: 0;
     font-size: 15px;
     background: #f8f9fa ;
+
     color: #212529
 }
 /* PSEUDO-KLASY  HIPERLACZA */
@@ -73,6 +74,7 @@ h1,h2,h3
 {
     text-align: center;
     font-weight: bold;
+    font-size: 36px;
 }
 
 form
@@ -159,9 +161,9 @@ input[type=submit] {
 
     font-size: 17px;
     padding: 26px;
-
     background: sandybrown;
     margin-top:10px;
+
 
 
 
