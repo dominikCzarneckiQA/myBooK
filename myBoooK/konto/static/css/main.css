@@ -7,6 +7,14 @@ body
 
     color: #212529
 }
+
+#header {
+    width: auto;
+    padding: 2px 4px;
+    line-height: 23px;
+    color: floralwhite;
+
+}
 /* PSEUDO-KLASY  HIPERLACZA */
 a:link
 {
@@ -41,6 +49,7 @@ a:hover
  ol, ul, dl {
     margin: 0;
     float:left;
+     list-style-type: none;
 }
 
 ol,ul
@@ -63,7 +72,7 @@ li,ul
 {
 
    margin-bottom: 0;
-
+    list-style-type: none;
 
 }
 
@@ -100,7 +109,11 @@ form
 
 }
 
-
+.logout
+{
+    letter-spacing: 1px;
+    font-size: 15px;
+}
 
 /*EDYCJA obszaru text oraz haslo*/
 input[type=text],
@@ -158,15 +171,23 @@ input[type=submit] {
 
 .user
 {
+    font-size: 18px;
+    background: lightcoral;
+    width: auto;
+    margin-left: 3px;
+    line-height: 23px;
+    letter-spacing: 3px;
+}
 
-    font-size: 17px;
-    padding: 26px;
-    background: sandybrown;
-    margin-top:10px;
-
-
-
-
+#userlogout
+{
+    margin: 0 33% ;
+    line-height: 35px;
+    font-size: 21px;
+    background: lightcoral;
+    padding: 10px;
+    letter-spacing: 5px;
+    text-align: center;
 
 }
 
@@ -175,6 +196,7 @@ input[type=submit] {
     margin-left: 11px;
     background: #5b80b2;
     width: 80%;
+    height: 2%;
 
 
 }

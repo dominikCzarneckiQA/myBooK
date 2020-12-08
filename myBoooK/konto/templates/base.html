@@ -24,9 +24,16 @@
         <span class="user">
             {% if request.user.is_authenticated %}
                 Siemanko, {{ request.user.first_name }}!
-                    <a href="{% url 'logout' %}">Wyloguj</a>
-                {% else  %}
-                    <a href="{% url "login" %}"></a>
+                    <li {% if section == "logout" %}
+                        class="selected"{% endif %}>
+                        <a href="{% url "logout" %}">Wyloguj </a>
+                    </li>
+                 {% else %}
+                    <li id="userlogout"
+                            {% if section == "login" %}
+                            class="selected"{% endif %}>
+                        <a href="{% url "login" %}">POWRÓT DO LOGOWANIA</a>
+                    </li>
             {% endif %}
         </span>
     </div>
