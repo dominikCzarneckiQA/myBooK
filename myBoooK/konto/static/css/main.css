@@ -4,7 +4,6 @@ body
     padding: 0;
     font-size: 15px;
     background: #f8f9fa ;
-
     color: #212529
 }
 
@@ -120,34 +119,21 @@ input[type=text],
 input[type=password]
 {
 
-    background: none;
-    display: block;
-    margin-right: 25px;
+    position: static;
+    margin-right: 11px;
     margin-top: 6px;
     text-align: center;
-    border: 2px solid sandybrown;
     padding: 14px 10px;
     width: 280px;
     outline: none;
     color: #A42626;
-    border-radius: 7px;
-    float:right;
-    position: center;
+
+
     cursor: text;
 
 }
 
-input[type=text]:focus,
-input[type=password]:focus
-{
 
-    border: 3px solid #eec9c9;
-    background-color: #edcaca;
-    color: lightslategray ;
-    font-weight: bold;
-
-
-}
 /* ############ EDYCJA PRZYCISKU SUBMIT############## */
 input[type=submit] {
     width: 125px;
@@ -250,3 +236,78 @@ input[type=submit] {
     padding: 10px;
 }
 
+/* PASSWORD -RESET */
+
+#passresform
+{
+    font-size: 26px;
+    margin-left: 21%;
+}
+
+/* PASSWORD -CHANGE */
+#passchange
+{
+    width: 100%;
+    font-size: 16px;
+}
+#passchange ul li {
+
+    font-size: 13px;
+    font-style: oblique;
+
+
+}
+#passchange h1
+{
+    font-size: 25px;
+    background: lightsteelblue;
+    width: 100%;
+    border: 4px double  ghostwhite;
+    line-height: 55px;
+    letter-spacing: 4px;
+}
+
+#passchange h2
+{
+    text-align: center;
+    font-weight: bold;
+    font-size: 19px;
+}
+
+#passchangeinput [type=text],
+input[type=password]
+{
+	border:1px solid #4e6096;
+	display:inline-block;
+	cursor:pointer;
+	font-size:14px;
+	font-weight:bold;
+
+    border-radius: 0;
+	text-decoration:none;
+}
+
+input[type=text]:focus,
+input[type=password]:focus
+{
+	border:1px solid #4e6097;
+	display:inline-block;
+	cursor:pointer;
+	font-size:14px;
+	font-weight:bold;
+
+    border-radius: 0;
+	text-decoration:none;
+    margin-left: 8px;
+}
+
+#passchange input[type=submit]
+{
+    margin-top: 5px;
+    background: #0066A2;
+    color: white;
+    height: 44px;
+    width: 183px;
+    margin-left: 20%;
+
+}

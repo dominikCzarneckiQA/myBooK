@@ -23,7 +23,7 @@
         {% endif %}
         <span class="user">
             {% if request.user.is_authenticated %}
-                Siemanko, {{ request.user.first_name }}!
+                Witaj,  {{ request.user.first_name }}!
                     <li {% if section == "logout" %}
                         class="selected"{% endif %}>
                         <a href="{% url "logout" %}">Wyloguj </a>
