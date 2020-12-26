@@ -3,10 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from .forms import LogowanieForm
+from .forms import LogowanieForm, RejestracjaUzytkownika
 
 
-# podstawowy widok logowania użytkownika
+# podstawowy widok zalogowanego użytkownika
 
 @login_required
 def tablica(request):
@@ -14,6 +14,7 @@ def tablica(request):
                   'dashboard.html',
                   {'section': 'tablica'})
 
+# widok logowania zarejestrowanego uzytkownika
 
 def user_login(request):
     if request.method == "POST":
@@ -33,3 +34,18 @@ def user_login(request):
     else:
         form = LogowanieForm()
     return render(request, 'konto/login.html', {'form': form})
+
+# utworzenie widoku rejestracji nowych użytkowników
+
+def rejestracja(request):
+    if request.method == 'POST':
+        uzytkownik_form = RejestracjaUzytkownika(request.POST)
+        if uzytkownik_form.is_valid():
+            nowy_uzytkownik = uzytkownik_form.save(commit=False)
+            nowy_uzytkownik .set_password(uzytkownik_form.cleaned_data['password'])
+            nowy_uzytkownik.save()
+            return render(request, 'registration/register_done.html',{'nowy_uzytkownik': nowy_uzytkownik})
+    else:
+        uzytkownik_form = RejestracjaUzytkownika()
+    return render(request,'registration/register.html',{'uzytkownik.form': uzytkownik_form})
+
