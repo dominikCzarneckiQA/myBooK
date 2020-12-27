@@ -39,13 +39,12 @@ def user_login(request):
 
 def rejestracja(request):
     if request.method == 'POST':
-        uzytkownik_form = RejestracjaUzytkownika(request.POST)
-        if uzytkownik_form.is_valid():
-            nowy_uzytkownik = uzytkownik_form.save(commit=False)
-            nowy_uzytkownik .set_password(uzytkownik_form.cleaned_data['password'])
+        user_form = RejestracjaUzytkownika(request.POST)
+        if user_form.is_valid():
+            nowy_uzytkownik = user_form.save(commit=False)
+            nowy_uzytkownik.set_password(user_form.cleaned_data['password'])
             nowy_uzytkownik.save()
-            return render(request, 'registration/register_done.html',{'nowy_uzytkownik': nowy_uzytkownik})
+            return render(request, 'konto/register_done.html',{'nowy_uzytkownik': nowy_uzytkownik})
     else:
-        uzytkownik_form = RejestracjaUzytkownika()
-    return render(request,'registration/register.html',{'uzytkownik.form': uzytkownik_form})
-
+        user_form = RejestracjaUzytkownika
+    return render(request, 'konto/register.html', {'user_form': user_form})

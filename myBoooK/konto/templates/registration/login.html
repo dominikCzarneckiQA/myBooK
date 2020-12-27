@@ -13,10 +13,11 @@
     </div>
     <div class="formularz-logowanie">
         <form action="{% url 'login' %}" method="post">
-            <p><a href="{% url "password_reset" %}">  Zapomniałeś hasła?</a></p>
+            <p>Nie masz konta?<a href="{% url "register" %}"> Zarejestruj się </a></p>
             {{ form.as_p }}
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}" />
+            <p><a href="{% url "password_reset" %}">  Zapomniałeś hasła?</a></p>
             <p><input  id="submit" type="submit" value="Zaloguj"></p>
         </form>
     </div>
