@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -130,3 +130,9 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 EMAIL_BECKEND = 'django.core.mail.backends.console.EMailBackend'
+
+# obsługa plików medialnych
+# adres docelowy w ktorym znajduja sie pliki multimedialne
+MEDIA_URL = '/media/'
+# jest to sciezka lokalna plikow
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
