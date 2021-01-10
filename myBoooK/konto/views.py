@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from .forms import LogowanieForm, RejestracjaUzytkownika
+from .forms import LogowanieForm, RejestracjaUzytkownika , EdycjaUzytkownika, EdycjaProfilu
 from .models import Profile
 
 # podstawowy widok zalogowanego użytkownika
@@ -44,8 +44,23 @@ def rejestracja(request):
             nowy_uzytkownik = user_form.save(commit=False)
             nowy_uzytkownik.set_password(user_form.cleaned_data['password'])
             nowy_uzytkownik.save()
-            profile = Profile.objects.create(nowy_uzytkownik)
+            profile = Profile.objects.create(user=nowy_uzytkownik)
             return render(request, 'konto/register_done.html',{'nowy_uzytkownik': nowy_uzytkownik})
     else:
         user_form = RejestracjaUzytkownika
     return render(request, 'konto/register.html', {'user_form': user_form})
+
+@login_required()
+def edycja(request):
+    if request.method == 'POST':
+        user_form = EdycjaUzytkownika(instance=request.user, data=request.POST)
+        profile_form = EdycjaProfilu(instance=request.user, data=request.POST, files=request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+    else:
+        user_form = EdycjaUzytkownika(instance=request.user)
+        profile_form = EdycjaProfilu(instance=request.user)
+    return render(request,'konto/edit.html',
+                  {'user_form': user_form,
+                   'profile_form':profile_form})

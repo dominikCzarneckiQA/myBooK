@@ -11,13 +11,16 @@
         {% if request.user.is_authenticated %}
             <ul class="menu">
                 <li {% if section == "dashboard" %} class="selected"{% endif %}>
-                    <a href="{% url "dashboard" %}">Panel główny </a>
+                    <a href="{% url "dashboard" %}">Tablica </a>
                 </li>
                 <li {% if section == "zdjecia" %}class="selected"{% endif %}>
                     <a href="#">Zdjęcia</a>
                 </li>
                 <li {% if section == "ziomki" %}class="selected"{% endif %}>
                     <a href="#">Ziomki</a>
+                </li>
+                <li {% if section == "Edycja" %}class="selected"{% endif %}>
+                    <a href="{% url "edycja" %}">Edycja</a>
                 </li>
             </ul>
         {% endif %}

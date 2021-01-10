@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %} Edytowanie Profilu  {% endblock %}
+{% block content %}
+<h2> Edytowanie Profilu </h2>
+
+<p>Zmiana ustawien profilu jest możliwa za pomocą formularza znajdującego się poniżej:</p>
+<form action="." method="post" enctype="multipart/form-data">
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+    {% csrf_token %}
+    <h4>Chcesz zmienić hasło?</h4>
+    <a href="{% url "password_change" %}">Zmiana Hasła</a>
+    <p><input type="submit" value="Zapisz"></p>
+</form>
+
+{% endblock %}
