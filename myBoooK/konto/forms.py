@@ -2,7 +2,6 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Profile
 
-
 class LogowanieForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
@@ -22,14 +21,12 @@ class RejestracjaUzytkownika(forms.ModelForm):
             raise forms.ValidationError("Niestety hasła nie są takie same!!")
         return cd['password2']
 
-
-class FormularzEdycjiUzytkownika(forms.ModelForm):
+class EdycjaUzytkownika(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email')
+        fields = ('first_name','last_name','email')
 
-class FormularzEdycjiProfilu(forms.ModelForm):
+class EdycjaProfilu(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('city', 'date_of_birth','phoneNumber ', 'photo')
-
+        fields = ('date_of_birth', 'photo')

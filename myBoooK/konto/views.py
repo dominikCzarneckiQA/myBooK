@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from .forms import LogowanieForm, RejestracjaUzytkownika
-
+from .models import Profile
 
 # podstawowy widok zalogowanego użytkownika
 
@@ -44,6 +44,7 @@ def rejestracja(request):
             nowy_uzytkownik = user_form.save(commit=False)
             nowy_uzytkownik.set_password(user_form.cleaned_data['password'])
             nowy_uzytkownik.save()
+            profile = Profile.objects.create(nowy_uzytkownik)
             return render(request, 'konto/register_done.html',{'nowy_uzytkownik': nowy_uzytkownik})
     else:
         user_form = RejestracjaUzytkownika
