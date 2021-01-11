@@ -36,13 +36,7 @@
                         class="selected"{% endif %}>
                         <a href="{% url "logout" %}">Wyloguj </a>
                     </li>
-                 {% else %}
-                    <li id="userlogout"
-                            {% if section == "login" %}
-                            class="selected"{% endif %}>
-                        <a href="{% url "login" %}">POWRÓT DO LOGOWANIA</a>
 
-                    </li>
             {% endif %}
         </span>
 

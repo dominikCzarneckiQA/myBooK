@@ -12,3 +12,12 @@ class Profile(models.Model):
 
     def __str__(self):
         return 'Informacje o użytkowniku {}.'.format(self.user)
+
+
+class Wpis(models.Model):
+    tytul = models.CharField(max_length=200)
+    autor = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    tresc = models.TextField()
+
+    def __str__(self):
+        return 'Autor wpisu: .'.format(self.autor)

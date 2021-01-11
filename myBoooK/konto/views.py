@@ -4,22 +4,26 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from .forms import LogowanieForm, RejestracjaUzytkownika , EdycjaUzytkownika, EdycjaProfilu
-from .models import Profile
+from .models import Profile, Wpis
+from django.views.generic import ListView
 from django.contrib import messages
+
 # podstawowy widok zalogowanego użytkownika
 
-def HomePage(request):
-    return render(request,'HomePage.html',
-                  {'section': 'Strona domowa'})
+#class HomePage(ListView):
+ #   model = Wpis
+  #  tempName = ''
+
+def entryPage(request):
+    return render(request, 'entryPage.html',{})
+
 @login_required
 def tablica(request):
-    return render(request,
-                  'dashboard.html',
-                  {'section': 'tablica'})
+    return render(request, 'dashboard.html',{'section': 'tablica'})
 
 # widok logowania zarejestrowanego uzytkownika
 
-def user_login(request):
+def loginUzytkownik(request):
     if request.method == "POST":
         form = LogowanieForm(request.POST)
         if form.is_valid():

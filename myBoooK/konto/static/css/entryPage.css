@@ -4,8 +4,8 @@ body
     padding: 0;
     font-size: 15px;
     color: #212529;
-    background-image: url(/myBoooK/konto/media/tlo01.png);
-    /* Background pattern from Toptal Subtle Patterns */
+    background-image: url("https://cdn.pixabay.com/photo/2016/11/13/21/46/sheep-1822137_1280.jpg" );
+    background-repeat: no-repeat;
     background-size: cover;
 }
 
@@ -86,6 +86,11 @@ h1,h2,h3
     text-align: center;
     font-weight: bold;
     font-size: 36px;
+}
+
+form
+{
+
 }
 
 
@@ -188,15 +193,7 @@ input[type=submit] {
 
 
 
-/* BUDOWANIE STRONY */
 
-#container {
-
-    width: 100%;
-    padding: 0;
-    min-width: 990px;
-    position: relative;
-}
 
 #content {
     padding: 40px 40px;
