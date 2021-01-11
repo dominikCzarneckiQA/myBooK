@@ -5,9 +5,12 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from .forms import LogowanieForm, RejestracjaUzytkownika , EdycjaUzytkownika, EdycjaProfilu
 from .models import Profile
-
+from django.contrib import messages
 # podstawowy widok zalogowanego użytkownika
 
+def HomePage(request):
+    return render(request,'HomePage.html',
+                  {'section': 'Strona domowa'})
 @login_required
 def tablica(request):
     return render(request,
@@ -58,6 +61,7 @@ def edycja(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
+
     else:
         user_form = EdycjaUzytkownika(instance=request.user)
         profile_form = EdycjaProfilu(instance=request.user)
