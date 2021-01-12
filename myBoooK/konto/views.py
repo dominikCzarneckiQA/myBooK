@@ -5,8 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from .forms import LogForm, RejestracjaUzytkownika , EdycjaUzytkownika, EdycjaProfilu
 from .models import Profile
-from django.views.generic import ListView
-from django.contrib import messages
+
 
 # podstawowy widok zalogowanego użytkownika
 
@@ -25,7 +24,7 @@ def tablica(request):
 
 def loginUzytkownik(request):
     if request.method == "POST":
-        form = LogowanieForm(request.POST)
+        form = LogForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
             user = authenticate(username=cd['username'],
@@ -39,7 +38,7 @@ def loginUzytkownik(request):
             else:
                 return HttpResponse("Nieprawidłowe dane! Spróbuj ponownie. ")
     else:
-        form = LogowanieForm()
+        form = LogForm()
     return render(request, 'konto/login.html', {'form': form})
 
 # utworzenie widoku rejestracji nowych użytkowników

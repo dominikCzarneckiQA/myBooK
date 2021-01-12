@@ -60,30 +60,13 @@ a:hover
 
 
 
- ol, ul, dl {
-    margin: 0;
-    float:left;
-     list-style-type: none;
-}
 
-ol,ul {
-    float:left;
-}
 
-ul li {
-    padding: 12px;
-    float: left;
-    margin-left: 20%;
-    list-style-type: none;
-    line-height: 22px;
-    font-size: 20px;
-    text-align: center;
 
-}
+
 
 li,ul {
 
-   margin-bottom: 0;
     list-style-type: none;
 
 }
@@ -91,11 +74,6 @@ li,ul {
 
 
 
-h1,h2,h3 {
-    text-align: center;
-    font-weight: bold;
-    font-size: 36px;
-}
 
 
 /* LOGOWANIE -login */
@@ -157,7 +135,7 @@ input[type=submit] {
 */
 
 /* STRONA GLOWNA - base */
-
+/*
 .user {
     font-size: 18px;
     background: lightcoral;
@@ -178,29 +156,15 @@ input[type=submit] {
 
 }
 
-
+*/
 
 
 
 /* BUDOWANIE STRONY */
 
-#container {
 
-    width: 100%;
-    padding: 0;
-    min-width: 990px;
-    position: relative;
-}
 
-#content {
-    padding: 40px 40px;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-
-}
-
+/*
 
 .login #content {
     margin-left: auto;
@@ -226,7 +190,7 @@ input[type=submit] {
     clear: both;
     padding: 10px;
 }
-
+*/
 /* PASSWORD -RESET */
 
 #passresform {

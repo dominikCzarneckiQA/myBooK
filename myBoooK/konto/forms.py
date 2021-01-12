@@ -5,11 +5,11 @@ from django.contrib.auth.models import User
 
 class LogForm(forms.Form):
     username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    password = forms.CharField(label='Potwierdz Haslo',widget=forms.PasswordInput)
 
 
 class RejestracjaUzytkownika(forms.ModelForm):
-    password1 = forms.CharField(label='Haslo ', widget=forms.PasswordInput)
+    password1 = forms.CharField(label='Haslo', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Potwierdz Haslo', widget=forms.PasswordInput)
 
     class Meta:

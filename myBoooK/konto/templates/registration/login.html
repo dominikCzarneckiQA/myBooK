@@ -1,25 +1,29 @@
-{% extends "base.html" %}
+{% extends "homePage.html" %}
  
-{% block title %}
-    Zaloguj się
-{% endblock %}
+{% block title %} Zaloguj się {% endblock %}
 
 {% block content %}
     {% if form.errors %}
         <p>Login lub hasło jest nieprawidłowe. Spróbuj ponownie. </p>
     {% endif %}
-    <div class ="logo">
-        myBooK
-
-    </div>
+    <br/>
+    <h1 class="display-1 text-dark chewy"> myBooK</h1>
     <div class="formularz-logowanie">
+        <h1 class="mb-4">Zaloguj sie</h1>
         <form action="{% url 'login' %}" method="post">
             <p>Nie masz konta?<a href="{% url "register" %}"> Zarejestruj się </a></p>
             {{ form.as_p }}
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}" />
             <p><a href="{% url "password_reset" %}">  Zapomniałeś hasła?</a></p>
-            <p><input  id="submit" type="submit" value="Zaloguj"></p>
+
+            <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
         </form>
+    <button class="w-100 btn btn-lg btn-primary"  type="submit">Zaloguj sie </button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2020-2021 Kozak</p>
     </div>
 {% endblock %}
