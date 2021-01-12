@@ -3,11 +3,11 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('entryPage', views.entryPage, name="entryPage"),
+    path('', views.stronaWejsciowa, name="stronaWejsciowa"),
     path('login/', auth_views.LoginView.as_view(),
          name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('', views.tablica, name='dashboard'),
+    path('dashboard/', views.tablica, name='dashboard'),
     # URL zmiana hasła
     path('password_change/', auth_views.PasswordChangeView.as_view(), name='password_change'),
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),

@@ -13,8 +13,8 @@ from .models import Profile
  #   model = Wpis
   #  tempName = ''
 
-def entryPage(request):
-    return render(request, 'entryPage.html',{})
+def stronaWejsciowa(request):
+    return render(request, 'stronaWejsciowa.html', {})
 
 @login_required
 def tablica(request):
@@ -68,6 +68,6 @@ def edycja(request):
     else:
         user_form = EdycjaUzytkownika(instance=request.user)
         profile_form = EdycjaProfilu(instance=request.user)
-    return render(request,'konto/edit.html',
+    return render(request, 'konto/edycja.html',
                   {'user_form': user_form,
                    'profile_form':profile_form})
