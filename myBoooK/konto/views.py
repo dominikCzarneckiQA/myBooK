@@ -3,8 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from .forms import LogowanieForm, RejestracjaUzytkownika , EdycjaUzytkownika, EdycjaProfilu
-from .models import Profile, Wpis
+from .forms import LogForm, RejestracjaUzytkownika , EdycjaUzytkownika, EdycjaProfilu
+from .models import Profile
 from django.views.generic import ListView
 from django.contrib import messages
 

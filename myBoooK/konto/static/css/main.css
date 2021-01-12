@@ -4,11 +4,23 @@ body
     padding: 0;
     font-size: 15px;
     color: #212529;
-    background-image: url(/myBoooK/konto/media/tlo01.png);
-    /* Background pattern from Toptal Subtle Patterns */
-    background-size: cover;
+    background: hsla(46, 100%, 97%, 1);
+}
+/* custom font for logo */
+.chewy
+{
+    font-family: 'Chewy', cursive;
 }
 
+/* latin */
+@font-face {
+  font-family: 'Chewy';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/chewy/v12/uK_94ruUb-k-wn52KjI.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 #header {
     width: auto;
@@ -54,8 +66,7 @@ a:hover
      list-style-type: none;
 }
 
-ol,ul
-{
+ol,ul {
     float:left;
 }
 
@@ -70,8 +81,7 @@ ul li {
 
 }
 
-li,ul
-{
+li,ul {
 
    margin-bottom: 0;
     list-style-type: none;
@@ -81,8 +91,7 @@ li,ul
 
 
 
-h1,h2,h3
-{
+h1,h2,h3 {
     text-align: center;
     font-weight: bold;
     font-size: 36px;
@@ -91,8 +100,7 @@ h1,h2,h3
 
 /* LOGOWANIE -login */
 
-.formularz-logowanie
-{
+.formularz-logowanie {
     align-items: center;
     background-color: #fff;
     border: none;
@@ -101,21 +109,19 @@ h1,h2,h3
     box-sizing: border-box;
     margin: 130px 525px 0;
     padding: 22px 0 29px;
-    width: 350px;
-    height: 270px;
+    width: 390px;
+    height: 300px;
 
 }
 
-.logout
-{
+.logout {
     letter-spacing: 1px;
     font-size: 15px;
 }
 
 /*EDYCJA obszaru text oraz haslo*/
-input[type=text],
-input[type=password]
-{
+/*input[type=text],
+input[type=password] {
 
     position: static;
     margin-right: 11px;
@@ -125,36 +131,34 @@ input[type=password]
     width: 280px;
     outline: none;
     color: #A42626;
-
-
     cursor: text;
 
 }
-
-
+*/
 /* ############ EDYCJA PRZYCISKU SUBMIT############## */
+/*
+
 input[type=submit] {
     width: 125px;
     background-color: #c34f4f;
     font-size: 22px;
     color: white;
-    padding: 10px 15px;
+    padding: 8px 15px;
     cursor: pointer;
     letter-spacing: 2px;
     border: none;
     transition: 0.25s;
     border-radius: 5px;
-    margin-top: 44px;
+
     position: fixed;
     display: block;
     margin-left: 120px;
 }
-
+*/
 
 /* STRONA GLOWNA - base */
 
-.user
-{
+.user {
     font-size: 18px;
     background: lightcoral;
     width: auto;
@@ -163,8 +167,7 @@ input[type=submit] {
     letter-spacing: 3px;
 }
 
-#userlogout
-{
+#userlogout {
     margin: 0 33% ;
     line-height: 35px;
     font-size: 21px;
@@ -175,15 +178,6 @@ input[type=submit] {
 
 }
 
-.menu
-{
-    margin-left: 11px;
-    background: #5b80b2;
-    width: 80%;
-    height: 2%;
-
-
-}
 
 
 
@@ -208,8 +202,7 @@ input[type=submit] {
 }
 
 
-.login #content
-{
+.login #content {
     margin-left: auto;
     margin-right: auto;
 }
@@ -236,27 +229,21 @@ input[type=submit] {
 
 /* PASSWORD -RESET */
 
-#passresform
-{
+#passresform {
     font-size: 26px;
     margin-left: 21%;
 }
 
 /* PASSWORD -CHANGE */
-#passchange
-{
+#passchange {
     width: 100%;
     font-size: 16px;
 }
 #passchange ul li {
-
     font-size: 13px;
     font-style: oblique;
-
-
 }
-#passchange h1
-{
+#passchange h1 {
     font-size: 25px;
     background: lightsteelblue;
     width: 100%;
@@ -265,42 +252,36 @@ input[type=submit] {
     letter-spacing: 4px;
 }
 
-#passchange h2
-{
+#passchange h2 {
     text-align: center;
     font-weight: bold;
     font-size: 19px;
 }
 
 #passchangeinput [type=text],
-input[type=password]
-{
+input[type=password] {
 	border:1px solid #4e6096;
 	display:inline-block;
 	cursor:pointer;
 	font-size:14px;
 	font-weight:bold;
-
     border-radius: 0;
 	text-decoration:none;
 }
 
 input[type=text]:focus,
-input[type=password]:focus
-{
+input[type=password]:focus {
 	border:1px solid #4e6097;
 	display:inline-block;
 	cursor:pointer;
 	font-size:14px;
 	font-weight:bold;
-
     border-radius: 0;
 	text-decoration:none;
     margin-left: 8px;
 }
 
-#passchange input[type=submit]
-{
+#passchange input[type=submit] {
     margin-top: 5px;
     background: #0066A2;
     color: white;
@@ -313,5 +294,4 @@ input[type=password]:focus
 .chewy
 {
     font-family: 'Chewy', cursive;
-
 }
