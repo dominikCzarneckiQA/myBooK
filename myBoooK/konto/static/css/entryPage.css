@@ -138,6 +138,7 @@ input[type=password]
 
 
 /* ############ EDYCJA PRZYCISKU SUBMIT############## */
+
 input[type=submit] {
     width: 125px;
     background-color: #c34f4f;
