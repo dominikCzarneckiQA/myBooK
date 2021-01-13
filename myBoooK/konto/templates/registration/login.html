@@ -1,4 +1,4 @@
-{% extends "homePage.html" %}
+{% extends "stronaGlowna.html" %}
  
 {% block title %} Zaloguj się {% endblock %}
 
@@ -11,11 +11,11 @@
     <div class="formularz-logowanie center">
         <h1 class="mb-4">Zaloguj sie</h1>
         <form action="{% url 'login' %}" method="post">
-            <p>Nie masz konta?<a href="{% url "register" %}"> Zarejestruj się </a></p>
+            <p>Nie masz konta?<a href="{% url 'register' %}"> Zarejestruj się </a></p>
             {{ form.as_p }}
             {% csrf_token %}
             <input type="hidden" name="kolejny" value="{{ next }}" />
-            <p><a href="{% url "password_reset" %}">  Zapomniałeś hasła?</a></p>
+            <p><a href="{% url 'password_reset' %}">  Zapomniałeś hasła?</a></p>
 
             <div class="checkbox mb-3">
               <label>

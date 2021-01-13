@@ -9,16 +9,13 @@ from .models import Profile
 
 # podstawowy widok zalogowanego użytkownika
 
-#class HomePage(ListView):
- #   model = Wpis
-  #  tempName = ''
 
 def stronaWejsciowa(request):
-    return render(request, 'stronaWejsciowa.html', {})
+    return render(request, 'stronaStartowa.html', {})
 
 @login_required
 def tablica(request):
-    return render(request, 'dashboard.html',{'section': 'tablica'})
+    return render(request, 'stronaTablica.html', {'section': 'tablica'})
 
 # widok logowania zarejestrowanego uzytkownika
 
@@ -39,7 +36,7 @@ def loginUzytkownik(request):
                 return HttpResponse("Nieprawidłowe dane! Spróbuj ponownie. ")
     else:
         form = LogForm()
-    return render(request, 'konto/login.html', {'form': form})
+    return render(request, 'konto/zaloguj.html', {'form': form})
 
 # utworzenie widoku rejestracji nowych użytkowników
 
@@ -51,7 +48,7 @@ def rejestracja(request):
             nowy_uzytkownik.set_password(user_form.cleaned_data['password'])
             nowy_uzytkownik.save()
             profile = Profile.objects.create(user=nowy_uzytkownik)
-            return render(request, 'konto/register_done.html',{'nowy_uzytkownik': nowy_uzytkownik})
+            return render(request, 'konto/rejestracja_gotowe.html', {'nowy_uzytkownik': nowy_uzytkownik})
     else:
         user_form = RejestracjaUzytkownika
     return render(request, 'konto/register.html', {'user_form': user_form})
