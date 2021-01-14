@@ -6,13 +6,11 @@ from django.http import HttpResponse
 from .forms import LogForm, RejestracjaUzytkownika , EdycjaUzytkownika, EdycjaProfilu
 from .models import Profile
 
-
-# podstawowy widok zalogowanego użytkownika
-
-
-def stronaWejsciowa(request):
+# widok
+def stronaStartowa(request):
     return render(request, 'stronaStartowa.html', {})
 
+# podstawowy widok tablicy zalogowanego uzytkownika
 @login_required
 def tablica(request):
     return render(request, 'stronaTablica.html', {'section': 'tablica'})

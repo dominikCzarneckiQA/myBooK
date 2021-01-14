@@ -54,7 +54,7 @@ ROOT_URLCONF = 'myBooK.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': []
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -118,7 +118,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = "/myBoooK/konto/static"
+STATIC_ROOT = "/myBoooK/konto/templates/registration/"
 LOGIN_URL = '/konto/login/'
 STATIC_URL = '/static/'
-
