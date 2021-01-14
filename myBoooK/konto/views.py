@@ -44,15 +44,15 @@ def rejestracja(request):
         if uzytkownik_form.is_valid():
             nowy_uzytkownik = uzytkownik_form.save(commit=False)
             nowy_uzytkownik.set_password(
-                uzytkownik_form.cleaned_data['haslo'])
+                uzytkownik_form.cleaned_data['password'])
             nowy_uzytkownik.save()
             Profile.objects.create(user=nowy_uzytkownik)
             return render(request, 'konto/rejestracja_gotowe.html',
                           {'nowy_uzytkownik': nowy_uzytkownik})
     else:
-        uzytkownik_form = RejestracjaUzytkownika()
+        uzytkownik_form= RejestracjaUzytkownika()
     return render(request, 'konto/register.html',
-                  {'uzytkownik_form': uzytkownik_form})
+                  {'user_form': uzytkownik_form })
 
 @login_required()
 def edycja(request):

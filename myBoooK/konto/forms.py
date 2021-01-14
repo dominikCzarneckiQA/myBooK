@@ -22,6 +22,7 @@ class RejestracjaUzytkownika(forms.ModelForm):
             raise forms.ValidationError("Niestety hasła nie są takie same!!")
         return cd['password2']
 
+
 class EdycjaUzytkownika(forms.ModelForm):
     class Meta:
         model = User
