@@ -14,16 +14,15 @@
   {% if request.user.is_authenticated %}
       <nav class="navbar navbar-expand navbar-light bg-light gx-2">
           <div class="container-fluid  ">
-            <a class="navbar-brand fw-bold" >myBooK</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"    aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+            <a class="navbar-brand "><h3 class="chewy">myBooK</h3></a>
+          <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
+
             <div class="collapse navbar-collapse">
               <ul class="navbar-nav me-auto  ">
-                <li {% if section == "dashboard" %} class="nav-item selected" {% endif %} >
+                <li {% if section == "dashboard" %} class="nav-item  " {% endif %} >
                   <a class="nav-link active" aria-current="page" href="{% url 'dashboard' %}">Home </a>
                 </li>
-                <li {% if section == "Opcja1" %} class="nav-item selected" {% endif %}>
+                <li {% if section == "Opcja1" %} class="nav-link active" {% endif %}>
                   <a class="nav-link" href="#">Opcja1</a>
                 </li>
                   <li {% if section == "Opcja2" %}  class="nav-item" {% endif %}>
@@ -47,7 +46,6 @@
 
             </div>
           </div>
-
   {% endif %}
     {% if request.user.is_authenticated %}
       <span class="nav-item">
