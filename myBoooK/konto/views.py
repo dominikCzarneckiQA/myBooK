@@ -3,17 +3,19 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from .forms import LogForm, RejestracjaUzytkownika , EdycjaUzytkownika, EdycjaProfilu
+from .forms import LogForm, RejestracjaUzytkownika, EdycjaUzytkownika, EdycjaProfilu
 from .models import Profile
 
 # widok
 def stronaStartowa(request):
     return render(request, 'stronaStartowa.html', {})
 
+
 # podstawowy widok tablicy zalogowanego uzytkownika
 @login_required
 def tablica(request):
     return render(request, 'stronaTablica.html', {'section': 'tablica'})
+
 
 # widok logowania zarejestrowanego uzytkownika
 
@@ -36,6 +38,7 @@ def loginUzytkownik(request):
         formularz = LogForm()
     return render(request, 'konto/zaloguj.html', {'formularz': formularz})
 
+
 # utworzenie widoku rejestracji nowych użytkowników
 
 def rejestracja(request):
@@ -50,9 +53,10 @@ def rejestracja(request):
             return render(request, 'konto/rejestracja_gotowe.html',
                           {'nowy_uzytkownik': nowy_uzytkownik})
     else:
-        uzytkownik_form= RejestracjaUzytkownika()
+        uzytkownik_form = RejestracjaUzytkownika()
     return render(request, 'konto/register.html',
-                  {'user_form': uzytkownik_form })
+                  {'user_form': uzytkownik_form})
+
 
 @login_required()
 def edycja(request):
@@ -67,5 +71,5 @@ def edycja(request):
         profile_form = EdycjaProfilu(instance=request.user)
     return render(request, 'konto/edycja.html',
                   {'user_form': user_form,
-                   'profile_form':profile_form
+                   'profile_form': profile_form
                    })

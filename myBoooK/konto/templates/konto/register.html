@@ -2,11 +2,15 @@
 
 {% block title %}Witaj W Panelu Rejestracyjnym{% endblock %}
 {% block content %}
+    <br/>
+     <h1 class="display-1 text-dark chewy border   border"> myBooK</h1>
     <h1>Zarejestruj się</h1>
     <p>Aby utworzyć konto, proszę o wypełnienie poniższego formularza :</p>
+
     <form class="text-capitalize text-secondary   " action="." method="post">
         {{ user_form.as_p }}
         {% csrf_token %}
-        <p><input  class="btn   btn-secondary" type="submit" value="Utwórz Konto"></p>
+        <p><input  class="btn  btn-secondary" type="submit" value="Utwórz Konto"></p>
     </form>
+
 {% endblock %}
