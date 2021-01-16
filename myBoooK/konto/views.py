@@ -13,13 +13,13 @@ def stronaStartowa(request):
 
 # podstawowy widok tablicy zalogowanego uzytkownika
 @login_required
-def tablica(request):
+def tablicaView(request):
     return render(request, 'stronaTablica.html', {'section': 'tablica'})
 
 
 # widok logowania zarejestrowanego uzytkownika
 
-def loginUzytkownik(request):
+def loginUzytkownikaView(request):
     if request.method == "POST":
         formularz = LogForm(request.POST)
         if formularz.is_valid():
@@ -41,7 +41,7 @@ def loginUzytkownik(request):
 
 # utworzenie widoku rejestracji nowych użytkowników
 
-def rejestracja(request):
+def rejestracjaView(request):
     if request.method == 'POST':
         uzytkownik_form = RejestracjaUzytkownika(request.POST)
         if uzytkownik_form.is_valid():
@@ -59,7 +59,7 @@ def rejestracja(request):
 
 
 @login_required()
-def edycja(request):
+def edycjaView(request):
     if request.method == 'POST':
         user_form = EdycjaUzytkownika(instance=request.user, data=request.POST)
         profile_form = EdycjaProfilu(instance=request.user, data=request.POST, files=request.FILES)
