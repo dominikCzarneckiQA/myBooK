@@ -17,48 +17,43 @@
 </head>
 <body class="text-center">
   {% if request.user.is_authenticated %}
-      <nav class="navbar sticky-top navbar-expand navbar-light bg-light gx-2 ">
-          <div class="container-fluid  ">
-            <a class="navbar-brand text-decoration-none" href="{% url 'dashboard' %}"><h3 class="chewy">myBooK</h3></a>
+      <nav class="navbar sticky-top navbar-expand navbar-dark bg-dark text-decoration-none ">
+      <a class="navbar-brand p-1 text-decoration-none" href="{% url 'dashboard' %}"><h3 class="chewy">myBooK</h3></a>
           <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
             <div class="collapse navbar-collapse">
-              <ul class="navbar-nav me-auto  ">
-                <li {% if section == "dashboard" %} class="nav-item  " {% endif %} >
-                  <a class="nav-link active" aria-current="page" href="{% url 'dashboard' %}">Home </a>
-                </li>
-                <li {% if section == "Opcja1" %} class="nav-link active" {% endif %}>
-                  <a class="nav-link" href="#">Opcja1</a>
-                </li>
+              <ul class="navbar-nav me-auto">
+                  <li {% if section == "dashboard" %} class="nav-item  " {% endif %} >
+                    <a class="nav-link active" aria-current="page"
+                       href="{% url 'dashboard' %}">Home </a>
+                  </li>
+                  <li {% if section == "Opcja1" %} class="nav-link active" {% endif %}>
+                      <a class="nav-link" href="#">Opcja1</a>
+                  </li>
                   <li {% if section == "Opcja2" %}  class="nav-item" {% endif %}>
-                  <a class="nav-link" href="#">Opcja2</a>
-                </li>
-                <li   class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle" href="#"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Profil
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Pokaz Profil</a></li>
-                    <li><a class="dropdown-item" href="{% url "edycja" %} ">Edytuj Profil</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Pozycja3</a></li>
-                  </ul>
-                </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="#">Opcja3</a>
-                </li>
+                      <a class="nav-link" href="#">Opcja2</a>
+                  </li>
+                  <li class="nav-item dropdown " >
+                      <a class="nav-link dropdown-toggle" href="#"
+                         role="button" data-bs-toggle="dropdown" aria-expanded="false">Profil
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="#">Pokaz Profil</a></li>
+                          <li><a class="dropdown-item" href="{% url "edycja" %} ">Edytuj Profil</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="#">Pozycja3</a></li>
+                      </ul>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Opcja3</a>
+                  </li>
               </ul>
-
             </div>
-          </div>
   {% endif %}
-    {% if request.user.is_authenticated %}
-      <span class="nav-item">
 
+    {% if request.user.is_authenticated %}
+      <span class="nav-item text-light">
           Witaj, {{ request.user.first_name }}!
           <a href="{% url 'wyloguj' %}">Wyloguj</a>
-        {% else %}
-            <a href="{% url 'dashboard' %}"></a>
-
       </span>
   {% endif %}
    </nav>
