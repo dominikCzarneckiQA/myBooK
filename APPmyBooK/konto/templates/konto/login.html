@@ -1,0 +1,15 @@
+{% extends "mainPage.html" %}
+
+
+    {% block title %}
+        myBooK
+    {% endblock %}
+
+    {% block content %}
+        <form action="." method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+        <p><input type="submit" value="Zaloguj się"></p>
+        </form>
+    {% endblock %}
+
