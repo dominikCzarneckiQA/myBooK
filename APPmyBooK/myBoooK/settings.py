@@ -116,7 +116,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = "/myBoooK/konto/static"
+STATIC_ROOT = "/APPmyBooK/konto/static"
 LOGIN_URL = '/konto/login/'
 
 

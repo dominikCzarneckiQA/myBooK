@@ -1,10 +1,17 @@
-{% extends "stronaGlowna.html" %}
+{% extends "mainPage.html" %}
 
 {% block title %}
     Tablica
 {% endblock %}
+{% if request.user.is_authenticated %}
 
 {% block content %}
     <p class="text-center ">Miło widzieć Cię tu ponownie! :-)</p>
     <img alt="" src="https://cdn.pixabay.com/photo/2017/07/04/10/01/positive-2470506_1280.jpg" class="img-fluid img">
 {% endblock %}
+
+    {% else%}
+    <p class="display-2">Niestety nie powinieneś tu być..
+        <a href="konto/login.html"> Zaloguj się </a>
+        aby w pełni skorzystać z naszego serwisu. </p>
+{% endif %}

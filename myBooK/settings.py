@@ -118,7 +118,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = "/myBoooK/konto/static"
+STATIC_ROOT = "/APPmyBooK/konto/static"
 LOGIN_URL = '/konto/login/'
 STATIC_URL = '/static/'
 

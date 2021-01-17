@@ -3,12 +3,12 @@ from .models import Profile
 from django.contrib.auth.models import User
 
 
-class LogForm(forms.Form):
+class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(label='Potwierdz Haslo',widget=forms.PasswordInput)
 
 
-class RejestracjaUzytkownika(forms.ModelForm):
+class UserRegisterForm(forms.ModelForm):
     password1 = forms.CharField(label='Haslo', widget=forms.PasswordInput(attrs={'class': 'form-control col'}))
     password2 = forms.CharField(label='Potwierdz Haslo', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
@@ -30,7 +30,7 @@ class RejestracjaUzytkownika(forms.ModelForm):
         return cd['password2']
 
 
-class EdycjaUzytkownika(forms.ModelForm):
+class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('first_name','last_name','email')
@@ -41,7 +41,7 @@ class EdycjaUzytkownika(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
         }
 
-class EdycjaProfilu(forms.ModelForm):
+class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('date_of_birth', 'photo')
