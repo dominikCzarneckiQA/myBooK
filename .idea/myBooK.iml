@@ -22,8 +22,7 @@
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/templates" />
-        <option value="$MODULE_DIR$/myBoooK/konto/templates" />
+        <option value="$MODULE_DIR$/APPmyBooK/konto/templates" />
       </list>
     </option>
   </component>

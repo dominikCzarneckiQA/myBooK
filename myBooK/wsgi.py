@@ -1,5 +1,5 @@
 """
-WSGI config for myBooK project.
+WSGI config for myBoooK project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
