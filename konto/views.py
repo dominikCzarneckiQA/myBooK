@@ -18,6 +18,7 @@ def dashboardView(request):
 
 
 # widok logowania zarejestrowanego uzytkownika
+ 
 def loginUserView(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -58,7 +59,7 @@ def registerView(request):
 
 
 @login_required()
-def edycjaView(request):
+def editView(request):
     if request.method == 'POST':
         user_form = UserEditForm(instance=request.user, data=request.POST)
         profile_form = UserEditForm(instance=request.user, data=request.POST, files=request.FILES)
