@@ -1,0 +1,17 @@
+{% extends 'mainPage.html' %}
+
+{% block title %}
+    Dodaj post
+{% endblock %}
+
+{% block  content %}
+    <div class="container">
+        <h1 class="display-2">Utwórz post</h1>
+        <img  alt="addImg" src="{{ request.GET.url }}" class="img-fluid">
+    <form action="." method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="Post">
+    </form>
+    </div>
+{% endblock %}

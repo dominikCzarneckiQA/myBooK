@@ -8,7 +8,7 @@ from urllib import request
 class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'img' ,'url' , 'description')
+        fields = ('title', 'img' , 'url' , 'description')
 
         widgets = {
             'img:': forms.ImageField,
