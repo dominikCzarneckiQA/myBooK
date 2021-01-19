@@ -14,7 +14,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=150, blank=True)
     url = models.URLField,
     img = models.ImageField(upload_to='img/%Y/%m/%d')
-    description = models.TextField(max_length=899, blank=True)
+    description = models.TextField(max_length=499, blank=True)
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                    related_name='img_liked',
                                    blank=True)
@@ -27,3 +27,4 @@ class Post(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
             super(Post,self).save(*args, **kwargs)
+
