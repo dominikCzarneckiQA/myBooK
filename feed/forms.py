@@ -8,9 +8,9 @@ from urllib import request
 class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'img' , 'description')
+        fields = ('title', 'url' , 'description')
         widgets = {
-            'img:': forms.ImageField,
+            'url': forms.HiddenInput,
 
         }
     # metoda clean_ url dziek ktorej mozliwe bedzie sprawdzienie url zdjecia z formatem 'jpeg' , 'jpg'

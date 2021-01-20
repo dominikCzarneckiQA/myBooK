@@ -7,10 +7,10 @@
 {% block  content %}
         <h1 class="display-3">Utwórz post</h1>
     <form class=" container-fluid  fw-normal border border-2 " action="." method="post">
-        <img  alt="" src="{{ request.GET.img }}"  class="img-thumbnail float-start">
+        <img  alt="" src="{{ request.GET.url }}"  class="img-thumbnail float-start">
         {{ form.as_p }}
         {% csrf_token %}
-        <input class="w-25 btn btn-lg btn-danger fw-normal"  type="submit" value="post">
+        <input class="w-25 btn btn-lg btn-danger fw-normal "  type="submit" value="post">
         <br/><br/>
     </form>
 {% endblock %}
