@@ -1,17 +1,20 @@
 {% extends 'mainPage.html' %}
 
 {% block title %}
-    Dodaj post
+   Utworz Post
 {% endblock %}
 
 {% block  content %}
-    <div class="container">
-        <h1 class="display-2">Utwórz post</h1>
-        <img  alt="addImg" src="{{ request.GET.url }}" class="img-fluid">
-    <form action="." method="post">
+        <h1 class="display-3">Utwórz post</h1>
+        <img  alt="" src="{{ request.GET.url }}" class="img-thumbnail">
+    <br/>
+    <br/>
+
+    <form class=" container w-50 fw-normal border border-2" action="." method="post">
         {{ form.as_p }}
         {% csrf_token %}
-        <input type="submit" value="Post">
+        <button class="w-25 btn btn-lg btn-danger fw-normal"  type="submit" value="post">Post </button>
+        <br/><br/>
     </form>
-    </div>
+
 {% endblock %}
