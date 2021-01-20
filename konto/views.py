@@ -14,11 +14,11 @@ def entryPageView(request):
 # podstawowy widok tablicy zalogowanego uzytkownika
 @login_required
 def dashboardView(request):
-    return render(request, 'dashboard.html', {'section': 'tablica'})
+    return render(request, 'dashboard.html', {'section': 'dashboard'})
 
 
 # widok logowania zarejestrowanego uzytkownika
- 
+
 def loginUserView(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -73,3 +73,5 @@ def editView(request):
                   {'user_form': user_form,
                    'profile_form': profile_form
                    })
+
+

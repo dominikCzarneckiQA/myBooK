@@ -23,3 +23,5 @@ def CreatePostView(request):
     return render(request, 'feed/post/post.html',
                   {'section': 'post',
                    'form': form})
+
+
