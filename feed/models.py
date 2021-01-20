@@ -12,7 +12,7 @@ class Post(models.Model):
         on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
     slug = models.SlugField(max_length=150, blank=True)
-    url = models.URLField()
+    # url = models.URLField()
     img = models.ImageField(upload_to='img/%Y/%m/%d')
     description = models.TextField(max_length=499, blank=True)
     creation_date = models.DateField(auto_now_add=True, db_index=True)
