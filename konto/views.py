@@ -6,19 +6,12 @@ from django.http import HttpResponse
 from .forms import LoginForm, UserRegisterForm, UserEditForm, ProfileEditForm
 from .models import Profile
 
-
+# widok bazowy, towarzyszący po entryPage
 def entryPageView(request):
     return render(request, 'entryPage.html', {})
 
 
-# podstawowy widok tablicy zalogowanego uzytkownika
-@login_required
-def dashboardView(request):
-    return render(request, 'dashboard.html', {'section': 'dashboard'})
-
-
 # widok logowania zarejestrowanego uzytkownika
-
 def loginUserView(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -75,3 +68,6 @@ def editView(request):
                    })
 
 
+@login_required()
+def MyProfile(request):
+    return render(request, 'konto/myProfil.html', {})

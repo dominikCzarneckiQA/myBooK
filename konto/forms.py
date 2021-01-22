@@ -1,11 +1,22 @@
 from django import forms
 from .models import Profile
+
 from django.contrib.auth.models import User
 
 
+"""class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('author', 'description')
+        widgets = {
+            'author': forms.Select(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'})
+        }
+"""
+
 class LoginForm(forms.Form):
     username = forms.CharField()
-    password = forms.CharField(label='Potwierdz Haslo',widget=forms.PasswordInput)
+    password = forms.CharField(label='Potwierdz Haslo', widget=forms.PasswordInput)
 
 
 class UserRegisterForm(forms.ModelForm):
@@ -14,13 +25,13 @@ class UserRegisterForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username','first_name','last_name','email')
+        fields = ('username', 'first_name', 'last_name', 'email')
 
         widgets = {
-            'username': forms.TextInput(attrs={'class':'form-control'}),
-            'first_name': forms.TextInput(attrs={'class':'form-control'}),
-            'last_name': forms.TextInput(attrs={'class':'form-control'}),
-            'email': forms.EmailInput(attrs={'class':'form-control'}),
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
         }
 
     def clean_password2(self):
@@ -33,7 +44,7 @@ class UserRegisterForm(forms.ModelForm):
 class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('first_name','last_name','email')
+        fields = ('first_name', 'last_name', 'email')
 
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -41,13 +52,15 @@ class UserEditForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
         }
 
+
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('date_of_birth', 'photo')
+        fields = ('aboutMe','date_of_birth', 'photo')
 
         widgets = {
             'date_of_birth': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'YYYY-MM-DD'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Kowalski'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'example@gmail.com'}),
+            'aboutMe': forms.Textarea(attrs={'class': 'text-area'}),
         }
+
+##################################################

@@ -1,27 +1,28 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from .forms import CreatePostForm
+from django.shortcuts import render
+from django.views import View
+from .models import Post
+from .forms import postForm
+class PostView(View):
+    def get(self, request, *args, **kwargs):
+        posts = Post.objects.all().order_by('-data')
+        form = postForm()
+        context = {
+            'postList': posts,
+            'form': form
+        }
+        return render(request, 'feed/Posty.html', context)
 
+    def post(self, request, *args, **kwargs):
+        posts = Post.objects.all().order_by('-data')
+        form = postForm(request.POST)
 
-# Create your views here.
-
-@login_required()
-def CreatePostView(request):
-    if request.method == 'POST':
-        form = CreatePostForm(data=request.POST)
         if form.is_valid():
-            cd = form.cleaned_data
-            newComponent = form.save(commit=False)
-            newComponent.user = request.user
-            newComponent.save()
-            messages.success(request,
-                             'Pomyślnie dodano obraz.')
-            return redirect(newComponent.get_absolute_url())
-    else:
-        form = CreatePostForm(data=request.GET)
-    return render(request, 'feed/post/post.html',
-                  {'section': 'post',
-                   'form': form})
+            new_post = form.save(commit=False)
+            new_post.author = request.user
+            new_post.save()
 
-
+        context = {
+            'postList': posts,
+            'form': form
+        }
+        return render(request, 'feed/Posty.html', context)

@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -32,14 +33,14 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'konto.apps.KontoConfig',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'feed.apps.FeedConfig'
+    'feed.apps.FeedConfig',
+
 
 ]
 
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'myBooK.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,24 +119,26 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
 STATIC_ROOT = "/konto/static"
 LOGIN_URL = '/konto/login/'
 
 
 # Login/ Logout / dashboard przekierowania
-LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_REDIRECT_URL = '/feed'
 
 # SERWER SMTP
 EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = 'djangoodominik@gmail.com'
-EMAIL_HOST_PASSWORD = 'django123$'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-
-EMAIL_BECKEND = 'django.core.mail.backends.console.EMailBackend'
+EMAIL_BECKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # obsługa plików medialnych
 # adres docelowy w ktorym znajduja sie pliki multimedialne
+
 MEDIA_URL = '/media/'
 # jest to sciezka lokalna plikow
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

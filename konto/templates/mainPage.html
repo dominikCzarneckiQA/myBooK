@@ -18,15 +18,15 @@
 <body class="text-center">
   {% if request.user.is_authenticated %}
       <nav class="navbar sticky-top navbar-expand navbar-dark bg-dark text-decoration-none ">
-      <a class="navbar-brand p-1 text-decoration-none" href="{% url 'dashboard' %}"><h3 class="chewy">myBooK</h3></a>
+      <a class="navbar-brand p-1 text-decoration-none" href="{% url 'feed:post-list' %}"><h3 class="chewy">myBooK</h3></a>
           <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
             <div class="collapse navbar-collapse">
               <ul class="navbar-nav me-auto">
-                  <li {% if section == "dashboard" %} class="active " {% endif %} >
+                  <li >
                     <a class="nav-link active" aria-current="page"
-                       href="{% url 'dashboard' %}">Home </a>
+                       href="{% url 'feed:post-list' %}">Home </a>
                   </li>
-                  <li {% if section == "Opcja1" %} class="nav-link active" {% endif %}>
+                  <li >
                       <a class="nav-link" href="#">Znajomi</a>
                   </li>
                   <li class="nav-item dropdown">
@@ -34,7 +34,7 @@
                          role="button" data-bs-toggle="dropdown" aria-expanded="false">Profil
                       </a>
                       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <li><a class="dropdown-item" href="#">Pokaz Profil</a></li>
+                          <li><a class="dropdown-item" href="{% url "myprofile" %}">Pokaz Profil</a></li>
                           <li><a class="dropdown-item" href="{% url "edycja" %} ">Edytuj Profil</a></li>
                           <li><hr class="dropdown-divider"></li>
                           <li><a class="dropdown-item" href="#">Pozycja3</a></li>
@@ -48,10 +48,14 @@
   {% endif %}
 
     {% if request.user.is_authenticated %}
-      <span class="nav-item text-light">
+
+      <div class="nav-item text-light float-end w-25">
           Witaj, {{ request.user.first_name }}!
-          <a href="{% url 'wyloguj' %}">Wyloguj</a>
-      </span>
+          <div class="float-end w-25">
+              <a href="{% url 'wyloguj' %}">Wyloguj</a>
+          </div>
+      </div>
+
   {% endif %}
    </nav>
 

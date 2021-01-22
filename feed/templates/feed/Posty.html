@@ -1,0 +1,33 @@
+{% extends "mainPage.html" %}
+{% block title %}
+    Tablica
+{% endblock %}
+
+
+{% block content %}
+    <div class="container ">
+        <div class="  row justify-content-center  mt-5 ">
+            <h1 class="display-5 fw-bold text-capitalize  shadow-sm p-3 mb-5 bg-white rounded">Utwórz post</h1>
+            <form class="fw-normal   shadow-sm p-3 mb-5 bg-white rounded" action='.' method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <img  alt="" src="{{ request.GET.url }}"  class="img-thumbnail float-start">
+                <input class="w-50 btn btn-lg btn-danger fw-normal shadow-sm p-3 mb-3  rounded"  type="submit" value="post">
+                <br/><br/>
+            </form>
+        </div>
+        {% for post in postList %}
+
+            <br/>
+        <div class="row justify-content-center  mt5 ">
+            <div class="col-md-6 border shadow-sm p-3 mb-5  rounded">
+                <p>{{ post.author }}</p><br/>
+                <p>{{ post.data }}</p><br/>
+                <p>{{ post.description }}</p>
+            </div>
+        </div>
+
+    {% endfor %}
+    <h1>kurde mole it works madafaka</h1>
+    </div>
+{% endblock %}

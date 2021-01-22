@@ -22,7 +22,8 @@
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/feed/posts" />
+        <option value="$MODULE_DIR$/feed/templates" />
+        <option value="$MODULE_DIR$/konto/templates" />
       </list>
     </option>
   </component>
