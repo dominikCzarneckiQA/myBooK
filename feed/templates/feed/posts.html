@@ -12,21 +12,23 @@
                 {% csrf_token %}
                 {{ form.as_p }}
                 <img  alt="" src="{{ request.GET.url }}"  class="img-thumbnail float-start">
-                <input class="w-50 btn btn-lg btn-danger fw-normal shadow-sm p-3 mb-3  rounded"  type="submit" value="post">
+                <input class="w-25 btn btn-lg btn-danger fw-normal shadow-sm p-3 mb-3  rounded"  type="submit" value="post">
                 <br/><br/>
             </form>
         </div>
-        {% for post in postList %}
 
+        {% for posts in allPosts %}
             <br/>
         <div class="row justify-content-center  mt5 ">
-            <div class="col-md-6 border shadow-sm p-3 mb-5  rounded">
-                <p>{{ post.author }}</p><br/>
-                <p>{{ post.data }}</p><br/>
-                <p>{{ post.description }}</p>
+            <div class="col-md-6 border shadow-sm p-3 mb-5  rounded position-relative">
+                <p class="text-capitalize text-secondary"> <strong>{{ posts.user }} </strong> - {{ posts.creationDate }}</p>
+
+                <p class="border  w-100  h-50 ">
+                    {{ posts.description }}
+                </p>
+                <a href ="{% url 'feed:detailPost' posts.pk %}" class="stretched-link"> </a>
             </div>
         </div>
-
     {% endfor %}
     <h1>kurde mole it works madafaka</h1>
     </div>

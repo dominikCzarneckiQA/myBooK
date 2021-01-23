@@ -1,28 +1,42 @@
 from django.shortcuts import render
 from django.views import View
-from .models import Post
-from .forms import postForm
-class PostView(View):
-    def get(self, request, *args, **kwargs):
-        posts = Post.objects.all().order_by('-data')
-        form = postForm()
-        context = {
-            'postList': posts,
-            'form': form
-        }
-        return render(request, 'feed/Posty.html', context)
+from .models import Posts
+from .forms import PostForm, CommentsForm
 
+
+class postsView(View):
     def post(self, request, *args, **kwargs):
-        posts = Post.objects.all().order_by('-data')
-        form = postForm(request.POST)
+        form = PostForm(request.POST)
+        posts = Posts.objects.all().order_by('-creationDate')
 
         if form.is_valid():
             new_post = form.save(commit=False)
-            new_post.author = request.user
+            new_post.user = request.user
             new_post.save()
 
         context = {
-            'postList': posts,
+            'allPosts': posts,
             'form': form
         }
-        return render(request, 'feed/Posty.html', context)
+        return render(request, 'feed/posts.html', context)
+
+    def get(self, request, *args, **kwargs):
+        form = PostForm()
+        posts = Posts.objects.all().order_by('-creationDate')
+
+        context = {
+            'allPosts': posts,
+            'form': form
+        }
+        return render(request, 'feed/posts.html', context)
+
+class postsDetailView(View):
+    def get(self, request, pk, *args, **kwargs):
+        posts = Posts.objects.get(pk=pk)
+        form = CommentsForm
+
+        context = {
+            'post': posts,
+            'form': form,
+        }
+        return render(request,'feed/postsDetail.html', context)

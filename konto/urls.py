@@ -19,4 +19,5 @@ urlpatterns = [
 
     path('feed/', include('feed.urls')),
     path('myprofile/', views.MyProfile, name='myprofile'),
+
 ]

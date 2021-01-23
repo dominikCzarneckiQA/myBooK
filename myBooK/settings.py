@@ -105,9 +105,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pl'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Warsaw'
 
 USE_I18N = True
 
@@ -125,7 +125,7 @@ LOGIN_URL = '/konto/login/'
 
 
 # Login/ Logout / dashboard przekierowania
-LOGIN_REDIRECT_URL = '/feed'
+LOGIN_REDIRECT_URL = '/feed/'
 
 # SERWER SMTP
 EMAIL_HOST = "smtp.gmail.com"

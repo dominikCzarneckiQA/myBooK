@@ -4,6 +4,9 @@
 {% endblock %}
 
 {% block content %}
+     {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{ redirect_field_name }"/>
+        {% endif %}
     {% if form.errors %}
         <p>Login lub hasło jest nieprawidłowe. Spróbuj ponownie. </p>
     {% endif %}

@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from .forms import LoginForm, UserRegisterForm, UserEditForm, ProfileEditForm
 from .models import Profile
+from django.shortcuts import redirect
+
 
 # widok bazowy, towarzyszący po entryPage
 def entryPageView(request):
@@ -19,6 +21,7 @@ def loginUserView(request):
             gt = form.cleaned_data
             user = authenticate(username=gt['username'],
                                 password=gt['password'])
+
             if user is not None:
                 if user.is_active:
                     login(request, user)
