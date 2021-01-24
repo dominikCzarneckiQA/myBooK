@@ -6,41 +6,42 @@
 
 {% block content %}
     <div class="container ">
-        <div class=" ">
-            <div class=" ">
-                <div class=" ">
-                    <a href="{% url 'feed:allPosts' %}"  class=" btn btn-secondary mt-2 "> Powrót </a>
-                </div>
+        <div class="row mt-5">
+            <div class="col-md-3 col-sm-6">
+                <a href="{% url 'feed:allPosts' %}"  class="btn btn-secondary mt-2 "> Powrót </a>
             </div>
         </div>
 
-        <div class="row justify-content-center  mt5 ">
-            <div class="col-md-6 border shadow-sm p-4 m-3 rounded">
-
-                <p class="text-capitalize text-secondary">
-                    <button class="btn btn-sm ">edytuj</button>
-                <button  class="btn btn-sm ">usun</button>
-                    <strong>{{ post.user }} </strong> - {{ post.creationDate }}</p>
-                <p>{{ post.description }}</p>
+        <div class="row justify-content-center  mt-3  mb-3">
+            <div class="border-bottom col-md-5  col-sm-12 rounded">
+                <p class="text-capitalize">
+                    <strong class="text-primary">{{ post.user }} </strong> - {{ post.creationDate }}
+                </p>
+                <p>
+                    {{ post.description }}
+                </p>
             </div>
         </div>
 
-
-         <div class=" ">
-            <form   method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button class="btn btn-outline-success fw-bold" >Dodaj Komentarz</button>
-            </form>
-        </div>
+         <div class="row justify-content-center mt-3 mb-5">
+             <div class="col-md-6 col-sm-12">
+                 <form  method="post">
+                     {% csrf_token %}
+                     {{ form.as_p }}
+                     <div class="d-grid gap-2">
+                         <button class="btn btn-outline-success fw-bold mt-2" >Dodaj Komentarz</button>
+                     </div>
+                 </form>
+             </div>
+         </div>
 
         {% for comment in comments %}
-            <div class="border mt-2">
-            <p>{{ comment.user }}</p>
-            <p>{{ comment.creationDate }}</p>
-            <p>{{ comment.comment }}</p>
+            <div class="justify-content-center row  mt-3 mb-5 ">
+                <div class="col-md-5 col-sm-12  rounded border-bottom ">
+                    <p><strong> {{ comment.user }} </strong> - {{ comment.creationDate }}</p>
+                    <p>{{ comment.comment }}</p>
+                </div>
             </div>
-    {% endfor %}
-
+        {% endfor %}
     </div>
 {% endblock %}
