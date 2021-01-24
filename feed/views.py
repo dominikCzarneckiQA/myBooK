@@ -2,9 +2,10 @@ from django.shortcuts import render
 from django.views import View
 from .models import Posts
 from .forms import PostForm, CommentsForm
+from django.views.generic.edit import UpdateView, DeleteView
+from django.urls import reverse_lazy
 
-
-class postsView(View):
+class PostsView(View):
     def post(self, request, *args, **kwargs):
         form = PostForm(request.POST)
         posts = Posts.objects.all().order_by('-creationDate')
@@ -30,7 +31,8 @@ class postsView(View):
         }
         return render(request, 'feed/posts.html', context)
 
-class postsDetailView(View):
+
+class PostsDetailView(View):
     def get(self, request, pk, *args, **kwargs):
         posts = Posts.objects.get(pk=pk)
         form = CommentsForm
@@ -39,4 +41,14 @@ class postsDetailView(View):
             'post': posts,
             'form': form,
         }
-        return render(request,'feed/postsDetail.html', context)
+        return render(request, 'feed/postsDetail.html', context)
+
+
+class PostsUpdateView(UpdateView):
+    model = Posts
+    fields = ['description']
+    template_name = 'feed/postsUpdate.html'
+
+    def get_success_url(self):
+        pk = self.kwargs['pk']
+        return reverse_lazy('feed:detailPost', kwargs={'pk': pk})
