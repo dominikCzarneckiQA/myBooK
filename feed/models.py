@@ -9,8 +9,8 @@ class Posts(models.Model):
     creationDate = models.DateTimeField(default=timezone.now)
 
 
-class Coments(models.Model):
+class Comments(models.Model):
     user = models.ForeignKey(User,default=None,blank=True ,null=False, on_delete=models.CASCADE)
     comment = models.TextField()
     creationDate = models.DateTimeField(default=timezone.now)
-    thisPost = models.ForeignKey('Posts', on_delete=models.CASCADE)
+    post = models.ForeignKey('Posts', on_delete=models.CASCADE)

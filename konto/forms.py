@@ -4,15 +4,6 @@ from .models import Profile
 from django.contrib.auth.models import User
 
 
-"""class PostForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        fields = ('author', 'description')
-        widgets = {
-            'author': forms.Select(attrs={'class': 'form-control'}),
-            'description': forms.Textarea(attrs={'class': 'form-control'})
-        }
-"""
 
 class LoginForm(forms.Form):
     username = forms.CharField()
@@ -56,11 +47,10 @@ class UserEditForm(forms.ModelForm):
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('aboutMe','date_of_birth', 'photo')
+        fields = ('aboutMe', 'photo')
 
         widgets = {
-            'date_of_birth': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'YYYY-MM-DD'}),
+
             'aboutMe': forms.Textarea(attrs={'class': 'text-area'}),
         }
 
-##################################################

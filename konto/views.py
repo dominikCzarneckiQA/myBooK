@@ -5,8 +5,6 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from .forms import LoginForm, UserRegisterForm, UserEditForm, ProfileEditForm
 from .models import Profile
-from django.shortcuts import redirect
-
 
 # widok bazowy, towarzyszący po entryPage
 def entryPageView(request):
@@ -43,9 +41,10 @@ def registerView(request):
         if userForm.is_valid():
             newUser = userForm.save(commit=False)
             newUser.set_password(
-                userForm.cleaned_data['password'])
+                userForm.cleaned_data['password1'])
             newUser.save()
             Profile.objects.create(user=newUser)
+
             return render(request, 'konto/register_success.html',
                           {'nowy_uzytkownik': newUser})
     else:

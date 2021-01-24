@@ -1,6 +1,6 @@
 {% extends "mainPage.html" %}
 {% block title %}
-    Update Posts
+    Edycja Postu
 {% endblock %}
 
 
@@ -9,30 +9,19 @@
         <div class=" ">
             <div class=" ">
                 <div class=" ">
-                    <a href="{% url 'feed:allPosts' %}"  class=" btn btn-secondary mt-2 "> Powrót </a>
+                    <a href="{% url 'feed:detailPost' object.pk %}"  class=" btn btn-secondary mt-2 "> Powrót Do Postu</a>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center  mt5 ">
-            <div class="col-md-6 border shadow-sm p-4 m-3 rounded">
-                <p class="text-capitalize text-secondary"> <strong>{{ post.user }} </strong> - {{ post.creationDate }}</p>
-                <p>{{ post.description }}</p>
-                <br/>
-            </div>
-        </div>
+
          <div class="">
-
-            <form class=" justify-content-center " action='.' method="post">
+            <form class=" justify-content-center mt-4"   method="post">
                 {% csrf_token %}
-
-                   {{ form.as_p }}
-
-                <input class="btn btn-light btn-outline-success fw-bold" type="submit" value="Dodaj komentarz">
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary" >Zaktualizuj Post</button>
                 <br/><br/>
             </form>
         </div>
 
-
-    <h1>kurde mole it works madafaka</h1>
     </div>
 {% endblock %}

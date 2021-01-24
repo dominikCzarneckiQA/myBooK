@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import View
-from .models import Posts
+from .models import Posts , Comments
 from .forms import PostForm, CommentsForm
 from django.views.generic.edit import UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 class PostsView(View):
     def post(self, request, *args, **kwargs):
         form = PostForm(request.POST)
-        posts = Posts.objects.all().order_by('-creationDate')
+        post = Posts.objects.all().order_by('-creationDate')
 
         if form.is_valid():
             new_post = form.save(commit=False)
@@ -16,17 +16,17 @@ class PostsView(View):
             new_post.save()
 
         context = {
-            'allPosts': posts,
+            'allPosts': post,
             'form': form
         }
         return render(request, 'feed/posts.html', context)
 
     def get(self, request, *args, **kwargs):
         form = PostForm()
-        posts = Posts.objects.all().order_by('-creationDate')
+        post = Posts.objects.all().order_by('-creationDate')
 
         context = {
-            'allPosts': posts,
+            'allPosts': post,
             'form': form
         }
         return render(request, 'feed/posts.html', context)
@@ -34,14 +34,41 @@ class PostsView(View):
 
 class PostsDetailView(View):
     def get(self, request, pk, *args, **kwargs):
-        posts = Posts.objects.get(pk=pk)
-        form = CommentsForm
+        post = Posts.objects.get(pk=pk)
+        form = CommentsForm()
+
+        comments = Comments.objects.filter(post=post).order_by('-creationDate')
 
         context = {
-            'post': posts,
+            'post': post,
             'form': form,
+            'comments': comments,
         }
         return render(request, 'feed/postsDetail.html', context)
+
+    def post(self, request, pk, *args, **kwargs):
+        post = Posts.objects.get(pk=pk)
+        form = CommentsForm(request.POST)
+
+        if form.is_valid():
+            newComment = form.save(commit=False)
+            newComment.user = request.user
+            newComment.post = post
+            newComment.save()
+
+        comments = Comments.objects.filter(post=post).order_by('-creationDate')
+
+        context = {
+            'post': post,
+            'form': form,
+            'comments': comments,
+        }
+        return render(request, 'feed/postsDetail.html', context)
+
+
+
+
+
 
 
 class PostsUpdateView(UpdateView):
@@ -52,3 +79,11 @@ class PostsUpdateView(UpdateView):
     def get_success_url(self):
         pk = self.kwargs['pk']
         return reverse_lazy('feed:detailPost', kwargs={'pk': pk})
+
+class DeletePostsView(DeleteView):
+    model = Posts
+    template_name = 'feed/postsDelete.html'
+    success_url = reverse_lazy('feed:allPosts')
+
+
+

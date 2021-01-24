@@ -1,6 +1,6 @@
 {% extends "mainPage.html" %}
 {% block title %}
-    postsDetail
+    Podgląd Postu
 {% endblock %}
 
 
@@ -13,27 +13,34 @@
                 </div>
             </div>
         </div>
+
         <div class="row justify-content-center  mt5 ">
             <div class="col-md-6 border shadow-sm p-4 m-3 rounded">
-                <p class="text-capitalize text-secondary"> <strong>{{ post.user }} </strong> - {{ post.creationDate }}</p>
 
+                <p class="text-capitalize text-secondary">
+                    <button class="btn btn-sm ">edytuj</button>
+                <button  class="btn btn-sm ">usun</button>
+                    <strong>{{ post.user }} </strong> - {{ post.creationDate }}</p>
                 <p>{{ post.description }}</p>
-                <br/>
             </div>
         </div>
-         <div class="">
 
-            <form class=" justify-content-center " action='.' method="post">
+
+         <div class=" ">
+            <form   method="post">
                 {% csrf_token %}
-
-                   {{ form.as_p }}
-
-                <input class="btn btn-light btn-outline-success fw-bold" type="submit" value="Dodaj komentarz">
-                <br/><br/>
+                {{ form.as_p }}
+                <button class="btn btn-outline-success fw-bold" >Dodaj Komentarz</button>
             </form>
         </div>
 
+        {% for comment in comments %}
+            <div class="border mt-2">
+            <p>{{ comment.user }}</p>
+            <p>{{ comment.creationDate }}</p>
+            <p>{{ comment.comment }}</p>
+            </div>
+    {% endfor %}
 
-    <h1>kurde mole it works madafaka</h1>
     </div>
 {% endblock %}
