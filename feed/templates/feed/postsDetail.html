@@ -4,6 +4,7 @@
 {% endblock %}
 
 
+
 {% block content %}
     <div class="container ">
         <div class="row mt-5">
@@ -15,8 +16,12 @@
         <div class="row justify-content-center  mt-3  mb-3">
             <div class="border-bottom col-md-5  col-sm-12 rounded">
                 <p class="text-capitalize">
-                    <strong class="text-primary">{{ post.user }} </strong> - {{ post.creationDate }}
-                </p>
+                    <strong class="text-primary h5">{{ post.user }} </strong> - {{ post.creationDate }}
+                    {% if request.user == post.user %}
+                        <a href="{% url 'feed:updatePost' post.pk %}" ><i class="far fa-edit h5 text-dark m-2"></i></a>
+                        <a href="{% url 'feed:deletePost' post.pk %}" ><i class="fas fa-trash-alt h5 text-dark "></i></a>
+                    {% endif %}
+
                 <p>
                     {{ post.description }}
                 </p>
@@ -38,7 +43,12 @@
         {% for comment in comments %}
             <div class="justify-content-center row  mt-3 mb-5 ">
                 <div class="col-md-5 col-sm-12  rounded border-bottom ">
-                    <p><strong> {{ comment.user }} </strong> - {{ comment.creationDate }}</p>
+                    <p>
+                        <strong> {{ comment.user }} </strong> - {{ comment.creationDate }}
+                        {% if request.user == comment.user %}
+                            <a href="{% url 'feed:deleteComment' post.pk comment.pk %}" ><i class="fas fa-trash-alt h5 text-dark "></i></a>
+                        {% endif %}
+                    </p>
                     <p>{{ comment.comment }}</p>
                 </div>
             </div>
