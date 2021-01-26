@@ -5,7 +5,7 @@ from django.utils import timezone
 
 class Posts(models.Model):
     user = models.ForeignKey(User,default=None, blank=True ,null=False, on_delete=models.CASCADE)
-    description = models.TextField(default='some')
+    description = models.TextField(default='Napisz cos.. ?')
     creationDate = models.DateTimeField(default=timezone.now)
 
 

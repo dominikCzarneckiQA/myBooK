@@ -3,7 +3,6 @@ from .models import Profile
 
 from django.contrib.auth.models import User
 
-
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(label='Potwierdz Haslo', widget=forms.PasswordInput)
@@ -52,4 +51,3 @@ class ProfileEditForm(forms.ModelForm):
 
             'aboutMe': forms.Textarea(attrs={'class': 'text-area'}),
         }
-

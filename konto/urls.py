@@ -1,6 +1,8 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path ,include
 from . import views
+from .views import UserProfileView
+
 urlpatterns = [
     path('', views.entryPageView, name="stronaStartowa"),
     path('zaloguj/', auth_views.LoginView.as_view(),name='login'),
@@ -18,6 +20,6 @@ urlpatterns = [
     path('edycja/', views.editView, name='edycja'),
 
     path('feed/', include('feed.urls')),
-    path('myprofile/', views.MyProfile, name='myprofile'),
+    path('profile/<int:pk>/', UserProfileView.as_view(), name='profile'),
 
 ]

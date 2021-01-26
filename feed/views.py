@@ -64,7 +64,7 @@ class PostsDetailView(View):
             newComment.post = post
             newComment.save()
 
-        comments = Comments.objects.filter(post=post).order_by('-creationDate')
+        comments = Comments.objects.filter(post=post, pk=pk).order_by('-creationDate')
 
         context = {
             'post': post,

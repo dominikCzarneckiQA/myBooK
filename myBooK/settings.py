@@ -121,10 +121,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
 STATIC_ROOT = "/konto/static"
 LOGIN_URL = '/konto/login/'
-
-
-# Login/ Logout / dashboard przekierowania
 LOGIN_REDIRECT_URL = '/feed/'
+
 
 # SERWER SMTP
 EMAIL_HOST = "smtp.gmail.com"
@@ -133,11 +131,12 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BECKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_ACCOUNT_REQUIRED = True
 
 # obsługa plików medialnych
-# adres docelowy w ktorym znajduja sie pliki multimedialne
 
 MEDIA_URL = '/media/'
-# jest to sciezka lokalna plikow
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+# ścieżka lokalna plików multimedialnych
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

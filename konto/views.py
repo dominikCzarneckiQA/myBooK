@@ -5,13 +5,14 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from .forms import LoginForm, UserRegisterForm, UserEditForm, ProfileEditForm
 from .models import Profile
+from django.views import View
+from feed.views import Posts
+# widok dostępny od razu po wejścia na stronę
 
-# widok bazowy, towarzyszący po entryPage
 def entryPageView(request):
     return render(request, 'entryPage.html', {})
 
 
-# widok logowania zarejestrowanego uzytkownika
 def loginUserView(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -33,7 +34,7 @@ def loginUserView(request):
     return render(request, 'konto/login.html', {'formularz': form})
 
 
-# utworzenie widoku rejestracji nowych użytkowników
+#  widok rejestracyjny nowych użytkowników
 
 def registerView(request):
     if request.method == 'POST':
@@ -69,7 +70,15 @@ def editView(request):
                    'profile_form': profile_form
                    })
 
+class UserProfileView(View):
+    def get(self, request, pk, *args, **kwargs):
+        profile = Profile.objects.get(pk=pk)
+        user = Profile.user
+        userPosts = Posts.objects.filter(user=user).order_by('-creationDate')
 
-@login_required()
-def MyProfile(request):
-    return render(request, 'konto/myProfil.html', {})
+        context = {
+            'user': user,
+            'profile': profile,
+            'userPosts': userPosts,
+        }
+        return render(request, 'konto/userProfile.html', context)

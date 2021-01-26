@@ -17,7 +17,10 @@
 
     </title>
 </head>
-<body class="text-center">
+
+<!-- Background pattern from Toptal Subtle Patterns -->
+
+<body class="text-center" style="background-image: url('{% static "backgrounds/tlo01.png" %}' );">
   {% if request.user.is_authenticated %}
       <nav class="navbar sticky-top   navbar-expand navbar-dark   bg-dark text-decoration-none ">
       <a class="navbar-brand p-1 text-decoration-none " href="{% url 'feed:allPosts' %}"><h3 class="chewy">myBooK</h3></a>
@@ -36,7 +39,7 @@
                          role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user-circle"></i>
                       </a>
                       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <li><a class="dropdown-item" href="{% url "myprofile" %}">Pokaz Profil</a></li>
+
                           <li><a class="dropdown-item" href="{% url "edycja" %} ">Edytuj Profil</a></li>
                           <li><hr class="dropdown-divider"></li>
                           <li><a class="dropdown-item" href="#">Opcja </a></li>
@@ -51,15 +54,14 @@
 
   {% endif %}
 
-    {% if request.user.is_authenticated %}
 
+    {% if request.user.is_authenticated %}
       <div class="nav-item text-light w-100 ">
           Witaj, {{ request.user.first_name }}!
           <div class="  ">
               <a href="{% url 'wyloguj' %}">Wyloguj</a>
           </div>
       </div>
-
   {% endif %}
    </nav>
 

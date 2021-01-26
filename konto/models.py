@@ -9,6 +9,8 @@ class Profile(models.Model):
     aboutMe = models.TextField(max_length=199, null=True, blank=True)
     birthDay = models.DateField(blank=True, null=True)
     photo = models.ImageField(upload_to='media/profilePhoto', default='media/profilePhoto/default.jpg')
+    city = models.CharField(max_length=99, null=True, blank=True)
+    country = models.CharField(max_length=99, null=True, blank=True)
 
     def __str__(self):
         return str('Informacje o użytkowniku {}.'.format(self.user))
