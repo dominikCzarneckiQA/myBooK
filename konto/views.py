@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from .forms import LoginForm, UserRegisterForm, UserEditForm, ProfileEditForm
 from .models import Profile
 from django.views import View
-from feed.views import Posts
+from feed.views import Post
 # widok dostępny od razu po wejścia na stronę
 
 def entryPageView(request):
@@ -26,7 +26,7 @@ def loginUserView(request):
                     login(request, user)
                     return HttpResponse('Uwierzytelnienie zakończyło się sukcesem!')
                 else:
-                    return HttpResponse("Niestety. Te konto jest zablokowane :(")
+                    return HttpResponse("Niestety. To konto jest zablokowane :(")
             else:
                 return HttpResponse("Nieprawidłowe dane! Spróbuj ponownie. ")
     else:
@@ -70,11 +70,14 @@ def editView(request):
                    'profile_form': profile_form
                    })
 
+
+
+
 class UserProfileView(View):
     def get(self, request, pk, *args, **kwargs):
         profile = Profile.objects.get(pk=pk)
         user = Profile.user
-        userPosts = Posts.objects.filter(user=user).order_by('-creationDate')
+        userPosts = Post.objects.filter(user=user).order_by('-postDate')
 
         context = {
             'user': user,

@@ -14,6 +14,3 @@ class Profile(models.Model):
 
     def __str__(self):
         return str('Informacje o użytkowniku {}.'.format(self.user))
-
-# ef get_absolute_url(self):
-#    return "/users/{}".format(self.slug)

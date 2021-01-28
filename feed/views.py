@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
-from .models import Posts, Comments
-from .forms import PostForm, CommentsForm
+from .models import Post, Comment
+from .forms import PostCreateForm, CommentCreateForm
 from django.views.generic.edit import UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
@@ -9,105 +9,119 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import UserPassesTestMixin
 
 
+
 @method_decorator(login_required, name='dispatch')
-class PostsView(View):
+class AllPostView(View):
     def post(self, request, *args, **kwargs):
-        form = PostForm(request.POST)
-        post = Posts.objects.all().order_by('-creationDate')
+        form = PostCreateForm(request.POST)
+        allPosts = Post.objects.all().order_by('-postDate')
 
         if form.is_valid():
-            new_post = form.save(commit=False)
-            new_post.user = request.user
-            new_post.save()
+            newPost = form.save(commit=False)
+            newPost.postAuthor = request.user
+            newPost.save()
 
-        context = {
-            'allPosts': post,
+        contxt = {
+            'allPosts': allPosts,
             'form': form
         }
-        return render(request, 'feed/posts.html', context)
+        return render(request, 'feed/allPost.html', contxt)
 
     def get(self, request, *args, **kwargs):
-        form = PostForm()
-        post = Posts.objects.all().order_by('-creationDate')
+        form = PostCreateForm()
+        allPosts = Post.objects.all().order_by('-postDate')
 
-        context = {
-            'allPosts': post,
+        contxt = {
+            'allPosts': allPosts,
             'form': form
         }
-        return render(request, 'feed/posts.html', context)
-
-
+        return render(request, 'feed/allPost.html', contxt)
 
 
 @method_decorator(login_required, name='dispatch')
-class PostsDetailView(View):
+class DetailPostView(View):
     def get(self, request, pk, *args, **kwargs):
-        post = Posts.objects.get(pk=pk)
-        form = CommentsForm()
+        post = Post.objects.get(pk=pk)
+        form = CommentCreateForm()
 
-        comments = Comments.objects.filter(post=post).order_by('-creationDate')
+        allComments = Comment.objects.filter(post=post).order_by('-commentDate')
 
-        context = {
+        contxt = {
             'post': post,
             'form': form,
-            'comments': comments,
+            'comments': allComments,
         }
-        return render(request, 'feed/postsDetail.html', context)
+        return render(request, 'feed/detailPost.html', contxt)
 
     def post(self, request, pk, *args, **kwargs):
-        post = Posts.objects.get(pk=pk)
-        form = CommentsForm(request.POST)
+        post = Post.objects.get(pk=pk)
+        form = CommentCreateForm(request.POST)
 
         if form.is_valid():
             newComment = form.save(commit=False)
-            newComment.user = request.user
+            newComment.commentAuthor = request.user
             newComment.post = post
             newComment.save()
 
-        comments = Comments.objects.filter(post=post, pk=pk).order_by('-creationDate')
+        allComments = Comment.objects.filter(post=post).order_by('-commentDate')
 
-        context = {
+        contxt = {
             'post': post,
             'form': form,
-            'comments': comments,
+            'comments': allComments,
         }
-        return render(request, 'feed/postsDetail.html', context)
+        return render(request, 'feed/detailPost.html', contxt)
+
+
+
+@method_decorator(login_required, name='dispatch')
+class UpdatePostView(UserPassesTestMixin,UpdateView):
+    model = Post
+    template_name = 'feed/updatePost.html'
+    fields = ['postContent']
+
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.postAuthor
+
+    def get_success_url(self):
+        url = self.kwargs['pk']
+        return reverse_lazy('feed:detail-post', kwargs={'pk': url})
+
+
+
+@method_decorator(login_required, name='dispatch')
+class DeletePostView(UserPassesTestMixin,DeleteView):
+    model = Post
+    template_name = 'feed/deletePost.html'
+    success_url = reverse_lazy('feed:all-posts')
+
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.postAuthor
 
 
 @method_decorator(login_required, name='dispatch')
 class DeleteCommentView(UserPassesTestMixin,DeleteView):
-    model = Comments
-    template_name = 'feed/commentDelete.html'
+    model = Comment
+    template_name = 'feed/deleteComment.html'
+
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.commentAuthor
 
     def get_success_url(self):
         pk = self.kwargs['post_pk']
-        return reverse_lazy('feed:detailPost', kwargs={'pk': pk})
-
-    def test_func(self):
-        post = self.get_object()
-        return self.request.user == post.user
+        return reverse_lazy('feed:detail-post', kwargs={'pk': pk})
 
 
-@method_decorator(login_required, name='dispatch')
-class DeletePostsView(UserPassesTestMixin,DeleteView, ):
-    model = Posts
-    template_name = 'feed/postsDelete.html'
-    success_url = reverse_lazy('feed:allPosts')
 
-    def test_func(self):
-        post = self.get_object()
-        return self.request.user == post.user
 
-@method_decorator(login_required, name='dispatch')
-class PostsUpdateView(UserPassesTestMixin,UpdateView):
-    model = Posts
-    fields = ['description']
-    template_name = 'feed/postsUpdate.html'
 
-    def get_success_url(self):
-        pk = self.kwargs['pk']
-        return reverse_lazy('feed:detailPost', kwargs={'pk': pk})
 
-    def test_func(self):
-        post = self.get_object()
-        return self.request.user == post.user
+
+
+
+
+
+

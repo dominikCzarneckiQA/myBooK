@@ -9,19 +9,19 @@
         <div class=" ">
             <div class=" ">
                 <div class=" ">
-                    <a href="{% url 'feed:detailPost' object.pk  %}"  class=" btn btn-secondary mt-2 "> Powrót Do Postu</a>
+                    <a href="{% url 'feed:detail-post' object.pk %}"  class=" btn btn-outline-secondary mt-2 "> Powrót do Postu</a>
                 </div>
             </div>
         </div>
 
          <div class="">
-            <form class=" justify-content-center mt-4"   method="post">
+            <form  method="post">
+                <h4 class="display-2">Czy jesteś pewien?</h4>
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-primary" >Zaktualizuj Post</button>
+                <p>Usuniętego komentarza nie mozna przywrócić. </p>
+                <button class="btn btn-danger" >Potwierdz</button>
                 <br/><br/>
             </form>
         </div>
-
     </div>
 {% endblock %}

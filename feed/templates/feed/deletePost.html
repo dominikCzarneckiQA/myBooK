@@ -1,0 +1,31 @@
+{% extends "mainPage.html" %}
+{% block title %}
+    Edycja Postu
+{% endblock %}
+
+
+{% block content %}
+    <div class="container ">
+        <div class="w-25">
+            <div class="mt-3">
+                <a href="{% url 'feed:detail-post' object.pk %}"  class="btn btn-outline-secondary mt-2"> Powrót do Postu</a>
+            </div>
+        </div>
+
+
+         <div class="">
+            <form  method="post">
+                <h4 class="display-4    ">Czy na pewno chcesz usunąć ten post?</h4>
+                {% csrf_token %}
+                <div class="d-flex justify-content-center ">
+                    <p class="w-50 alert-danger border border-dark  text-dark ">
+                        Pamiętaj, usuniętego postu nie da sie przywrócić!
+                    </p>
+                </div>
+                <button class="btn btn-outline-danger fw-bold" >Potwierdz</button>
+                <br/><br/>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}

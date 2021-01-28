@@ -1,28 +1,28 @@
 from django import forms
-from .models import Posts, Comments
+from .models import Post, Comment
 
 
-class PostForm(forms.ModelForm):
-    description = forms.CharField(label='',
+class PostCreateForm(forms.ModelForm):
+    postContent = forms.CharField(label='',
                                   widget=forms.Textarea(attrs={
                                       'rows': '7',
                                       'cols': '77',
-                                      'placeholder': 'Co u Ciebie Użytkowniku?'
+                                      'placeholder': 'Co u Ciebie użytkowniku...?',
                                   }))
 
     class Meta:
-        model = Posts
-        fields = ['description']
+        model = Post
+        fields = ['postContent']
 
 
-class CommentsForm(forms.ModelForm):
-    comment = forms.CharField(label='',
-                              widget=forms.Textarea(attrs={
-                                  'rows': '7',
-                                  'cols': '82',
-                                  'placeholder': 'Dodaj komentarz..'
-                              }))
+class CommentCreateForm(forms.ModelForm):
+    commentContent = forms.CharField(label='',
+                                     widget=forms.Textarea(attrs={
+                                         'rows': '7',
+                                         'cols': '82',
+                                         'placeholder': 'Dodaj komentarz..'
+                                     }))
 
     class Meta:
-        model = Comments
-        fields = ['comment']
+        model = Comment
+        fields = ['commentContent']

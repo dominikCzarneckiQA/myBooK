@@ -22,4 +22,8 @@ urlpatterns = [
     path('feed/', include('feed.urls')),
     path('profile/<int:pk>/', UserProfileView.as_view(), name='profile'),
 
+
+
+    path('login/', auth_views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
+
 ]

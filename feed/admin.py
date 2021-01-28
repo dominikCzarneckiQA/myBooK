@@ -1,13 +1,13 @@
 from django.contrib import admin
-from .models import Posts, Comments
+from .models import Post, Comment
 
 
 # Register your models here.
 
-@admin.register(Posts)
+@admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['user', 'creationDate', 'description']
+    list_display = ['postAuthor', 'postDate', 'postContent']
 
-@admin.register(Comments)
+@admin.register(Comment)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['user', 'comment', 'creationDate', 'post']
+    list_display = ['commentAuthor', 'commentContent', 'commentDate', 'post']

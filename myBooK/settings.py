@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
 ]
 
+SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -131,6 +132,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BECKEND = 'django.core.mail.backends.console.EmailBackend'
+
 EMAIL_ACCOUNT_REQUIRED = True
 
 # obsługa plików medialnych

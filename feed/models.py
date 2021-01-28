@@ -3,14 +3,14 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 
-class Posts(models.Model):
-    user = models.ForeignKey(User,default=None, blank=True ,null=False, on_delete=models.CASCADE)
-    description = models.TextField(default='Napisz cos.. ?')
-    creationDate = models.DateTimeField(default=timezone.now)
+class Post(models.Model):
+    postAuthor = models.ForeignKey(User,default=None, blank=True , null=False, on_delete=models.CASCADE)
+    postContent = models.TextField(default='Napisz cos.. ?')
+    postDate = models.DateTimeField(default=timezone.now)
 
 
-class Comments(models.Model):
-    user = models.ForeignKey(User,default=None,blank=True ,null=False, on_delete=models.CASCADE)
-    comment = models.TextField()
-    creationDate = models.DateTimeField(default=timezone.now)
-    post = models.ForeignKey('Posts', on_delete=models.CASCADE)
+class Comment(models.Model):
+    post = models.ForeignKey('Post', on_delete=models.CASCADE)
+    commentAuthor = models.ForeignKey(User,default=None,blank=True ,null=False, on_delete=models.CASCADE)
+    commentContent = models.TextField()
+    commentDate = models.DateTimeField(default=timezone.now)

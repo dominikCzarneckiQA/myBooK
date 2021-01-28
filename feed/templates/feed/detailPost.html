@@ -1,0 +1,65 @@
+{% extends "mainPage.html" %}
+{% block title %}
+    Podgląd Postu
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="">
+            <div class="w-25">
+                <a href="{% url 'feed:all-posts' %}"  class="btn btn-outline-secondary mt-2 "> Powrót </a>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center  mt-3  mb-3">
+            <div class="border-bottom col-md-5  col-sm-12 rounded">
+                <p class="text-capitalize">
+                <h3 class="text-primary  bg-light border border-dark rounded-circle p-1">{{ post.postAuthor }}
+
+                      <small class="text-muted fw-normal   ">- {{ post.postDate }}</small>
+                    </h3>
+
+                    {% if request.user == post.postAuthor %}
+                        <a class="btn  btn  btn-outline-success" href="{% url 'feed:update-post' post.pk %}" ><i class="far fa-edit  text-dark "></i></a>
+                        <a class="btn   btn-outline-danger" href="{% url 'feed:delete-post' post.pk %}" ><i class="fas fa-trash-alt   text-dark "></i></a>
+                    {% endif %}
+                    <div class="card mt-3 border" style="width:100% ; height:250px;">
+                        <p class="card-text"> {{ post.postContent }}</p>
+                    </div></div>
+
+            </div>
+        </div>
+
+         <div class="d-flex justify-content-center mt-3 mb-5">
+             <div class="col-md-6 col-sm-12">
+                 <form method="post">
+                     {% csrf_token %}
+                     {{ form.as_p }}
+                     <div class= "">
+                         <button class="btn btn-outline-success fw-bold mt-2" >Dodaj Komentarz</button>
+                     </div>
+                 </form>
+             </div>
+         </div>
+
+        {% for comment in comments %}
+            <div class="justify-content-center d-flex mt-3 mb-5 ">
+                <div class="col-md-5 col-sm-12  rounded border-bottom ">
+                    <p>
+                        <strong> {{ comment.commentAuthor }} </strong> - {{ comment.commentDate }}
+                        {% if request.user == post.postAuthor %}
+                            <a href="{% url 'feed:delete-comment' post.pk comment.pk %}">
+                                <i class="fas fa-trash-alt h5 text-dark "></i>
+                            </a>
+                        {% endif %}
+                        {% if request.user == comment.commentAuthor %}
+                            <a href="{% url 'feed:delete-comment' post.pk comment.pk %}">
+                                <i class="fas fa-trash-alt h5 text-dark "></i>
+                            </a>
+                        {% endif %}
+                    </p>
+                    <p class="blockquote ">{{ comment.commentContent }}</p>
+                </div>
+            </div>
+        {% endfor %}
+{% endblock %}

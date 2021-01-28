@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    <form action="" method="post">
+    <form class=" " method="post">
         {% csrf_token %}
         {{ form.as_p }}
         {% if redirect_field_value %}
