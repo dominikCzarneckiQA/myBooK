@@ -1,0 +1,33 @@
+{% extends "mainPage.html" %}
+{% block title %}
+    Tablica
+{% endblock %}
+
+
+{% block content %}
+    <div class="container ">
+        <div class="  row justify-content-center  mt-5 ">
+            <h1 class="display-5 fw-bold text-capitalize  shadow-sm p-3 mb-5 bg-white rounded">Utwórz post</h1>
+            <form class="fw-normal   shadow-sm p-3 mb-5 bg-white rounded"  method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class=" w-25 btn fw-bold  btn-outline-success  p-3 mb-3  rounded">Dodaj Post</button>
+            </form>
+        </div>
+
+
+        {% for post in allPosts %}
+        <div class="d-flex justify-content-center  mt-2 ">
+            <div class="col-md-6 border shadow-sm p-3 mb-5  rounded position-relative bg-body" style="width:50% ; height:250px;" >
+                <p class="text-capitalize text-secondary">
+                    <strong>{{ post.postAuthor }} </strong> - {{ post.postDate }}
+                </p>
+                <p class="border  w-100  h-50 "> {{ post.postContent }} </p>
+
+                <a href ="{% url 'feed:detail-post' post.pk %}" class="stretched-link"> </a>
+            </div>
+        </div>
+    {% endfor %}
+
+    </div>
+{% endblock %}
