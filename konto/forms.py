@@ -45,9 +45,9 @@ class UserEditForm(forms.ModelForm):
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('aboutMe', 'photo')
+        fields = ('biography', 'profileAvatar')
 
         widgets = {
+            'biography': forms.Textarea(attrs={'class': 'text-area'}),
 
-            'aboutMe': forms.Textarea(attrs={'class': 'text-area'}),
         }

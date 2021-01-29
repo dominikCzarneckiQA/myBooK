@@ -1,55 +1,61 @@
 {% extends 'mainPage.html' %}
 
 {% block title %}
-    Tablica
+    Profil {{ request.user.first_name }}
 {% endblock %}
 
 
 {% block content %}
     <div class="container ">
-        <div class="row mt-5 ">
-            <div class="col-md-4  col-sm-8 ">
-                <a href="{% url 'feed:allPosts' %}" class="btn btn-outline-light">Powrót</a>
+        <div class="">
+            <div class="">
+                <a href="{% url 'feed:all-posts' %}" class="btn btn-outline-light">Powrót</a>
             </div>
         </div>
 
         <div class="row mt-4 justify-content-center ">
             <div class="card shadow-sm col-md-8 col-sm-12 border-bottom px-4 pt-4">
-                <img alt="userProfileImg" src="{{ profile.photo.url }}" class="rounded-circle w-100 h-100 height" />
+                <img alt="userProfileImg" src="{{ profile.profileAvatar.url }}"
+                     class="rounded-circle" width="150px" height="150px" />
 
-                {% if profile.name %}
-                    <h4 class="py-4">{{ profile.name }}</h4>
+                {% if request.user.first_name %}
+                    <h5 class="py-5 border-bottom">{{ request.user.first_name }}</h5>
                 {% endif %}
 
-                {% if profile.aboutMe %}
-                    <h4 class="py-4">{{ profile.aboutMe }}</h4>
+                {% if request.user.last_name %}
+                    <h5 class="py-5 border-bottom">{{ request.user.last_name }}</h5>
                 {% endif %}
 
-                {% if profile.birthDay %}
-                    <h4 class="py-4">{{ profile.birthDay }}</h4>
+                {% if request.user.email %}
+                    <h5 class="py-5 border-bottom">{{ request.user.email }}</h5>
                 {% endif %}
 
-                {% if profile.city %}
-                    <h4 class="py-4">{{ profile.city }}</h4>
+                {% if profile.biography %}
+                    <h5 class="py-5 border-bottom">{{ profile.biography }}</h5>
                 {% endif %}
 
-                {% if profile.country %}
-                    <h4 class="py-4">{{ profile.country }}</h4>
+                {% if profile.birthDate %}
+                    <h5 class="py-5border-bottom">{{ profile.birthDate }}</h5>
                 {% endif %}
 
-                {% if profile.name %}
-                    <h4 class="py-4">{{ profile.name }}</h4>
+                {% if profile.currentLocation %}
+                    <h5 class="py-5 border-bottom">{{ profile.currentLocation }}</h5>
+                {% endif %}
+
+                {% if profile.countryOrigin %}
+                    <h5 class="py-5 border-bottom">{{ profile.countryOrigin }}</h5>
                 {% endif %}
 
             </div>
         </div>
 
-        {% for posts in userPosts %}
+        {% for post in posts %}
             <div class="row justify-content-center  mt-5 ">
                 <div class="col-md-6 border shadow-sm p-3 mb-5  rounded position-relative">
-                    <p class="text-capitalize text-secondary"> <strong>{{ posts.user }} </strong> - {{ posts.creationDate }}</p>
-                    <p class="border  w-100  h-50 "> {{ posts.description }} </p>
-                    <a href ="{% url 'feed:detailPost' posts.pk %}" class="stretched-link"> </a>
+                    <p class="text-capitalize text-secondary">
+                        <strong>{{ post.postAuthor }} </strong> - {{ post.postDate }}</p>
+                    <p class="border  w-100  h-50 "> {{ post.postContent }} </p>
+                    <a href ="{% url 'feed:detail-post' post.pk %}" class="stretched-link"> </a>
                 </div>
             </div>
         {% endfor %}

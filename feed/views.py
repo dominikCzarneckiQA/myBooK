@@ -9,7 +9,6 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import UserPassesTestMixin
 
 
-
 @method_decorator(login_required, name='dispatch')
 class AllPostView(View):
     def post(self, request, *args, **kwargs):

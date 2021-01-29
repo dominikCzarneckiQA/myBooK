@@ -3,6 +3,7 @@ from django.urls import path ,include
 from . import views
 from .views import UserProfileView
 
+
 urlpatterns = [
     path('', views.entryPageView, name="stronaStartowa"),
     path('zaloguj/', auth_views.LoginView.as_view(),name='login'),
@@ -17,11 +18,12 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/',  auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/gotowe/', auth_views.PasswordResetCompleteView.as_view(),name='password_reset_complete'),
     path('rejestracja/', views.registerView, name='register'),
-    path('edycja/', views.editView, name='edycja'),
+    path('edycja/', views.editView, name='edit'),
+
+
 
     path('feed/', include('feed.urls')),
-    path('profile/<int:pk>/', UserProfileView.as_view(), name='profile'),
-
+    path('user_profile/<int:pk>', UserProfileView.as_view(), name='profile'),
 
 
     path('login/', auth_views.LoginView.as_view(redirect_authenticated_user=True), name='login'),

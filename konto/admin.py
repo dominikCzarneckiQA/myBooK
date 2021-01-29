@@ -4,5 +4,4 @@ from .models import Profile
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'aboutMe', 'photo', 'birthDay', 'city', 'country']
-
+    list_display = ['user', 'biography', 'profileAvatar', 'birthDate', 'currentLocation', 'countryOrigin']

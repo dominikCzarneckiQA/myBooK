@@ -136,9 +136,6 @@ EMAIL_BECKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_ACCOUNT_REQUIRED = True
 
 # obsługa plików medialnych
-
 MEDIA_URL = '/media/'
-
 # ścieżka lokalna plików multimedialnych
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

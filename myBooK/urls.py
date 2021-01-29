@@ -23,9 +23,6 @@ urlpatterns = [
     path('', include('konto.urls')),
 
 
-
-
-
 ]
 
 if settings.DEBUG:

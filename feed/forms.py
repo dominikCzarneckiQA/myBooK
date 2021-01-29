@@ -5,8 +5,8 @@ from .models import Post, Comment
 class PostCreateForm(forms.ModelForm):
     postContent = forms.CharField(label='',
                                   widget=forms.Textarea(attrs={
-                                      'rows': '7',
-                                      'cols': '77',
+                                      'class': 'form-control',
+                                      'cols': '5',
                                       'placeholder': 'Co u Ciebie użytkowniku...?',
                                   }))
 
@@ -18,8 +18,9 @@ class PostCreateForm(forms.ModelForm):
 class CommentCreateForm(forms.ModelForm):
     commentContent = forms.CharField(label='',
                                      widget=forms.Textarea(attrs={
+
                                          'rows': '7',
-                                         'cols': '82',
+                                         'class': 'form-control',
                                          'placeholder': 'Dodaj komentarz..'
                                      }))
 

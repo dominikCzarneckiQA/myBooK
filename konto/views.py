@@ -3,11 +3,11 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from .forms import LoginForm, UserRegisterForm, UserEditForm, ProfileEditForm
 from .models import Profile
 from django.views import View
-from feed.views import Post
-# widok dostępny od razu po wejścia na stronę
+from .forms import LoginForm, UserRegisterForm, UserEditForm, ProfileEditForm
+from feed.models import Post
+
 
 def entryPageView(request):
     return render(request, 'entryPage.html', {})
@@ -66,22 +66,21 @@ def editView(request):
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user)
     return render(request, 'konto/edit.html',
-                  {'user_form': user_form,
-                   'profile_form': profile_form
+                  {
+                   'profile_form': profile_form,
+                   'user_form': user_form,
                    })
-
-
 
 
 class UserProfileView(View):
     def get(self, request, pk, *args, **kwargs):
         profile = Profile.objects.get(pk=pk)
-        user = Profile.user
-        userPosts = Post.objects.filter(user=user).order_by('-postDate')
+        user = profile.user
+        posts = Post.objects.filter(postAuthor=user).order_by('-postDate')
 
         context = {
             'user': user,
             'profile': profile,
-            'userPosts': userPosts,
+            'posts': posts,
         }
         return render(request, 'konto/userProfile.html', context)

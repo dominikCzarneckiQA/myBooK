@@ -44,17 +44,17 @@
 
         {% for comment in comments %}
             <div class="justify-content-center d-flex mt-3 mb-5 ">
-                <div class="col-md-5 col-sm-12  rounded border-bottom ">
+                <div class="col-md-5 col-sm-12  rounded border-bottom  ">
                     <p>
                         <strong> {{ comment.commentAuthor }} </strong> - {{ comment.commentDate }}
                         {% if request.user == post.postAuthor %}
                             <a href="{% url 'feed:delete-comment' post.pk comment.pk %}">
-                                <i class="fas fa-trash-alt h5 text-dark "></i>
+                                <i class="fas fa-trash-alt h6 text-dark "></i>
                             </a>
                         {% endif %}
                         {% if request.user == comment.commentAuthor %}
                             <a href="{% url 'feed:delete-comment' post.pk comment.pk %}">
-                                <i class="fas fa-trash-alt h5 text-dark "></i>
+                                <i class="fas fa-trash-alt h6 text-dark table-hover "></i>
                             </a>
                         {% endif %}
                     </p>
