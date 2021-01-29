@@ -7,43 +7,37 @@
 
 {% block content %}
     <div class="container ">
-        <div class="">
-            <div class="">
-                <a href="{% url 'feed:all-posts' %}" class="btn btn-outline-light">Powrót</a>
-            </div>
-        </div>
-
         <div class="row mt-4 justify-content-center ">
-            <div class="card shadow-sm col-md-8 col-sm-12 border-bottom px-4 pt-4">
+            <div class="card card-subtitle shadow-sm col-md-8 col-sm-12 border-bottom px-4 pt-4">
                 <img alt="userProfileImg" src="{{ profile.profileAvatar.url }}"
                      class="rounded-circle" width="150px" height="150px" />
 
                 {% if request.user.first_name %}
-                    <h5 class="py-5 border-bottom">{{ request.user.first_name }}</h5>
+                    <p class="py-2 border-bottom">{{ request.user.first_name }}</p>
                 {% endif %}
 
                 {% if request.user.last_name %}
-                    <h5 class="py-5 border-bottom">{{ request.user.last_name }}</h5>
+                    <p class="py-2 border-bottom">{{ request.user.last_name }}</p>
                 {% endif %}
 
                 {% if request.user.email %}
-                    <h5 class="py-5 border-bottom">{{ request.user.email }}</h5>
+                    <p class="py-2 border-bottom">{{ request.user.email }}</p>
                 {% endif %}
 
                 {% if profile.biography %}
-                    <h5 class="py-5 border-bottom">{{ profile.biography }}</h5>
+                    <p class="py-2 border-bottom">{{ profile.biography }}</p>
                 {% endif %}
 
                 {% if profile.birthDate %}
-                    <h5 class="py-5border-bottom">{{ profile.birthDate }}</h5>
+                    <p class="py-2 border-bottom">{{ profile.birthDate }}</p>
                 {% endif %}
 
                 {% if profile.currentLocation %}
-                    <h5 class="py-5 border-bottom">{{ profile.currentLocation }}</h5>
+                    <p class="py-2 border-bottom">{{ profile.currentLocation }}</p>
                 {% endif %}
 
                 {% if profile.countryOrigin %}
-                    <h5 class="py-5 border-bottom">{{ profile.countryOrigin }}</h5>
+                    <p class="py-2 border-bottom">{{ profile.countryOrigin }}</p>
                 {% endif %}
 
             </div>
