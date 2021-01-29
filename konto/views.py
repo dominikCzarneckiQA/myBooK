@@ -58,29 +58,28 @@ def registerView(request):
 def editView(request):
     if request.method == 'POST':
         user_form = UserEditForm(instance=request.user, data=request.POST)
-        profile_form = UserEditForm(instance=request.user, data=request.POST, files=request.FILES)
-        if user_form.is_valid() and profile_form.is_valid():
+        if user_form.is_valid():
             user_form.save()
-            profile_form.save()
     else:
         user_form = UserEditForm(instance=request.user)
-        profile_form = ProfileEditForm(instance=request.user)
     return render(request, 'konto/edit.html',
                   {
-                   'profile_form': profile_form,
                    'user_form': user_form,
                    })
 
 
+
 class UserProfileView(View):
     def get(self, request, pk, *args, **kwargs):
-        profile = Profile.objects.get(pk=pk)
-        user = profile.user
-        posts = Post.objects.filter(postAuthor=user).order_by('-postDate')
+        getProfile = Profile.objects.get(pk=pk)
+        getUser = getProfile.user
+        getPosts = Post.objects.filter(postAuthor=getUser).order_by('-postDate')
 
         context = {
-            'user': user,
-            'profile': profile,
-            'posts': posts,
+            'getUser': getUser,
+            'getProfile': getProfile,
+            'getPosts': getPosts,
         }
         return render(request, 'konto/userProfile.html', context)
+
+## dodac edycje profilu uzytkownika
