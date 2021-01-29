@@ -1,12 +1,17 @@
 # Create your views here.
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from .models import Profile
+from django.shortcuts import render
+from django.utils.decorators import method_decorator
+
 from django.views import View
-from .forms import LoginForm, UserRegisterForm, UserEditForm, ProfileEditForm
+
 from feed.models import Post
+from .forms import LoginForm, UserRegisterForm, UserEditForm
+from .models import Profile
+
+
 
 
 def entryPageView(request):
@@ -55,20 +60,20 @@ def registerView(request):
 
 
 @login_required()
-def editView(request):
-    if request.method == 'POST':
-        user_form = UserEditForm(instance=request.user, data=request.POST)
+def editView(UpdateView):
+    if UpdateView.method == 'POST':
+        user_form = UserEditForm(instance=UpdateView.user, data=UpdateView.POST)
         if user_form.is_valid():
             user_form.save()
     else:
-        user_form = UserEditForm(instance=request.user)
-    return render(request, 'konto/edit.html',
+        user_form = UserEditForm(instance=UpdateView.user)
+    return render(UpdateView, 'konto/updateUser.html',
                   {
                    'user_form': user_form,
                    })
 
 
-
+@method_decorator(login_required , name='dispatch')
 class UserProfileView(View):
     def get(self, request, pk, *args, **kwargs):
         getProfile = Profile.objects.get(pk=pk)
@@ -82,4 +87,7 @@ class UserProfileView(View):
         }
         return render(request, 'konto/userProfile.html', context)
 
-## dodac edycje profilu uzytkownika
+@method_decorator(login_required , name='dispatch')
+class ProfileUpdateView(View):
+    model = Profile
+    fields = ['profileAvatar', 'biography','birthDate', 'currentLocation', 'countryOrigin']

@@ -11,6 +11,12 @@
             <div class="card card-subtitle shadow-sm col-md-8 col-sm-12 border-bottom px-4 pt-4">
                 <img alt="userProfileImg" src="{{ getProfile.profileAvatar.url }}"
                      class="rounded-circle" width="125px" height="125px" />
+                {% if request.user == getProfile.user %}
+                    <div class="w-25">
+                        <a class="btn" href="{% url 'edit' %}" >
+                        <i class="far fa-edit  text-dark  "></i></a>
+                    </div>
+                {% endif %}
 
                 {% if request.user.first_name %}
                     <p class="py-2 border-bottom">{{ request.user.first_name }}</p>

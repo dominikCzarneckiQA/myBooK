@@ -124,17 +124,18 @@ STATIC_ROOT = "/konto/static"
 LOGIN_URL = '/konto/login/'
 LOGIN_REDIRECT_URL = '/feed/'
 
-
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 # SERWER SMTP
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
 EMAIL_BECKEND = 'django.core.mail.backends.console.EmailBackend'
-
+# SendGrid
 EMAIL_ACCOUNT_REQUIRED = True
-
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # obsługa plików medialnych
 MEDIA_URL = '/media/'
 # ścieżka lokalna plików multimedialnych

@@ -42,7 +42,7 @@ class UserEditForm(forms.ModelForm):
         }
 
 
-class ProfileEditForm(forms.ModelForm):
+'''class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('biography', 'profileAvatar')
@@ -51,3 +51,4 @@ class ProfileEditForm(forms.ModelForm):
             'biography': forms.Textarea(attrs={'class': 'text-area'}),
 
         }
+'''

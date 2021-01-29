@@ -53,12 +53,12 @@
 
 
     {% if request.user.is_authenticated %}
-        <div class="dropstart    ">
+        <div class="dropstart  mx-3  ">
           <button type="button" class="btn btn-secondary dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
           </button>
           <ul class="dropdown-menu">
              <li>
-                 <a class="dropdown-item p-3 text-dark" href="konto/userProfile.html">
+                 <a class="dropdown-item p-3 text-dark" href="{% url 'profile' user.profile.pk %} ">
                      {{ request.user.first_name }} {{ request.user.last_name }}
                  </a>
              </li>
