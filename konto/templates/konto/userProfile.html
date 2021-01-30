@@ -6,58 +6,60 @@
 
 
 {% block content %}
-    <div class="container ">
-        <div class="row mt-4 justify-content-center ">
-            <div class="card card-subtitle shadow-sm col-md-8 col-sm-12 border-bottom px-4 pt-4">
-                <img alt="userProfileImg" src="{{ getProfile.profileAvatar.url }}"
-                     class="rounded-circle" width="125px" height="125px" />
-                {% if request.user == getProfile.user %}
-                    <div class="w-25">
-                        <a class="btn" href="{% url 'profile_edit' getProfile.pk  %}" >
-                        <i class="far fa-edit  text-dark  "></i></a>
-                    </div>
-                {% endif %}
+    <div class="container-fluid ">
+        <div class="container">
+            <div class="row mt-4 justify-content-center ">
+                <div class="card card-subtitle shadow-sm col-md-8 col-sm-12 border-bottom px-4 pt-4">
+                    <img alt="userProfileImg" src="{{ getProfile.profileAvatar.url }}"
+                         class="rounded-circle" width="125px" height="125px" />
+                    {% if request.user == getProfile.user %}
+                        <div class="w-25">
+                            <a class="btn" href="{% url 'profile_edit' getProfile.pk  %}" >
+                            <i class="far fa-edit  text-dark  "></i></a>
+                        </div>
+                    {% endif %}
 
-                {% if request.user.first_name %}
-                    <p class="py-2 border-bottom">{{ request.user.first_name }}</p>
-                {% endif %}
+                    {% if request.user.first_name %}
+                        <p class="py-2 border-bottom">{{ request.user.first_name }}</p>
+                    {% endif %}
 
-                {% if request.user.last_name %}
-                    <p class="py-2 border-bottom">{{ request.user.last_name }}</p>
-                {% endif %}
+                    {% if request.user.last_name %}
+                        <p class="py-2 border-bottom">{{ request.user.last_name }}</p>
+                    {% endif %}
 
-                {% if request.user.email %}
-                    <p class="py-2 border-bottom">{{ request.user.email }}</p>
-                {% endif %}
+                    {% if request.user.email %}
+                        <p class="py-2 border-bottom">{{ request.user.email }}</p>
+                    {% endif %}
 
-                {% if getProfile.biography %}
-                    <p class="py-2 border-bottom">{{ getProfile.biography }}</p>
-                {% endif %}
+                    {% if getProfile.biography %}
+                        <p class="py-2 border-bottom">{{ getProfile.biography }}</p>
+                    {% endif %}
 
-                {% if getProfile.birthDate %}
-                    <p class="py-2 border-bottom">{{ getProfile.birthDate }}</p>
-                {% endif %}
+                    {% if getProfile.birthDate %}
+                        <p class="py-2 border-bottom">{{ getProfile.birthDate }}</p>
+                    {% endif %}
 
-                {% if getProfile.currentLocation %}
-                    <p class="py-2 border-bottom">{{ getProfile.currentLocation }}</p>
-                {% endif %}
+                    {% if getProfile.currentLocation %}
+                        <p class="py-2 border-bottom">{{ getProfile.currentLocation }}</p>
+                    {% endif %}
 
-                {% if getProfile.countryOrigin %}
-                    <p class="py-2 border-bottom">{{ getProfile.countryOrigin }}</p>
-                {% endif %}
+                    {% if getProfile.countryOrigin %}
+                        <p class="py-2 border-bottom">{{ getProfile.countryOrigin }}</p>
+                    {% endif %}
 
-            </div>
-        </div>
-
-        {% for post in getPosts %}
-            <div class="row justify-content-center  mt-5 ">
-                <div class="col-md-6 border shadow-sm p-3 mb-5  rounded position-relative">
-                    <p class="text-capitalize text-secondary">
-                        <strong>{{ post.postAuthor }} </strong> - {{ post.postDate }}</p>
-                    <p class="border  w-100  h-50 "> {{ post.postContent }} </p>
-                    <a href ="{% url 'feed:detail-post' post.pk %}" class="stretched-link"> </a>
                 </div>
             </div>
-        {% endfor %}
+
+            {% for post in getPosts %}
+                <div class="row justify-content-center  mt-5 ">
+                    <div class="col-md-6 border shadow-sm p-3 mb-5  rounded position-relative">
+                        <p class="text-capitalize text-secondary">
+                            <strong>{{ post.postAuthor }} </strong> - {{ post.postDate }}</p>
+                        <p class="border  w-100  h-50 "> {{ post.postContent }} </p>
+                        <a href ="{% url 'feed:detail-post' post.pk %}" class="stretched-link"> </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

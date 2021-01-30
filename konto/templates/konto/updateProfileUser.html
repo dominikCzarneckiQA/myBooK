@@ -12,14 +12,14 @@
         <h1 class="display-4 fw-normal"> Edytowanie Profilu </h1>
         <p class="text-secondary">Zmiana danych profilu jest możliwa za pomocą formularza znajdującego się poniżej:</p>
 
-        <form  class="text-capitalize container w-25 border border-2"   method="post" enctype="multipart/form-data">
-            {{ form.as_p }}
+        <form  class=" p-2 d-flex row  float-end border border-2"   method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            {{ form.as_p }}
+
+
             <h4>Chcesz zmienić hasło?</h4>
             <a href="{% url "password_change" %}"><h6>Zmiana Hasła</h6></a>
-            <input class="btn btn-secondary" type="submit" value="Zapisz">
-            <br/> <br/>
-
+            <input class="btn btn-secondary pb-3" type="submit" value="Zapisz">
         </form>
     </div>
 {% endblock %}

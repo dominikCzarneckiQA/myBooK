@@ -6,7 +6,8 @@
 {% endblock %}
 
 {% block content %}
-    <form class=" " method="post">
+    <div class="container-fluid">
+    <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         {% if redirect_field_value %}
@@ -14,5 +15,6 @@
         {% endif %}
         <p><input type="submit" value="Zaloguj się"></p>
     </form>
+     </div>
 {% endblock %}
 

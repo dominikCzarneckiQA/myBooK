@@ -14,8 +14,6 @@ from pathlib import Path
 import os
 
 
-
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
@@ -130,15 +128,16 @@ LOGIN_REDIRECT_URL = '/feed/'
 
 
 
-# SendGrid
+
 # SERWER SMTP
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'djangoodominik@gmail.com'
+# SendGrid
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = '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'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'djangomyBooK@outlook.com'
 EMAIL_BECKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST_PASSWORD = 'djangomybook123'
-
 
 
 # obsługa plików medialnych

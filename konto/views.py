@@ -9,7 +9,7 @@ from django.views.generic.edit import UpdateView
 from django.views import View
 
 from feed.models import Post
-from .forms import LoginForm, UserRegisterForm, UserEditForm , ProfileUpdateForm
+from .forms import LoginForm, UserRegisterForm, UserEditForm, ProfileUpdateForm
 from .models import Profile
 
 
@@ -85,26 +85,17 @@ class UserProfileView(View):
             'getPosts': getPosts,
         })
 
+
 @method_decorator(login_required, name='dispatch')
 class UpdateProfileView(UpdateView):
     model = Profile
     template_name = 'konto/updateProfileUser.html'
-    success_url = reverse_lazy('profile_edit')
+    form = ProfileUpdateForm()
     fields = ['biography', 'profileAvatar', 'birthDate', 'currentLocation', 'countryOrigin']
 
-    def updateView(request):
-        if request.method == 'POST':
-            form = ProfileUpdateForm(instance=request.user, data=request.POST)
-            if form.is_valid():
-                form.save()
-        else:
-            form = ProfileUpdateForm(instance=request.user)
-        return render(request, 'konto/updateProfileUser.html',
-                      {
-                          'form': form,
-                      })
+
     def get_success_url(self):
-        return reverse_lazy('profile_edit', kwargs={'pk': self.object.pk})
+        return reverse_lazy('profile', kwargs={'pk': self.object.pk})
 
     def test_func(self):
         return self.request.user == self.get_object().user

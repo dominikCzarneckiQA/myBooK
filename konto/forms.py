@@ -3,6 +3,7 @@ from .models import Profile
 
 from django.contrib.auth.models import User
 
+
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(label='Potwierdz Haslo', widget=forms.PasswordInput)
@@ -43,14 +44,15 @@ class UserEditForm(forms.ModelForm):
 
 
 class ProfileUpdateForm(forms.ModelForm):
+    biography = forms.CharField(label='',
+                                widget=forms.Textarea(attrs={
+
+                                    'rows': '7',
+                                    'cols': '5',
+                                    'class': 'form-control',
+
+                                }))
+
     class Meta:
         model = Profile
-        fields = ('biography', 'profileAvatar', 'birthDate', 'currentLocation', 'countryOrigin')
-
-        widgets = {
-            'biography': forms.Textarea(attrs={'class': 'text-area'}),
-            'birthDate': forms.TextInput(attrs={'class': 'form-control'}),
-            'currentLocation': forms.TextInput(attrs={'class': 'form-control'}),
-            'countryOrigin': forms.EmailInput(attrs={'class': 'form-control'}),
-
-        }
+        fields = ['biography', 'profileAvatar', 'birthDate', 'currentLocation', 'countryOrigin']

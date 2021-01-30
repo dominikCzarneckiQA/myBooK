@@ -1,15 +1,22 @@
 {% extends 'mainPage.html' %}
 
-{% block title %}Witaj W Panelu Rejestracyjnym{% endblock %}
+{% block title %}Panel Rejestracyjny{% endblock %}
 {% block content %}
-    <br/>
-     <h1 class="display-1 text-dark chewy border"> myBooK</h1>
-    <h1>Zarejestruj się</h1>
-    <p>Aby utworzyć konto, proszę o wypełnienie poniższego formularza :</p>
-    <button class="btn btn-secondary float-start "><a href="{% url 'login' %}">wstecz</a></button>
-    <form class="text-capitalize container w-25 fw-normal border border-2" action="." method="post">
-        {{ user_form.as_p }}
-        {% csrf_token %}
-        <p><input  class="btn  btn-secondary" type="submit" value="Utwórz Konto"></p>
-    </form>
+    <div class="container">
+         <div class="w-25 mt-1">
+                <a href="{% url 'login' %}"  class="btn btn-outline-secondary mt-2 "> Powrót do Logowania </a>
+            </div>
+        <h1 >Zarejestruj się</h1>
+        <p>Aby utworzyć konto, proszę o wypełnienie poniższego formularza :</p>
+        <div class="d-flex justify-content-center "  >
+            <form class=" row card   container w-25   fw-normal border border-1 p-2"  method="post">
+                {{ user_form.as_p }}
+                {% csrf_token %}
+                <div class="mb-1">
+                    <button class=" btn   btn-success fw-normal  w-75"  type="submit" value="zaloguj">Utwórz Konto </button>
+                </div>
+            </form>
+        </div>
+        <h1 class="display-2 text-dark chewy  fixed-bottom"> myBooK</h1>
+    </div>
 {% endblock %}
