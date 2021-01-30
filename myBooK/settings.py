@@ -12,15 +12,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-from dotenv import load_dotenv
 
 
-import os
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
 
 
-load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
@@ -137,13 +132,13 @@ LOGIN_REDIRECT_URL = '/feed/'
 
 # SendGrid
 # SERWER SMTP
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'djangoodominik@gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-SENDGRID_PASSWORD = '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'
 EMAIL_BECKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'djangomyBooK@outlook.com'
+EMAIL_HOST_PASSWORD = 'djangomybook123'
+
 
 
 # obsługa plików medialnych
