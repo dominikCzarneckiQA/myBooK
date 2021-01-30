@@ -12,6 +12,15 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+
+import os
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+
+
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
@@ -119,23 +128,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = "/konto/static"
 LOGIN_URL = '/konto/login/'
 LOGIN_REDIRECT_URL = '/feed/'
 
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+
+
+# SendGrid
 # SERWER SMTP
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
-EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_HOST_USER = 'apikey'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-
+SENDGRID_PASSWORD = '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'
 EMAIL_BECKEND = 'django.core.mail.backends.console.EmailBackend'
-# SendGrid
-EMAIL_ACCOUNT_REQUIRED = True
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = 'djangomyBooK@outlook.com'
+
+
 # obsługa plików medialnych
 MEDIA_URL = '/media/'
 # ścieżka lokalna plików multimedialnych

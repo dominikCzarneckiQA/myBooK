@@ -6,9 +6,9 @@ app_name = 'feed'
 urlpatterns = [
     path('', AllPostView.as_view(), name='all-posts'),
     path('post/<int:pk>', DetailPostView.as_view(), name='detail-post'),
-    path('post/delete/<int:pk>', DeletePostView.as_view(), name='delete-post'),
-    path('post/update/<int:pk>', UpdatePostView.as_view(), name='update-post'),
+    path('post/usun/<int:pk>', DeletePostView.as_view(), name='delete-post'),
+    path('post/edycja/<int:pk>', UpdatePostView.as_view(), name='update-post'),
 
-    path('post/<int:post_pk>/comments/delete/<int:pk>/' , DeleteCommentView.as_view(), name='delete-comment'),
+    path('post/<int:postPK>/komentarz/usun/<int:pk>/' , DeleteCommentView.as_view(), name='delete-comment'),
 
 ]

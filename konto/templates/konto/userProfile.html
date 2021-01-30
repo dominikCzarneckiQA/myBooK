@@ -13,7 +13,7 @@
                      class="rounded-circle" width="125px" height="125px" />
                 {% if request.user == getProfile.user %}
                     <div class="w-25">
-                        <a class="btn" href="{% url 'edit' %}" >
+                        <a class="btn" href="{% url 'profile_edit' getProfile.pk  %}" >
                         <i class="far fa-edit  text-dark  "></i></a>
                     </div>
                 {% endif %}

@@ -3,15 +3,14 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-
+from django.views.generic.edit import UpdateView
 from django.views import View
 
 from feed.models import Post
-from .forms import LoginForm, UserRegisterForm, UserEditForm
+from .forms import LoginForm, UserRegisterForm, UserEditForm , ProfileUpdateForm
 from .models import Profile
-
-
 
 
 def entryPageView(request):
@@ -60,34 +59,52 @@ def registerView(request):
 
 
 @login_required()
-def editView(UpdateView):
-    if UpdateView.method == 'POST':
-        user_form = UserEditForm(instance=UpdateView.user, data=UpdateView.POST)
-        if user_form.is_valid():
-            user_form.save()
+def editView(request):
+    if request.method == 'POST':
+        userForm = UserEditForm(instance=request.user, data=request.POST)
+        if userForm.is_valid():
+            userForm.save()
     else:
-        user_form = UserEditForm(instance=UpdateView.user)
-    return render(UpdateView, 'konto/updateUser.html',
+        userForm = UserEditForm(instance=request.user)
+    return render(request, 'konto/updateUser.html',
                   {
-                   'user_form': user_form,
-                   })
+                      'userForm': userForm,
+                  })
 
 
-@method_decorator(login_required , name='dispatch')
+@method_decorator(login_required, name='dispatch')
 class UserProfileView(View):
     def get(self, request, pk, *args, **kwargs):
         getProfile = Profile.objects.get(pk=pk)
         getUser = getProfile.user
         getPosts = Post.objects.filter(postAuthor=getUser).order_by('-postDate')
 
-        context = {
+        return render(request, 'konto/userProfile.html', {
             'getUser': getUser,
             'getProfile': getProfile,
             'getPosts': getPosts,
-        }
-        return render(request, 'konto/userProfile.html', context)
+        })
 
-@method_decorator(login_required , name='dispatch')
-class ProfileUpdateView(View):
+@method_decorator(login_required, name='dispatch')
+class UpdateProfileView(UpdateView):
     model = Profile
-    fields = ['profileAvatar', 'biography','birthDate', 'currentLocation', 'countryOrigin']
+    template_name = 'konto/updateProfileUser.html'
+    success_url = reverse_lazy('profile_edit')
+    fields = ['biography', 'profileAvatar', 'birthDate', 'currentLocation', 'countryOrigin']
+
+    def updateView(request):
+        if request.method == 'POST':
+            form = ProfileUpdateForm(instance=request.user, data=request.POST)
+            if form.is_valid():
+                form.save()
+        else:
+            form = ProfileUpdateForm(instance=request.user)
+        return render(request, 'konto/updateProfileUser.html',
+                      {
+                          'form': form,
+                      })
+    def get_success_url(self):
+        return reverse_lazy('profile_edit', kwargs={'pk': self.object.pk})
+
+    def test_func(self):
+        return self.request.user == self.get_object().user

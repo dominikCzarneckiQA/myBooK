@@ -42,13 +42,15 @@ class UserEditForm(forms.ModelForm):
         }
 
 
-'''class ProfileEditForm(forms.ModelForm):
+class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('biography', 'profileAvatar')
+        fields = ('biography', 'profileAvatar', 'birthDate', 'currentLocation', 'countryOrigin')
 
         widgets = {
             'biography': forms.Textarea(attrs={'class': 'text-area'}),
+            'birthDate': forms.TextInput(attrs={'class': 'form-control'}),
+            'currentLocation': forms.TextInput(attrs={'class': 'form-control'}),
+            'countryOrigin': forms.EmailInput(attrs={'class': 'form-control'}),
 
         }
-'''
