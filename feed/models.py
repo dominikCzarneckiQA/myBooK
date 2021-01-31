@@ -7,6 +7,7 @@ class Post(models.Model):
     postAuthor = models.ForeignKey(User,default=None, blank=True , null=False, on_delete=models.CASCADE)
     postContent = models.TextField(default='Napisz cos.. ?')
     postDate = models.DateTimeField(default=timezone.now)
+    postLikes = models.ManyToManyField(User, related_name='postlikes')
 
 
 class Comment(models.Model):
