@@ -10,6 +10,7 @@ class Profile(models.Model):
     birthDate = models.DateField(null=True, blank=True, verbose_name='Birthday')
     currentLocation = models.CharField(max_length=99, null=True, blank=True , verbose_name='Location')
     countryOrigin = models.CharField(max_length=99, null=True, blank=True , verbose_name='Country')
+    friends = models.ManyToManyField(User, blank=True, related_name='friends')
 
     def __str__(self):
         return str('Informacje o użytkowniku {}.'.format(self.user))

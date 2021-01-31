@@ -27,7 +27,7 @@
 
 <body class="text-center" style="background-image: url('{% static "backgrounds/tlo01.png" %}' );">
   {% if request.user.is_authenticated %}
-      <nav class=" m-4 navbar sticky-top border shadow-sm  navbar-light bg-light navbar-expand-lg   text-decoration-none ">
+      <nav class=" m-4 navbar sticky-top border border-2 shadow-sm  navbar-light bg-light navbar-expand-lg   text-decoration-none ">
       <div class="container-fluid">
           <a class="navbar-brand  text-decoration-none mx-3 " href="{% url 'feed:all-posts' %}"><h3 class="chewy "> myBooK</h3></a>
        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,11 +53,12 @@
                          role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           <i class="fas fa-user-circle h4 "></i>
                       </a>
-                      <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li><a class="dropdown-item" href="{% url 'profile' user.profile.pk %}">Profil</a></li>
-                          <li><a class="dropdown-item" href="{% url 'edit' %} ">Edytuj Profil</a></li>
                           <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="#">Opcja </a></li>
+                          <li><a class="dropdown-item" href="{% url 'edit' %} ">Edytuj Profil</a></li>
+
+
                       </ul>
                   </li>
               </ul>
