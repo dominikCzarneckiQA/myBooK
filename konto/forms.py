@@ -47,10 +47,8 @@ class ProfileUpdateForm(forms.ModelForm):
     biography = forms.CharField(label='',
                                 widget=forms.Textarea(attrs={
 
-                                    'rows': '7',
-                                    'cols': '5',
                                     'class': 'form-control',
-
+                                    'rows': '2',
                                 }))
 
     class Meta:
