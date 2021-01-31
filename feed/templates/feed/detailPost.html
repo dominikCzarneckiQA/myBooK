@@ -8,24 +8,34 @@
         <div class="w-25 mt-3">
             <a href="{% url 'feed:all-posts' %}"  class="btn btn-outline-secondary mt-2 "> Powrót </a>
         </div>
-
-
         <div class="d-flex justify-content-center  mt-3  mb-3">
             <div class="border-bottom col-md-5  col-sm-12 rounded ">
-                <p class="text-capitalize">
-                <h3 class="text-primary  bg-light border border-dark rounded-circle p-1 ">{{ post.postAuthor }}
+                <p class="text-capitalize fw-bold h5 text-primary bg-light border border-dark rounded-circle p-2 ">
+                {{ post.postAuthor }} <em class="text-secondary fw-normal h6"> {{ post.postDate }}</em>
+                <div class=""> </div>
+                {% if request.user == post.postAuthor %}
+                    <div class="dropdown   ">
+                        <button type="button" class=" btn" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-caret-down"></i>
+                        </button>
+                        <ul class="dropdown-menu ">
+                            <li  >
+                                <a class="dropdown-item fw-normal " href="{% url 'feed:update-post' post.pk %}" >
+                                    <i class="far fa-edit  text-dark "></i> Edit</a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item fw-normal" href="{% url 'feed:delete-post' post.pk %}">
+                                    <i class="fas fa-trash-alt   text-dark "></i> Delete</a>
+                            </li>
+                        </ul>
+                    </div>
+                {% endif %}
 
-                      <small class="text-muted fw-normal   ">- {{ post.postDate }}</small>
-                    </h3>
-
-                    {% if request.user == post.postAuthor %}
-                        <a class="btn  btn  btn-outline-success" href="{% url 'feed:update-post' post.pk %}" ><i class="far fa-edit  text-dark "></i></a>
-                        <a class="btn   btn-outline-danger" href="{% url 'feed:delete-post' post.pk %}" ><i class="fas fa-trash-alt   text-dark "></i></a>
-                    {% endif %}
-
-                    <div class="card mt-3 border" style="width:100% ; height:250px;">
-                        <p class="card-text   "> {{ post.postContent }}</p>
-                    </div></div>
+                <div class="card mt-3 border" style="width:100% ; height:250px;">
+                    <p class="card-text   "> {{ post.postContent }}
+                </div>
+            </div>
 
             </div>
         </div>
@@ -47,10 +57,10 @@
          </div>
 
         {% for comment in comments %}
-            <div class="justify-content-center d-flex mt-3 mb-5 ">
-                <div class=" w-50 rounded border-bottom  ">
-                    <p>
-                        <strong> {{ comment.commentAuthor }} </strong> - {{ comment.commentDate }}
+            <div class=" d-flex row mx-auto mt-3 mb-5 w-50 ">
+                <div class=" rounded border-bottom  card-body bg-white  ">
+
+                        <strong> {{ comment.commentAuthor }} </strong>
 
                         {% if request.user == post.postAuthor  and comment.commentAuthor%}
                             <a href="{% url 'feed:delete-comment' post.pk comment.pk %}">
@@ -70,7 +80,7 @@
                             </a>
                         {% endif %}
                     {% endif %}
-                    </p>
+                    <p> <em>{{ comment.commentDate }}</em></p>
                     <p class="blockquote ">{{ comment.commentContent }}</p>
                 </div>
             </div>
