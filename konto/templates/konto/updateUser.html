@@ -7,24 +7,26 @@
 {% block content %}
     <div class="container-fluid">
 
-            <h1 class="display-4 fw-normal mt-4"> Edytowanie Profilu </h1>
-            <p class="text-secondary mt-2 ">Zmiana danych profilu jest możliwa za pomocą formularza znajdującego się poniżej:</p>
-           <div class="d-flex justify-content-center 3   ">
+        <h1 class="display-4 fw-normal mt-4">Edycja danych systemowych</h1>
+        <p class="text-secondary mt-2 ">Zmiana danych systemowych jest możliwa za pomocą formularza znajdującego się
+            poniżej:</p>
+        <div class="d-flex justify-content-center 3   ">
             <div class=" w-25 ">
-            <form  class="text-capitalize  border   card-body mt-5 "   method="post" enctype="multipart/form-data">
+                <form class="text-capitalize  border   card-body mt-5 " method="post" enctype="multipart/form-data">
 
-                {{ userForm.as_p }}
-                {% csrf_token %}
-                <h4>Chcesz zmienić hasło?</h4>
+                    {{ userForm.as_p }}
+                    {% csrf_token %}
+                    <h4>Chcesz zmienić hasło?</h4>
 
-                <a href="{% url "password_change" %}"><h6>Zmiana Hasła</h6></a>
-                <div class="card-footer bg-white">
-                <button class="btn btn-secondary w-50" type="submit" >Zapisz </button>
-               </div>
-             </div>
-           </div>
-            </form>
-                </div>
+                    <a href="{% url "password_change" %}"><h6>Zmiana Hasła</h6></a>
+                    <div class="card-footer bg-white">
+                        <button class="btn btn-secondary w-50" type="submit">Zapisz</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-     </div>
+    </div>
+
+
 {% endblock %}

@@ -7,14 +7,14 @@
 
 {% block content %}
     <div class="container-fluid">
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {% if redirect_field_value %}
-            <input type="hidden" name="{{ redirect_field_name }}" value="{ redirect_field_name }"/>
-        {% endif %}
-        <p><input type="submit" value="Zaloguj się"></p>
-    </form>
-     </div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{ redirect_field_name }"/>
+            {% endif %}
+            <p><input type="submit" value="Zaloguj się"></p>
+        </form>
+    </div>
 {% endblock %}
 

@@ -9,18 +9,21 @@
         <div class=" ">
             <div class=" ">
                 <div class=" ">
-                    <a href="{% url 'feed:detail-post' object.pk  %}"  class=" btn btn-outline-secondary mt-2 "> Powrót Do Postu</a>
+                    <a href="{% url 'feed:detail-post' object.pk %}" class=" btn btn-outline-secondary mt-2 ">
+                        Powrót Do Postu</a>
                 </div>
             </div>
         </div>
 
-         <div class="d-flex justify-content-center">
-            <form class="   mt-4 w-50"   method="post">
+        <div class="d-flex justify-content-center">
+            <form class="   mt-4 w-50" method="post">
                 <div class="w-100">
                     {% csrf_token %}
                     {{ form.as_p }}
                 </div>
-                <button type="submit" class="  btn btn-outline-primary w-25  fw-bold  p-2 mb-3  rounded  " >Zaktualizuj Post</button>
+                <button type="submit" class="  btn btn-outline-primary w-25  fw-bold  p-2 mb-3  rounded  ">
+                    Zaktualizuj Post
+                </button>
                 <br/><br/>
             </form>
         </div>

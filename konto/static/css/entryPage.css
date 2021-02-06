@@ -1,5 +1,4 @@
-body
-{
+body {
     margin: 0;
     padding: 0;
     font-size: 15px;
@@ -10,21 +9,18 @@ body
 
 /* PSEUDO-KLASY  HIPERLACZA */
 
-a:link
-{
+a:link {
     color: #993300;
-    text-decoration:none;
+    text-decoration: none;
     font-weight: bold;
 }
 
-a:visited
-{
-     color: #6DDCBD;
-    text-decoration:none;
+a:visited {
+    color: #6DDCBD;
+    text-decoration: none;
     font-weight: bold;
 }
 
-.chewy
-{
+.chewy {
     font-family: 'Chewy', cursive;
 }

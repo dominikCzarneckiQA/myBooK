@@ -1,5 +1,6 @@
 from django import forms
 from .models import Profile
+from django.urls import reverse_lazy
 
 from django.contrib.auth.models import User
 
@@ -21,7 +22,7 @@ class UserRegisterForm(forms.ModelForm):
             'username': forms.TextInput(attrs={'class': 'form-control'}),
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'} , ),
         }
 
     def clean_password2(self):
@@ -54,3 +55,20 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['biography', 'profileAvatar', 'birthDate', 'currentLocation', 'countryOrigin']
+
+
+def mutliFormProfileUpdate(request):
+    if request.method == 'POST':
+        profileUpdateForm = ProfileUpdateForm(request.POST)
+        userEditForm = UserEditForm(request.POST)
+        if profileUpdateForm.is_valid() or userEditForm.is_valid():
+            return reverse_lazy('userProfile')
+        else:
+            profileUpdateForm = ProfileUpdateForm()
+            userEditForm = UserEditForm()
+        return reverse_lazy(request, 'userprofile',
+                            {
+                                'profileUpdateForm': profileUpdateForm,
+                                'userEditForm': userEditForm,
+
+                            })

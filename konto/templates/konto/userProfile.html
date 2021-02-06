@@ -1,99 +1,202 @@
 {% extends 'mainPage.html' %}
 
 {% block title %}
-   {{ request.user.first_name }}
-   {{ request.user.last_name }}
+    {{ request.user.first_name }}
+    {{ request.user.last_name }}
 {% endblock %}
 
 
 {% block content %}
-    <div class="container-fluid ">
-        <div class="container">
-            <div class="row mt-4 justify-content-center ">
-                <div class="card card-subtitle shadow-sm col-md-8 col-sm-12 border-bottom px-4 pt-4">
-                    <img alt="userProfileImg" src="{{ getProfile.profileAvatar.url }}"
-                         class="rounded-circle" width="125px" height="125px" />
-                    {% if request.user == getProfile.user %}
-                        <div class="w-25">
-                            <a class="btn" href="{% url 'profile_edit' getProfile.pk  %}" >
-                            <i class="far fa-edit  text-dark  "></i></a>
-                        </div>
-                    {% endif %}
 
-                    {% if request.user.first_name %}
-                        <p class="py-2 border-bottom">{{ request.user.first_name }}</p>
-                    {% endif %}
+    <div class="container">
+        <div class="  justify-content-center mt-4">
+            <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                    <div class="card ">
+                        <div class="card-body  border p-2">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <img alt="userProfileImg" src="{{ getProfile.profileAvatar.url }}"
+                                     class="rounded-circle mt-2" width="125px" height="125px"/>
+                                {% if request.user == getProfile.user %}
+                                    <div class="w-25">
+                                        <a class="btn" href="{% url 'profile_edit' getProfile.pk %}">
+                                            <i class="far fa-edit  text-dark  "></i></a>
+                                    </div>
+                                {% endif %}
 
-                    {% if request.user.last_name %}
-                        <p class="py-2 border-bottom">{{ request.user.last_name }}</p>
-                    {% endif %}
+                                <div class="mt-3">
+                                    <h4>{{ getUser.first_name }} {{ getUser.last_name }}</h4>
+                                    {% if getProfile.biography %}
+                                        <p class="text-muted  py-2  ">
+                                            <em>{{ getProfile.biography }}</em>
+                                        </p>
+                                    {% endif %}
+                                    <div class="  card p-2 mb-2">
+                                        {% if getUser == request.user %}
 
-                    {% if request.user.email %}
-                        <p class="py-2 border-bottom">{{ request.user.email }}</p>
-                    {% endif %}
+                                            Ilość przyjaciół, którzy Cię obserwują:  {{ getNumberFriends }}
 
-                    {% if getProfile.biography %}
-                        <p class="py-2 border-bottom">{{ getProfile.biography }}</p>
-                    {% endif %}
-
-                    {% if getProfile.birthDate %}
-                        <p class="py-2 border-bottom">{{ getProfile.birthDate }}</p>
-                    {% endif %}
-
-                    {% if getProfile.currentLocation %}
-                        <p class="py-2 border-bottom">{{ getProfile.currentLocation }}</p>
-                    {% endif %}
-
-                    {% if getProfile.countryOrigin %}
-                        <p class="py-2 border-bottom">{{ getProfile.countryOrigin }}</p>
-                    {% endif %}
-                    <div class="card m-3">
-                    <p class="text-secondary">
-                       Ilość przyjaciół, którzy Cię obserwują:  {{ getNumberFriends }}
-                    </p>
-
-                        {% if getUser == request.user %}
-                        {% else %}
-
-                        {% if is_friend %}
-                            <form method="post" action="{% url 'friend_remove' getProfile.pk %}">
-                                {% csrf_token %}
-                                <button class="btn btn-danger"  type="submit">Usun</button>
-                            </form>
-                        {% else %}
-                            <form method="post" action="{% url 'friend_add' getProfile.pk %}">
-                                {% csrf_token %}
-                                <button class="btn btn-success"  type="submit">Dodaj</button>
-                            </form>
-                        {% endif %}
-                        {% endif %}
+                                            </div>
+                                        {% else %}
 
 
+                                            {% if is_friend %}
+                                                <div>
+                                                    <form method="post"
+                                                          action="{% url 'friend_remove' getProfile.pk %}">
+                                                        {% csrf_token %}
+                                                        <button class="btn btn-danger" type="submit">
+                                                            Usun z listy znajomych
+                                                        </button>
+                                                    </form>
+                                                    {% else %}
+                                                    <form method="post"
+                                                          action="{% url 'friend_add' getProfile.pk %}">
+                                                        {% csrf_token %}
 
-                </div>
-                </div>
-
-            </div>
-            <div class="container">
-                {% for post in getPosts %}
-                    <div class="d-flex row justify-content-center   mt-5 ">
-                        <div class=" col-md-6  shadow-sm  mb-5 card
-                        rounded "  style="min-height:190px; max-height:899px;" >
-                            <div class="card-body align-content-start ">
-                                <p class=""><a class="text-decoration-none text-capitalize text-secondary
-                                border-bottom card-header" href="{% url 'userProfile' post.postAuthor.profile.pk  %}">
-                                    <strong>{{ post.postAuthor }} </strong> </a>  - {{ post.postDate }}
-                                </p>
-                                <div class="border text-start p-2 position-relative"
-                                     style="min-height:105px; max-height:899px;">
-                                    {{ post.postContent }}
-                                    <a href ="{% url 'feed:detail-post' post.pk %}" class="stretched-link"> </a>
+                                                        <button class="btn btn-success" type="submit">
+                                                            Dodaj do znajomych
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
                                 </div>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
+
+                    <div class="card  p-2 mt-3 border border-3">
+                        <ul class="list-group list-group-flush border">
+                            <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
+                                <h6 class=""> Github</h6>
+                                <span class="text-secondary">bootdey</span>
+                            </li>
+                            <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
+                                <h6 class=""> Github</h6>
+                                <span class="text-secondary">bootdey</span>
+                            </li>
+                            <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
+                                <h6 class=""> Github</h6>
+                                <span class="text-secondary">bootdey</span>
+                            </li>
+                            <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
+                                <h6 class=""> Github</h6>
+                                <span class="text-secondary">bootdey</span>
+                            </li>
+                            <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap">
+                                <h6 class=""> Github</h6>
+                                <span class="text-secondary">bootdey</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="m-0">Imie</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {% if getUser.first_name %}
+                                        {{ getUser.first_name  }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6>Nazwisko</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {% if getUser.last_name %}
+                                        {{ getUser.last_name  }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="m-0">Data Urodzin</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {% if getProfile.birthDate %}
+                                        {{ getProfile.birthDate }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="m-0">Miejsce Zamieszkania</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+
+                                    {% if getProfile.currentLocation %}
+                                        {{ getProfile.currentLocation }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="m-0">Kraj Pochodzenia</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {% if getProfile.countryOrigin %}
+                                        {{ getProfile.countryOrigin }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-12" style="height: 269px">
+                                        <h6 class="m-0">Zdjecia</h6>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
+
         </div>
+
+    </div>
+
+
+
+
+    <div class="container">
+        {% for post in getPosts %}
+            <div class="d-flex row justify-content-center   mt-5 ">
+                <div class=" col-md-6  shadow-sm  mb-5 card
+                        rounded " style="min-height:190px; max-height:899px;">
+                    <div class="card-body align-content-start ">
+                        <p class="card-header"><a class="text-decoration-none text-capitalize text-secondary
+                                " href="{% url 'userProfile' post.postAuthor.profile.pk %}">
+                            <strong class="text-primary"> <i class="fas fa-user text-dark"></i>
+                                {{ post.postAuthor }} </strong> </a>
+                            - <em> {{ post.postDate }}</em>
+                        </p>
+                        <div class="border text-start p-2 position-relative"
+                             style="min-height:105px; max-height:899px;">
+                            {{ post.postContent }}
+                            <a href="{% url 'feed:detail-post' post.pk %}" class="stretched-link"> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}

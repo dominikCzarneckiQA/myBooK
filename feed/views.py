@@ -93,13 +93,14 @@ class DeletePostView(UserPassesTestMixin, DeleteView):
         return self.request.user == self.get_object().postAuthor
 
 
+# UserPassesTestMixin
 @method_decorator(login_required, name='dispatch')
-class DeleteCommentView(UserPassesTestMixin, DeleteView):
+class DeleteCommentView(DeleteView):
     model = Comment
     template_name = 'feed/deleteComment.html'
 
-    def test_func(self):
-        return self.request.user == self.get_object().commentAuthor
+    # def test_func(self):
+    #    return self.request.user == self.get_object().commentAuthor
 
     def get_success_url(self):
         return reverse_lazy('feed:detail-post', kwargs={'pk': self.kwargs['post_pk']})

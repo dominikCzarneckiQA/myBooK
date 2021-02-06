@@ -9,12 +9,12 @@
             {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{ redirect_field_name }"/>
             {% endif %}
-                {% if form.errors %}
+            {% if form.errors %}
                 <p class="mt-4">Login lub hasło jest nieprawidłowe. Spróbuj ponownie. </p>
             {% endif %}
-                <div class="formularz-logowanie p-3 ">
-                    <div class="card p-2  bg-transparent shadow-sm">
-                        <div class="card  p-2">
+            <div class="formularz-logowanie p-3 ">
+                <div class="card p-2  bg-transparent shadow-sm">
+                    <div class="card  p-2">
                         <h1 class="card-header">Zaloguj sie</h1>
                         <form action="{% url 'login' %}" method="post" class=" card-body">
                             <p>Nie masz konta?<a href="{% url 'register' %}"> Zarejestruj się </a></p>
@@ -24,8 +24,8 @@
                                     {% csrf_token %}
                                 </div>
                             </div>
-                            <input type="hidden" name="kolejny" value="{{ next }}" />
-                            <p><a href="{% url 'password_reset' %}">  Zapomniałeś hasła?</a></p>
+                            <input type="hidden" name="kolejny" value="{{ next }}"/>
+                            <p><a href="{% url 'password_reset' %}"> Zapomniałeś hasła?</a></p>
 
                             <div class="checkbox mb-3">
                                 <label>
@@ -33,15 +33,17 @@
                                 </label>
                             </div>
                             <div class="25 card-footer bg-body">
-                                <button class="  btn btn-lg btn-danger fw-normal "  type="submit" value="zaloguj">Zaloguj sie </button>
+                                <button class="  btn btn-lg btn-danger fw-normal " type="submit" value="zaloguj">Zaloguj
+                                    sie
+                                </button>
                             </div>
                         </form>
                     </div>
-                    <div class="mt-4">&copy; 2020-2021 Kozak
+                    <div class="mt-4">&copy; 2020-2021 Dominik Czarnecki
                     </div>
 
+                </div>
             </div>
-        </div>
         </div>
         <div>
             <h1 class="display-2 text-dark chewy  fixed-bottom"> myBooK</h1>

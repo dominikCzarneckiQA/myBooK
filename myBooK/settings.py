@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
@@ -126,9 +125,6 @@ STATIC_ROOT = "/konto/static"
 LOGIN_URL = '/konto/login/'
 LOGIN_REDIRECT_URL = '/feed/'
 
-
-
-
 # SERWER SMTP
 # SendGrid
 EMAIL_HOST = 'smtp.sendgrid.net'
@@ -138,7 +134,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'djangomyBooK@outlook.com'
 EMAIL_BECKEND = 'django.core.mail.backends.console.EmailBackend'
-
 
 # obsługa plików medialnych
 MEDIA_URL = '/media/'

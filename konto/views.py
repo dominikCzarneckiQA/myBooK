@@ -81,14 +81,14 @@ class UserProfileView(View):
         getUser = getProfile.user
         getPosts = Post.objects.filter(postAuthor=getUser).order_by('-postDate')
 
-        friends = getProfile.friends.all()
+        friendsList = getProfile.friends.all()
 
-        getNumberFriends = len(friends)
+        getNumberFriends = len(friendsList)
 
-        if len(friends) == 0:
+        if len(friendsList) == 0:
             is_friend = False
 
-        for friend in friends:
+        for friend in friendsList:
             if friend == request.user:
                 is_friend = True
                 break
@@ -101,7 +101,7 @@ class UserProfileView(View):
             'getPosts': getPosts,
             'getNumberFriends': getNumberFriends,
             'is_friend': is_friend,
-            'friends': friends,
+            'friendList': friendsList,
         })
 
 
@@ -135,3 +135,5 @@ class RemoveFriend(View):
         profile.friends.remove(request.user)
 
         return redirect('userProfile', pk=profile.pk)
+
+
