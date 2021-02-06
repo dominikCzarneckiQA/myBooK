@@ -1,7 +1,8 @@
 {% extends 'mainPage.html' %}
 
 {% block title %}
-    Profil {{ request.user.first_name }}
+   {{ request.user.first_name }}
+   {{ request.user.last_name }}
 {% endblock %}
 
 
@@ -49,17 +50,26 @@
 
                 </div>
             </div>
-
-            {% for post in getPosts %}
-                <div class="row justify-content-center  mt-5 ">
-                    <div class="col-md-6 border shadow-sm p-3 mb-5  rounded position-relative">
-                        <p class="text-capitalize text-secondary">
-                            <strong>{{ post.postAuthor }} </strong> - {{ post.postDate }}</p>
-                        <p class="border  w-100  h-50 "> {{ post.postContent }} </p>
-                        <a href ="{% url 'feed:detail-post' post.pk %}" class="stretched-link"> </a>
+            <div class="container">
+                {% for post in getPosts %}
+                    <div class="d-flex row justify-content-center   mt-5 ">
+                        <div class=" col-md-6  shadow-sm  mb-5 card
+                        rounded "  style="min-height:190px; max-height:899px;" >
+                            <div class="card-body align-content-start ">
+                                <p class=""><a class="text-decoration-none text-capitalize text-secondary
+                                border-bottom card-header" href="{% url 'profile' post.postAuthor.profile.pk  %}">
+                                    <strong>{{ post.postAuthor }} </strong> </a>  - {{ post.postDate }}
+                                </p>
+                                <div class="border text-start p-2 position-relative"
+                                     style="min-height:105px; max-height:899px;">
+                                    {{ post.postContent }}
+                                    <a href ="{% url 'feed:detail-post' post.pk %}" class="stretched-link"> </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

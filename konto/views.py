@@ -93,7 +93,6 @@ class UpdateProfileView(UpdateView):
     form = ProfileUpdateForm()
     fields = ['biography', 'profileAvatar', 'birthDate', 'currentLocation', 'countryOrigin']
 
-
     def get_success_url(self):
         return reverse_lazy('profile', kwargs={'pk': self.object.pk})
 

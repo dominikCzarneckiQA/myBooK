@@ -15,6 +15,7 @@
         <form  class=" p-2 d-flex row  float-end border border-2 w-25 "   method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_table }}
+
                 <h4>Chcesz zmienić hasło?</h4>
                 <a href="{% url "password_change" %}"><h6>Zmiana Hasła</h6></a>
 
