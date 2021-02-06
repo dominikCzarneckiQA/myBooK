@@ -33,15 +33,13 @@
                                     {% endif %}
                                     <div class="  card p-2 mb-2">
                                         {% if getUser == request.user %}
-
                                             Ilość przyjaciół, którzy Cię obserwują:  {{ getNumberFriends }}
 
-                                            </div>
                                         {% else %}
 
-
                                             {% if is_friend %}
-                                                <div>
+
+
                                                     <form method="post"
                                                           action="{% url 'friend_remove' getProfile.pk %}">
                                                         {% csrf_token %}
@@ -49,18 +47,22 @@
                                                             Usun z listy znajomych
                                                         </button>
                                                     </form>
+
                                                     {% else %}
+
                                                     <form method="post"
                                                           action="{% url 'friend_add' getProfile.pk %}">
                                                         {% csrf_token %}
-
                                                         <button class="btn btn-success" type="submit">
                                                             Dodaj do znajomych
                                                         </button>
                                                     </form>
-                                                </div>
+
+
                                             {% endif %}
+
                                         {% endif %}
+</div>
                                 </div>
                             </div>
                         </div>
@@ -69,24 +71,24 @@
                     <div class="card  p-2 mt-3 border border-3">
                         <ul class="list-group list-group-flush border">
                             <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
-                                <h6 class=""> Github</h6>
+                                <h6 class=""><i class="fab fa-github"></i> Github</h6>
                                 <span class="text-secondary">bootdey</span>
                             </li>
                             <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
-                                <h6 class=""> Github</h6>
+                                <h6 class=""><i class="fab fa-snapchat-ghost"></i> Snapchat</h6>
                                 <span class="text-secondary">bootdey</span>
                             </li>
                             <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
-                                <h6 class=""> Github</h6>
+                                <h6 class=""><i class="fab fa-instagram"></i> Instagram</h6>
                                 <span class="text-secondary">bootdey</span>
                             </li>
                             <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
-                                <h6 class=""> Github</h6>
+                                <h6 class=""><i class="fab fa-facebook"></i> Facebook</h6>
                                 <span class="text-secondary">bootdey</span>
                             </li>
                             <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap">
-                                <h6 class=""> Github</h6>
-                                <span class="text-secondary">bootdey</span>
+                                <h6 class=""><i class="fab fa-twitter"></i>  Twitter</h6>
+                                <span class="text-secondary"> sialalal</span>
                             </li>
                         </ul>
                     </div>

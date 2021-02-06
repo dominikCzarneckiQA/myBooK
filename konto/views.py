@@ -72,6 +72,8 @@ def editView(request):
                   })
 
 
+
+
 @method_decorator(login_required, name='dispatch')
 class UserProfileView(View):
     def get(self, request, pk, *args, **kwargs):
@@ -135,5 +137,3 @@ class RemoveFriend(View):
         profile.friends.remove(request.user)
 
         return redirect('userProfile', pk=profile.pk)
-
-
