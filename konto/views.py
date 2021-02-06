@@ -2,7 +2,7 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import UpdateView
@@ -75,14 +75,33 @@ def editView(request):
 @method_decorator(login_required, name='dispatch')
 class UserProfileView(View):
     def get(self, request, pk, *args, **kwargs):
+
+        global is_friend
         getProfile = Profile.objects.get(pk=pk)
         getUser = getProfile.user
         getPosts = Post.objects.filter(postAuthor=getUser).order_by('-postDate')
 
+        friends = getProfile.friends.all()
+
+        getNumberFriends = len(friends)
+
+        if len(friends) == 0:
+            is_friend = False
+
+        for friend in friends:
+            if friend == request.user:
+                is_friend = True
+                break
+            else:
+                is_friend = False
+
         return render(request, 'konto/userProfile.html', {
-            'getUser': getUser,
             'getProfile': getProfile,
+            'getUser': getUser,
             'getPosts': getPosts,
+            'getNumberFriends': getNumberFriends,
+            'is_friend': is_friend,
+            'friends': friends,
         })
 
 
@@ -94,7 +113,25 @@ class UpdateProfileView(UpdateView):
     fields = ['biography', 'profileAvatar', 'birthDate', 'currentLocation', 'countryOrigin']
 
     def get_success_url(self):
-        return reverse_lazy('profile', kwargs={'pk': self.object.pk})
+        return reverse_lazy('userProfile', kwargs={'pk': self.object.pk})
 
     def test_func(self):
         return self.request.user == self.get_object().user
+
+
+@method_decorator(login_required, name='dispatch')
+class AddFriend(View):
+    def post(self, request, pk, *args, **kwargs):
+        profile = Profile.objects.get(pk=pk)
+        profile.friends.add(request.user)
+
+        return redirect('userProfile', pk=profile.pk)
+
+
+@method_decorator(login_required, name='dispatch')
+class RemoveFriend(View):
+    def post(self, request, pk, *args, **kwargs):
+        profile = Profile.objects.get(pk=pk)
+        profile.friends.remove(request.user)
+
+        return redirect('userProfile', pk=profile.pk)

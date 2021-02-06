@@ -47,8 +47,32 @@
                     {% if getProfile.countryOrigin %}
                         <p class="py-2 border-bottom">{{ getProfile.countryOrigin }}</p>
                     {% endif %}
+                    <div class="card m-3">
+                    <p class="text-secondary">
+                       Ilość przyjaciół, którzy Cię obserwują:  {{ getNumberFriends }}
+                    </p>
+
+                        {% if getUser == request.user %}
+                        {% else %}
+
+                        {% if is_friend %}
+                            <form method="post" action="{% url 'friend_remove' getProfile.pk %}">
+                                {% csrf_token %}
+                                <button class="btn btn-danger"  type="submit">Usun</button>
+                            </form>
+                        {% else %}
+                            <form method="post" action="{% url 'friend_add' getProfile.pk %}">
+                                {% csrf_token %}
+                                <button class="btn btn-success"  type="submit">Dodaj</button>
+                            </form>
+                        {% endif %}
+                        {% endif %}
+
+
 
                 </div>
+                </div>
+
             </div>
             <div class="container">
                 {% for post in getPosts %}
@@ -57,7 +81,7 @@
                         rounded "  style="min-height:190px; max-height:899px;" >
                             <div class="card-body align-content-start ">
                                 <p class=""><a class="text-decoration-none text-capitalize text-secondary
-                                border-bottom card-header" href="{% url 'profile' post.postAuthor.profile.pk  %}">
+                                border-bottom card-header" href="{% url 'userProfile' post.postAuthor.profile.pk  %}">
                                     <strong>{{ post.postAuthor }} </strong> </a>  - {{ post.postDate }}
                                 </p>
                                 <div class="border text-start p-2 position-relative"

@@ -1,7 +1,7 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path ,include
 from . import views
-from .views import UserProfileView , UpdateProfileView
+from .views import UserProfileView , UpdateProfileView , AddFriend ,RemoveFriend
 
 
 urlpatterns = [
@@ -24,9 +24,11 @@ urlpatterns = [
     path('wyloguj/', auth_views.LogoutView.as_view(), name='wyloguj'),
 
     path('feed/', include('feed.urls')),
-    path('profile/<int:pk>', UserProfileView.as_view(), name='profile'),
-    path('profile/edycja/<int:pk>/', UpdateProfileView.as_view(), name='profile_edit'),
 
+    path('profil/<int:pk>', UserProfileView.as_view(), name='userProfile'),
+    path('profil/edycja/<int:pk>/', UpdateProfileView.as_view(), name='profile_edit'),
+    path('profil/<int:pk>/przyjaciele/dodaj', AddFriend.as_view(), name='friend_add'),
+    path('profil/<int:pk>/przyjaciele/usun', RemoveFriend.as_view(), name='friend_remove'),
 
 
     path('login/', auth_views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
