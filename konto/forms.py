@@ -1,6 +1,6 @@
 from django import forms
 from .models import Profile
-from django.urls import reverse_lazy
+
 
 from django.contrib.auth.models import User
 
@@ -22,7 +22,7 @@ class UserRegisterForm(forms.ModelForm):
             'username': forms.TextInput(attrs={'class': 'form-control'}),
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'} , ),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}, ),
         }
 
     def clean_password2(self):
@@ -45,30 +45,20 @@ class UserEditForm(forms.ModelForm):
 
 
 class ProfileUpdateForm(forms.ModelForm):
-    biography = forms.CharField(label='',
-                                widget=forms.Textarea(attrs={
-
-                                    'class': 'form-control',
-                                    'rows': '2',
-                                }))
-
     class Meta:
         model = Profile
-        fields = ['biography', 'profileAvatar', 'birthDate', 'currentLocation', 'countryOrigin']
+        fields = ['biography', 'profileAvatar', 'birthDate', 'currentLocation', 'countryOrigin', 'github', 'snapchat',
+                  'instagram', 'facebook', 'twitter']
 
-
-def mutliFormProfileUpdate(request):
-    if request.method == 'POST':
-        profileUpdateForm = ProfileUpdateForm(request.POST)
-        userEditForm = UserEditForm(request.POST)
-        if profileUpdateForm.is_valid() or userEditForm.is_valid():
-            return reverse_lazy('userProfile')
-        else:
-            profileUpdateForm = ProfileUpdateForm()
-            userEditForm = UserEditForm()
-        return reverse_lazy(request, 'userprofile',
-                            {
-                                'profileUpdateForm': profileUpdateForm,
-                                'userEditForm': userEditForm,
-
-                            })
+        widgets = {
+            'biography': forms.Textarea(attrs={'class': 'form-control '}),
+            'profileAvatar': forms.TextInput(attrs={'class': 'form-control'}),
+            'birthDate': forms.Select(attrs={'class': 'form-control'}),
+            'currentLocation': forms.TextInput(attrs={'class': 'form-control'}),
+            'countryOrigin': forms.Select(attrs={'class': 'form-control'}),
+            'github': forms.URLInput(attrs={'class': 'form-control'}),
+            'snapchat': forms.TextInput(attrs={'class': 'form-control'}),
+            'instagram': forms.URLInput(attrs={'class': 'form-control'}),
+            'facebook': forms.URLInput(attrs={'class': 'form-control'}),
+            'twitter': forms.URLInput(attrs={'class': 'form-control'}),
+        }

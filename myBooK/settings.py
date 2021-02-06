@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'feed.apps.FeedConfig',
 
+
 ]
 
 SITE_ID = 1

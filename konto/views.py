@@ -7,11 +7,12 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import UpdateView
 from django.views import View
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from feed.models import Post
 from .forms import LoginForm, UserRegisterForm, UserEditForm, ProfileUpdateForm
 from .models import Profile
 
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 def entryPageView(request):
     return render(request, 'entryPage.html', {})
@@ -72,8 +73,6 @@ def editView(request):
                   })
 
 
-
-
 @method_decorator(login_required, name='dispatch')
 class UserProfileView(View):
     def get(self, request, pk, *args, **kwargs):
@@ -108,11 +107,13 @@ class UserProfileView(View):
 
 
 @method_decorator(login_required, name='dispatch')
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Profile
+    form = ProfileUpdateForm
     template_name = 'konto/updateProfileUser.html'
-    form = ProfileUpdateForm()
-    fields = ['biography', 'profileAvatar', 'birthDate', 'currentLocation', 'countryOrigin']
+
+    fields = ['biography', 'profileAvatar', 'birthDate', 'currentLocation', 'countryOrigin', 'github', 'snapchat',
+              'instagram', 'facebook', 'twitter']
 
     def get_success_url(self):
         return reverse_lazy('userProfile', kwargs={'pk': self.object.pk})
