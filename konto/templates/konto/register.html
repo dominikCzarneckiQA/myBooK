@@ -12,12 +12,17 @@
             <form class=" row card   container w-25   fw-normal border border-1 p-2" method="post">
                 {{ user_form.as_p }}
                 {% csrf_token %}
-                <div class="mb-1">
+                <div class="mb-5">
                     <button class=" btn   btn-success fw-normal  w-75" type="submit" value="zaloguj">Utwórz Konto
                     </button>
                 </div>
             </form>
         </div>
-        <h1 class="display-2 text-dark chewy  fixed-bottom"> myBooK</h1>
+        <footer class="mt-3  mb-3"><h1 class="display-2 text-dark chewy "> myBooK</h1></footer>
+
     </div>
+
+
+
+
 {% endblock %}

@@ -11,7 +11,12 @@
         <div class="d-flex justify-content-center  mt-3  mb-3">
             <div class="border-bottom col-md-5  col-sm-12 rounded ">
                 <p class="text-capitalize fw-bold h5 text-primary bg-light border border-dark rounded-circle p-2 ">
-                    {{ post.postAuthor }} <em class="text-secondary fw-normal h6"> {{ post.postDate }}</em>
+                    <a class="text-decoration-none text-capitalize
+                            text-secondary "
+                       href="{% url 'userProfile' post.postAuthor.profile.pk %}">
+                        <strong class="text-primary">
+                            {{ post.postAuthor.get_full_name }} </strong></a> <em
+                        class="text-secondary fw-normal h6"> {{ post.postDate }}</em>
                 <div class=""></div>
                 {% if request.user == post.postAuthor %}
                     <div class="dropdown   ">
@@ -61,8 +66,13 @@
     {% for comment in comments %}
         <div class=" d-flex row mx-auto mt-3 mb-5 w-50 ">
             <div class=" rounded border-bottom  card-body bg-white  ">
+                <a class="text-decoration-none text-capitalize
+                            text-secondary "
+                   href="{% url 'userProfile' comment.commentAuthor.profile.pk %}">
+                    <strong class="text-primary">
+                        {{ comment.commentAuthor.get_full_name }}
+                    </strong></a>
 
-                <strong> {{ comment.commentAuthor }} </strong>
 
                 {% if request.user == post.postAuthor  and comment.commentAuthor %}
                     <a href="{% url 'feed:delete-comment' post.pk comment.pk %}">

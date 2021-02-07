@@ -20,7 +20,9 @@
                                 {% if request.user == getProfile.user %}
                                     <div class="w-25">
                                         <a class="btn" href="{% url 'profile_edit' getProfile.pk %}">
-                                            <i class="far fa-edit  text-dark  "></i></a>
+                                            <button class="btn btn-sm">Edit <i class="far fa-edit  text-dark  "></i>
+                                            </button>
+                                        </a>
                                     </div>
                                 {% endif %}
 
@@ -62,9 +64,12 @@
                                             {% endif %}
 
                                         {% endif %}
+
+
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
 
@@ -99,9 +104,9 @@
                 <div class="col-md-8">
                     <div class="card mb-3">
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row ">
                                 <div class="col-sm-3">
-                                    <h6 class="m-0">Imie</h6>
+                                    <h6 class="m-0 ">Imie</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     {% if getUser.first_name %}
@@ -162,11 +167,19 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-12" style="height: 269px">
+                                        <button class="btn  text-white float-end bg-secondary  disabled">
+                                            Liczba Przyjaciół {{ getNumberFriends }}</button>
                                         <h6 class="m-0">Lista przyjaciół</h6>
 
-                                              {% for friend in friendsList   %}
-                                                  {{ getProfile.user}}
-                                                {% endfor %}
+                                        {% for friend in friendsList %}
+                                            <div class="p-4 card w-25 m-3 page-link  text-capitalize">
+
+                                                <a class=" text-primary "
+                                                   href="{% url 'userProfile' friend.profile.pk %}">
+                                                    {{ friend.get_full_name }}
+                                                </a>
+                                            </div>
+                                        {% endfor %}
 
                                     </div>
                                 </div>

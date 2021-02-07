@@ -79,15 +79,12 @@ def editView(request):
 @method_decorator(login_required, name='dispatch')
 class UserProfileView(View):
     def get(self, request, pk, *args, **kwargs):
-
         global is_friend
         getProfile = Profile.objects.get(pk=pk)
         getUser = getProfile.user
         getPosts = Post.objects.filter(postAuthor=getUser).order_by('-postDate')
 
         friendsList = getProfile.friends.all()
-
-        getNumberFriends = len(friendsList)
 
         if len(friendsList) == 0:
             is_friend = False
@@ -99,13 +96,16 @@ class UserProfileView(View):
             else:
                 is_friend = False
 
+        getNumberFriends = len(friendsList)
+        friendsList = getProfile.friends.all()
         return render(request, 'konto/userProfile.html', {
             'getProfile': getProfile,
             'getUser': getUser,
             'getPosts': getPosts,
             'getNumberFriends': getNumberFriends,
             'is_friend': is_friend,
-            'friendList': friendsList,
+            'friendsList' : friendsList ,
+
         })
 
 

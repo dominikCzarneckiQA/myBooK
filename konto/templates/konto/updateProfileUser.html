@@ -1,4 +1,6 @@
 {% extends "mainPage.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     Edytowanie Profilu
@@ -11,10 +13,10 @@
         </div>
         <h1 class="display-4 fw-normal"> Edytowanie Profilu </h1>
         <p class="text-secondary">Zmiana danych profilu jest możliwa za pomocą formularza znajdującego się poniżej:</p>
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center mb-5">
             <form class=" card p-3"  method="post"  enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form|crispy }}
 
                 <h4>Chcesz zmienić hasło?</h4>
                 <a href="{% url "password_change" %}"><h6>Zmiana Hasła</h6></a>

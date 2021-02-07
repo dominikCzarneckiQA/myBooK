@@ -1,4 +1,6 @@
 {% extends "mainPage.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
 {% block title %}
     Edycja Postu
 {% endblock %}
@@ -19,7 +21,7 @@
             <form class="   mt-4 w-50" method="post">
                 <div class="w-100">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    {{ form|crispy }}
                 </div>
                 <button type="submit" class="  btn btn-outline-primary w-25  fw-bold  p-2 mb-3  rounded  ">
                     Zaktualizuj Post
