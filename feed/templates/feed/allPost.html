@@ -41,15 +41,29 @@
                             {{ post.postContent }}
                             <a href="{% url 'feed:detail-post' post.pk %}" class="stretched-link"> </a>
                         </div>
+
+
                         {% with allLikes=post.postLikes.count %}
-                            <div class="mt-3 fw-bold  ">
-                            <span class="">
-                                {{ allLikes }} Likes
-                            </span>
-                            </div>
+                            <div class="mt-3 fw-bold   ">
 
+                                <form action="{% url 'feed:like-post' post.pk %}" method="post">
+                                    {% csrf_token %}
 
-                        {% endwith %}
+                                    {% if ifLiked %}
+
+                                        <button type="submit" name="post.pk" value="{{ post.pk }}"
+                                                class="btn btn-danger">Nie Lubię
+                                        </button>
+                                    {% else %}
+
+                                        <button type="submit" name="post.pk" value="{{ post.pk }}"
+                                                class="btn btn-primary">Lubię to
+                                        </button>
+                                    {% endif %}
+                                    {{ allLikes }} Likes
+            </form>
+        </div>
+    {% endwith %}
                     </div>
                 </div>
             </div>

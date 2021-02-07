@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 from .models import Post, Comment
 from .forms import PostCreateForm, CommentCreateForm
@@ -39,16 +39,24 @@ class AllPostView(View):
 
 @method_decorator(login_required, name='dispatch')
 class DetailPostView(View):
+
     def get(self, request, pk, *args, **kwargs):
         postget = Post.objects.get(pk=pk)
         formDetail = CommentCreateForm()
 
         allComments = Comment.objects.filter(post=postget).order_by('-commentDate')
+        something = get_object_or_404(Post, id=self.kwargs['pk'])
+        ifLiked = False
+
+        if something.postLikes.filter(id=self.request.user.id).exists():
+           ifLiked = True
 
         return render(request, 'feed/detailPost.html', {
             'post': postget,
             'form': formDetail,
             'comments': allComments,
+            'something': something,
+            'ifLiked' : ifLiked,
         })
 
     def post(self, request, pk, *args, **kwargs):
@@ -62,6 +70,8 @@ class DetailPostView(View):
             newComment.save()
 
         allComments = Comment.objects.filter(post=postget).order_by('-commentDate')
+
+
 
         return render(request, 'feed/detailPost.html', {
             'post': postget,
@@ -104,3 +114,18 @@ class DeleteCommentView(DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('feed:detail-post', kwargs={'pk': self.kwargs['post_pk']})
+
+
+def LikePostDetailView(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('post.pk'))
+
+    ifLiked = False
+    if post.postLikes.filter(id=request.user.id).exists():
+        post.postLikes.remove(request.user)
+        ifLiked = False
+    else:
+        post.postLikes.add(request.user)
+        ifLiked = True
+    return HttpResponseRedirect(reverse_lazy('feed:detail-post', args=[str(pk)]))
+
+
