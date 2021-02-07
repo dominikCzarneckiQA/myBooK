@@ -4,9 +4,10 @@ from .models import Post, Comment
 
 class PostCreateForm(forms.ModelForm):
     postContent = forms.CharField(label='',
-                                  widget=forms.Textarea(attrs={
+                                  widget=forms.TextInput(attrs={
                                       'class': 'form-control',
-                                      'cols': '5',
+                                      'cols': '11',
+
                                       'placeholder': 'Co u Ciebie użytkowniku...?',
                                   }))
 

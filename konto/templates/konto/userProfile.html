@@ -40,29 +40,29 @@
                                             {% if is_friend %}
 
 
-                                                    <form method="post"
-                                                          action="{% url 'friend_remove' getProfile.pk %}">
-                                                        {% csrf_token %}
-                                                        <button class="btn btn-danger" type="submit">
-                                                            Usun z listy znajomych
-                                                        </button>
-                                                    </form>
+                                                <form method="post"
+                                                      action="{% url 'friend_remove' getProfile.pk %}">
+                                                    {% csrf_token %}
+                                                    <button class="btn btn-danger" type="submit">
+                                                        Usun z listy znajomych
+                                                    </button>
+                                                </form>
 
-                                                    {% else %}
+                                            {% else %}
 
-                                                    <form method="post"
-                                                          action="{% url 'friend_add' getProfile.pk %}">
-                                                        {% csrf_token %}
-                                                        <button class="btn btn-success" type="submit">
-                                                            Dodaj do znajomych
-                                                        </button>
-                                                    </form>
+                                                <form method="post"
+                                                      action="{% url 'friend_add' getProfile.pk %}">
+                                                    {% csrf_token %}
+                                                    <button class="btn btn-success" type="submit">
+                                                        Dodaj do znajomych
+                                                    </button>
+                                                </form>
 
 
                                             {% endif %}
 
                                         {% endif %}
-</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -72,24 +72,27 @@
                         <ul class="list-group list-group-flush border">
                             <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
                                 <h6 class=""><i class="fab fa-github"></i> Github</h6>
-                                <span class="text-secondary">bootdey</span>
+                                <span class="text-secondary"><a class="page-link border-0">  {{ getProfile.github }}</a>   </span>
                             </li>
                             <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
                                 <h6 class=""><i class="fab fa-snapchat-ghost"></i> Snapchat</h6>
-                                <span class="text-secondary">bootdey</span>
+                                <span class="text-secondary"> <a
+                                        class="page-link border-0">{{ getProfile.snapchat }} </a> </span>
                             </li>
                             <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
                                 <h6 class=""><i class="fab fa-instagram"></i> Instagram</h6>
-                                <span class="text-secondary">bootdey</span>
+                                <span class="text-secondary"> <a
+                                        class="page-link border-0"> {{ getProfile.instagram }}</a>  </span>
                             </li>
                             <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
                                 <h6 class=""><i class="fab fa-facebook"></i> Facebook</h6>
-                                <span class="text-secondary">bootdey</span>
+                                <span class="text-secondary"> <a
+                                        class="page-link border-0">{{ getProfile.facebook }}</a>  </span>
                             </li>
                             <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap">
-                                <h6 class=""><i class="fab fa-twitter"></i>  Twitter</h6>
-                                <span class="text-secondary"> sialalal</span>
-                            </li>
+                                <h6 class=""><i class="fab fa-twitter"></i> Twitter</h6>
+                                <span class="text-secondary"><a class="page-link border-0"> {{ getProfile.twitter }}</a>  </span>
+
                         </ul>
                     </div>
                 </div>
@@ -102,7 +105,7 @@
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     {% if getUser.first_name %}
-                                        {{ getUser.first_name  }}
+                                        {{ getUser.first_name }}
                                     {% endif %}
                                 </div>
                             </div>
@@ -113,7 +116,7 @@
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     {% if getUser.last_name %}
-                                        {{ getUser.last_name  }}
+                                        {{ getUser.last_name }}
                                     {% endif %}
                                 </div>
                             </div>
@@ -159,11 +162,13 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-12" style="height: 269px">
-                                        <h6 class="m-0">Zdjecia</h6>
+                                        <h6 class="m-0">Lista przyjaciół</h6>
+
+                                              {% for friend in friendsList   %}
+                                                  {{ getProfile.user}}
+                                                {% endfor %}
 
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>

@@ -49,8 +49,8 @@
                     <i class="fas fa-home h4 "></i>
                 </a>
             </li>
-            <li class="me-md-5 w-25 nav-item">
-                <a class="nav-link" href="#">
+            <li  class="me-md-5 w-25 nav-item">
+                <a class="nav-link   "  data-toggle="tab" href="{% url 'people' %}">
                     <i class="fas fa-user-friends h4"></i>
                 </a>
             </li>
@@ -67,7 +67,6 @@
                     </li>
 
                     <li><a class="dropdown-item" href="{% url 'profile_edit' user.profile.pk %}">Edycja Profilu</a></li>
-
                 </ul>
             </li>
         </ul>

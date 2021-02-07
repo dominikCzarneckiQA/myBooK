@@ -11,8 +11,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from feed.models import Post
 from .forms import LoginForm, UserRegisterForm, UserEditForm, ProfileUpdateForm
 from .models import Profile
+from django.contrib.auth.models import User
+
 
 from django.contrib.auth.mixins import UserPassesTestMixin
+
 
 def entryPageView(request):
     return render(request, 'entryPage.html', {})
@@ -138,3 +141,15 @@ class RemoveFriend(View):
         profile.friends.remove(request.user)
 
         return redirect('userProfile', pk=profile.pk)
+
+@method_decorator(login_required, name='dispatch')
+class PeopleListView(View):
+    template_name = 'konto/userList.html'
+
+    def get(self, request):
+        users = User.objects.all()
+        return render(request, self.template_name,
+                      {
+                          'users': users,
+                      })
+
