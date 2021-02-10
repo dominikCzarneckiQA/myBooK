@@ -43,15 +43,16 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <div class="d-flex justify-content-center w-100">
 
-        <ul class=" nav    nav-pills w-25 ">
-            <li class=" nav-item me-md-5">
-                <a class="nav-link " aria-current="page"
+        <ul class=" nav    w-25 ">
+
+            <li {% if section == "feed:all-posts" %} class="active "{% endif %}>
+                <a class="nav-link nav-item me-md-5 " aria-current="page"
                    href="{% url 'feed:all-posts' %}">
                     <i class="fas fa-home h4 "></i>
                 </a>
             </li>
-            <li  class="me-md-5 w-25 nav-item">
-                <a class="nav-link   "  data-toggle="tab" href="{% url 'people' %}">
+            <li  class="me-md-5 w-25 nav-item  ">
+                <a class="nav-link   " data-toggle="tab" href="{% url 'people' %}">
                     <i class="fas fa-user-friends h4"></i>
                 </a>
             </li>
@@ -76,16 +77,20 @@
 
 
 {% if request.user.is_authenticated %}
+    <a class="  fw-normal  text-secondary" href="{% url 'userProfile' user.profile.pk %} ">
+        {{ request.user.first_name }} {{ request.user.last_name }}
+    </a>
     <div class="dropstart   ">
         <button type="button" class=" btn btn-outline-danger " data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fas fa-angle-left"></i>
         </button>
         <ul class="dropdown-menu">
             <li>
-                <a class="dropdown-item p-3 text-dark" href="{% url 'userProfile' user.profile.pk %} ">
-                    {{ request.user.first_name }} {{ request.user.last_name }}
+                <a class=" disabled dropdown-item p-3 text-dark"  >
+                    Ustawienia
                 </a>
             </li>
+
             <li>
                 <a class="dropdown-item p-3 text-dark" href="{% url 'edit' %} ">
                     Edycja danych

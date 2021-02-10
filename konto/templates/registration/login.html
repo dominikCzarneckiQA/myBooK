@@ -9,9 +9,7 @@
             {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{ redirect_field_name }"/>
             {% endif %}
-            {% if form.errors %}
-                <p class="mt-4">Login lub hasło jest nieprawidłowe. Spróbuj ponownie. </p>
-            {% endif %}
+
             <div class="formularz-logowanie p-3 ">
                 <div class="card p-2  bg-transparent shadow-sm">
                     <div class="card  p-2">
