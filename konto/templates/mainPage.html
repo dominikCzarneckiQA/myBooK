@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load active_link_tags %}
 <!doctype html>
 <html lang="pl">
 <head>
@@ -45,14 +45,15 @@
 
         <ul class=" nav    w-25 ">
 
-            <li {% if section == "feed:all-posts" %} class="active "{% endif %}>
-                <a class="nav-link nav-item me-md-5 " aria-current="page"
+            <li class="nav-item {% active_link 'feed:all-posts' 'active' %}">
+                <a class="nav-link   me-md-5 " aria-current="page"
                    href="{% url 'feed:all-posts' %}">
                     <i class="fas fa-home h4 "></i>
                 </a>
             </li>
-            <li  class="me-md-5 w-25 nav-item  ">
-                <a class="nav-link   " data-toggle="tab" href="{% url 'people' %}">
+
+            <li  class="me-md-5 w-25  nav-item {% if request.path == people %} active {%endif%}">
+                <a class="nav-link   " data-toggle="tab" href="{% url 'people'  %}">
                     <i class="fas fa-user-friends h4"></i>
                 </a>
             </li>
@@ -63,12 +64,13 @@
                     <i class="fas fa-user-circle h4 "></i>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="{% url 'userProfile' user.profile.pk %}">Profil</a></li>
+                    {% url 'userProfile' user.profile.pk as url %}
+                    <li class="nav-item"><a class="dropdown-item" href="{{ url }}">Profil</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-
-                    <li><a class="dropdown-item" href="{% url 'profile_edit' user.profile.pk %}">Edycja Profilu</a></li>
+                    {% url 'profile_edit' user.profile.pk as url %}
+                    <li><a class="dropdown-item" href="{{ url }}">Edycja Profilu</a></li>
                 </ul>
             </li>
         </ul>
@@ -77,7 +79,8 @@
 
 
 {% if request.user.is_authenticated %}
-    <a class="  fw-normal  text-secondary" href="{% url 'userProfile' user.profile.pk %} ">
+    {% url 'userProfile' user.profile.pk as url %}
+    <a class="  fw-normal  text-secondary" href="{{ url }} ">
         {{ request.user.first_name }} {{ request.user.last_name }}
     </a>
     <div class="dropstart   ">
@@ -99,7 +102,8 @@
             <li>
                 <hr class="dropdown-divider">
             </li>
-            <li><a href="{% url 'wyloguj' %}" class="dropdown-item"> <i class="fas fa-sign-out-alt"></i> Wyloguj</a>
+            {% url 'wyloguj'  as url %}
+            <li><a href="{{ url }}" class="dropdown-item"> <i class="fas fa-sign-out-alt"></i> Wyloguj</a>
             </li>
         </ul>
     </div>

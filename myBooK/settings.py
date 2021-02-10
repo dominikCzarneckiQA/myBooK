@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'konto.apps.KontoConfig',
     "crispy_forms",
+    "active_link",
     "crispy_bootstrap5",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -71,6 +72,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
             ],
         },
     },
