@@ -1,7 +1,7 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from . import views
-from .views import UserProfileView, UpdateProfileView, AddFriend, RemoveFriend , PeopleListView
+from .views import UserProfileView, UpdateProfileView, AddFriend, RemoveFriend, PeopleListView 
 
 urlpatterns = [
     path('', views.entryPageView, name="stronaStartowa"),
