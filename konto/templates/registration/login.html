@@ -10,10 +10,10 @@
                 <input type="hidden" name="{{ redirect_field_name }}" value="{ redirect_field_name }"/>
             {% endif %}
 
-            <div class="formularz-logowanie p-3 ">
+            <div class="formularz-logowanie p-4">
                 <div class="card p-2  bg-transparent shadow-sm">
                     <div class="card  p-2">
-                        <h1 class="card-header">Zaloguj sie</h1>
+                        <h1 class="card-header border-secondary">Zaloguj sie</h1>
                         <form action="{% url 'login' %}" method="post" class=" card-body">
                             <p>Nie masz konta?<a href="{% url 'register' %}"> Zarejestruj się </a></p>
                             <div class="d-flex justify-content-center ">
@@ -30,22 +30,22 @@
                                     <input type="checkbox" value="remember-me"> Zapamietaj mnie
                                 </label>
                             </div>
-                            <div class="25 card-footer bg-body">
-                                <button class="  btn btn-lg btn-danger fw-normal " type="submit" value="zaloguj">Zaloguj
-                                    sie
+                            <div class="  ">
+                                <button class="btn  btn-lg btn-danger fw-normal " type="submit" value="zaloguj">
+                                    Zaloguj sie
                                 </button>
                             </div>
                         </form>
                     </div>
-                    <div class="mt-4">&copy; 2020-2021 Dominik Czarnecki
+                    <div class="mt-2">&copy; 2020-2021 Dominik Czarnecki
                     </div>
 
                 </div>
             </div>
         </div>
-        <div>
-            <h1 class="display-2 text-dark chewy  fixed-bottom"> myBooK</h1>
-        </div>
+    </div>
+    <div class=" sticky fixed-bottom   p-1   ">
+        <h1 class="display-2 text-dark chewy   "> myBooK</h1>
     </div>
 {% endblock %}
 

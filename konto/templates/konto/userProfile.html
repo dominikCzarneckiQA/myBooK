@@ -18,9 +18,10 @@
                                 <img alt="userProfileImg" src="{{ getProfile.profileAvatar.url }}"
                                      class="rounded-circle mt-2" width="125px" height="125px"/>
                                 {% if request.user == getProfile.user %}
-                                    <div class="w-25">
+                                    <div class="w-50">
                                         <a class="btn" href="{% url 'profile_edit' getProfile.pk %}">
-                                            <button class="btn btn-sm">Edit <i class="far fa-edit  text-dark  "></i>
+                                            <button class="btn btn-sm  mt-1 "><h6> Edytuj Profil <i
+                                                    class="far fa-edit  text-dark  "></i></h6>
                                             </button>
                                         </a>
                                     </div>
@@ -33,20 +34,31 @@
                                             <em>{{ getProfile.biography }}</em>
                                         </p>
                                     {% endif %}
-                                    <div class="  card p-2 mb-2">
+                                    <div class="p-2">
                                         {% if getUser == request.user %}
-                                            Liczba przyjaciół, którzy Cię obserwują:  {{ getNumberFriends }}
+
+
+
+                                                <button class="btn  fw-bold p-2 btn-outline-primary disabled ">
+                                                    Obserwujący {{ getNumberFollowers }}
+                                                </button>
+
+
+                                                <button class="btn  fw-bold p-2 btn-outline-secondary disabled ">
+                                                    Obserwowani  1
+                                                </button>
+
 
                                         {% else %}
 
-                                            {% if is_friend %}
+                                            {% if is_follower %}
 
 
                                                 <form method="post"
                                                       action="{% url 'friend_remove' getProfile.pk %}">
                                                     {% csrf_token %}
                                                     <button class="btn btn-danger" type="submit">
-                                                        Usun z listy znajomych
+                                                        Nie obserwuj
                                                     </button>
                                                 </form>
 
@@ -56,7 +68,7 @@
                                                       action="{% url 'friend_add' getProfile.pk %}">
                                                     {% csrf_token %}
                                                     <button class="btn btn-success" type="submit">
-                                                        Dodaj do znajomych
+                                                        Obserwuj
                                                     </button>
                                                 </form>
 
@@ -166,17 +178,17 @@
                         <div class="card mb-3">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-sm-12" style="height: 269px">
+                                    <div class="col-sm-12   " style="height: 269px">
                                         <button class="btn   float-end  card disabled">
-                                            Liczba Przyjaciół {{ getNumberFriends }}</button>
-                                        <h6 class="m-0">Lista przyjaciół</h6>
+                                            Obserwujący {{ getNumberFollowers }}</button>
+                                        <h6 class="m-0">Lista obserwujących</h6>
 
-                                        {% for friend in friendsList %}
+                                        {% for follower in followersList %}
                                             <div class="p-4 card w-25 m-3 page-link  text-capitalize">
 
                                                 <a class=" text-primary "
-                                                   href="{% url 'userProfile' friend.profile.pk %}">
-                                                    {{ friend.get_full_name }}
+                                                   href="{% url 'userProfile' follower.profile.pk %}">
+                                                    {{ follower.get_full_name }}
                                                 </a>
                                             </div>
                                         {% endfor %}

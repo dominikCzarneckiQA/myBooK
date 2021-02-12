@@ -12,6 +12,7 @@ class Profile(models.Model):
     currentLocation = models.CharField(max_length=99, null=True, blank=True, verbose_name='Location')
     countryOrigin = models.CharField(max_length=99, null=True, blank=True, verbose_name='Country')
     friends = models.ManyToManyField(User, blank=True, related_name='friends')
+
     github = models.URLField(null=True, blank=True, max_length=40)
     snapchat = models.CharField(null=True, blank=True, max_length=40)
     instagram = models.URLField(null=True, blank=True, max_length=40)

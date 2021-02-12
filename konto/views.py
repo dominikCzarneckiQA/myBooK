@@ -78,32 +78,31 @@ def editView(request):
 @method_decorator(login_required, name='dispatch')
 class UserProfileView(View):
     def get(self, request, pk, *args, **kwargs):
-        global is_friend
+        global is_follower
         getProfile = Profile.objects.get(pk=pk)
         getUser = getProfile.user
         getPosts = Post.objects.filter(postAuthor=getUser).order_by('-postDate')
-        friendsList = getProfile.friends.all()
-        getFriendsPosts = Post.objects.filter(postAuthor=friendsList).order_by('-postDate')
-        if len(friendsList) == 0:
-            is_friend = False
+        followersList = getProfile.friends.all()
 
-        for friend in friendsList:
-            if friend == request.user:
-                is_friend = True
+        if len(followersList) == 0:
+            is_follower = False
+
+        for follower in followersList:
+            if follower == request.user:
+                is_follower = True
                 break
             else:
-                is_friend = False
+                is_follower = False
 
-        getNumberFriends = len(friendsList)
-        friendsList = getProfile.friends.all()
+        getNumberFollowers = len(followersList)
+
         return render(request, 'konto/userProfile.html', {
             'getProfile': getProfile,
             'getUser': getUser,
             'getPosts': getPosts,
-            'getNumberFriends': getNumberFriends,
-            'is_friend': is_friend,
-            'friendsList': friendsList,
-            'getFriendsPosts': getFriendsPosts,
+            'getNumberFollowers': getNumberFollowers,
+            'is_follower': is_follower,
+            'followersList': followersList,
 
         })
 
@@ -144,7 +143,7 @@ class RemoveFriend(View):
 
 @method_decorator(login_required, name='dispatch')
 class PeopleListView(View):
-    template_name = 'konto/userList.html'
+    template_name = '/feed/allPost.html'
 
     def get(self, request):
         users = User.objects.all()
@@ -152,4 +151,3 @@ class PeopleListView(View):
                       {
                           'users': users,
                       })
-
