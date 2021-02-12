@@ -30,8 +30,7 @@
 
 <body class="text-center" style="background-image: url('{% static "backgrounds/tlo01.png" %}' );">
 {% if request.user.is_authenticated %}
-    <nav class=" m-4 navbar sticky-top border border-2 shadow-sm  navbar-light bg-light navbar-expand-lg   text-decoration-none ">
-    <div class="container-fluid">
+    <nav class="navbar m-4 sticky-top border border-2 shadow-sm  navbar-light bg-light navbar-expand-lg   text-decoration-none ">
     <a class="navbar-brand  text-decoration-none mx-3 " href="{% url 'feed:all-posts' %}"><h3 class="chewy ">
         myBooK</h3></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -39,31 +38,47 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
+    <nav class="navbar navbar-light bg-light ">
+        <form class="form-inline">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text align-content-center" id="basic-addon1">@</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Szukaj" aria-label="Username"
+                       aria-describedby="basic-addon1">
+            </div>
+        </form>
+    </nav>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <div class="d-flex justify-content-center w-100">
 
-        <ul class=" nav    w-25 ">
-
-            <li class="nav-item {% active_link 'feed:all-posts' 'active' %}">
-                <a class="nav-link   me-md-5 " aria-current="page"
+        <ul class=" nav  w-50">
+            <li class="nav-item  mx-3 {% active_link 'feed:all-posts' 'active' %}">
+                <a class="nav-link mx-auto" aria-current="page"
                    href="{% url 'feed:all-posts' %}">
                     <i class="fas fa-home h4 "></i>
                 </a>
             </li>
+            <li class=" nav-item mx-3  ">
+                <a class="nav-link     " aria-current="page"
+                   href="#">
+                    <i class="fas h4 fa-clipboard"></i>
+                </a>
+            </li>
 
-            <li  class="me-md-5 w-25  nav-item {% if request.path == people %} active {%endif%}">
-                <a class="nav-link   " data-toggle="tab" href="{% url 'people'  %}">
+            <li class="  nav-item mx-3  {% if request.path == people %} active {% endif %}">
+                <a class="nav-link   " data-toggle="tab" href="{% url 'people' %}">
                     <i class="fas fa-user-friends h4"></i>
                 </a>
             </li>
 
-            <li class="nav-item dropdown ">
+            <li class="nav-item dropdown  mx-3 ">
                 <a class="nav-link " href="#"
                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fas fa-user-circle h4 "></i>
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <ul class="dropdown-menu  " aria-labelledby="navbarDropdown">
                     {% url 'userProfile' user.profile.pk as url %}
                     <li class="nav-item"><a class="dropdown-item" href="{{ url }}">Profil</a></li>
                     <li>
@@ -83,13 +98,14 @@
     <a class="  fw-normal  text-secondary" href="{{ url }} ">
         {{ request.user.first_name }} {{ request.user.last_name }}
     </a>
-    <div class="dropstart   ">
-        <button type="button" class=" btn btn-outline-danger " data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-angle-left"></i>
+
+    <div class="dropdown   mx-3">
+        <button type="button " class=" btn btn-outline-danger   " data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-chevron-down"></i>
         </button>
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu dropdown-menu-end">
             <li>
-                <a class=" disabled dropdown-item p-3 text-dark"  >
+                <a class=" disabled dropdown-item p-3 text-dark">
                     Ustawienia
                 </a>
             </li>

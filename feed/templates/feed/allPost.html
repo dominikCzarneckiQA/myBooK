@@ -7,51 +7,56 @@
 
 
 {% block content %}
-    <div class="container-fluid">
-        <div class="d-flex row justify-content-center">
-            <div class=" card   w-50">
-                <div class="row ">
-                    <h1 class="display-5 fw-bold  border  border-dark  card-header ">Utwórz post</h1>
-                    <form class=" card-body  fw-normal shadow-sm p-2  mt-1  " method="post">
+    <div class="container mb-1">
+        <div class=" mx-auto col-md-6 card ">
+            <form class="  fw-normal shadow-sm  p-2 mt-2  " method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="  btn  fw-bold  btn-outline-primary mb-2 ">Dodaj Post</button>
+            </form>
 
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button class="  btn  fw-bold  btn-outline-secondary    mb-2  rounded">Dodaj Post</button>
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
 
-    <div class="container">
-        {% for post in allPosts %}
-            <div class="d-flex row justify-content-center   mt-5 ">
-                <div class=" col-md-6  shadow-sm  mb-5 card
-                rounded " style="min-height:150px; max-height:899px;">
-                    <div class="card-body align-content-start ">
-                        <p class="card-header">
-                            <a class="text-decoration-none text-capitalize
-                            text-secondary "
-                               href="{% url 'userProfile' post.postAuthor.profile.pk %}">
-                                <strong class="text-primary"> <i class="fas fa-user text-dark"></i>
-                                    {{ post.postAuthor.get_full_name }} </strong></a> - <em> {{ post.postDate }} </em>
-                        </p>
-                        <div class="border text-start p-1 position-relative"
-                             style="min-height:150px; max-height:899px;">
-                            {{ post.postContent }}
-                            <a href="{% url 'feed:detail-post' post.pk %}" class="stretched-link"> </a>
-                        </div>
 
 
-                        {% with allLikes=post.postLikes.count %}
+    {% for post in allPosts %}
+        <div class=" col-md-5  shadow-sm    p-1 mx-auto card
+                    overflow-auto" style="min-height:150px; max-height:555px">
 
-                            <button class=" border-dark mt-3 disabled fw-bold btn  btn-primary"><i class="fas fa-heart"></i> {{ allLikes }} Likes
-                            </button>
+            <p class="card-header bg-white">
+                <a href="{% url 'userProfile' post.postAuthor.profile.pk %}">
+                    <strong class="text-primary"> <i class="fas fa-user text-dark"></i>
+                        {{ post.postAuthor.get_full_name }} </strong></a> -
+                <em class="text-secondary "> {{ post.postDate }} </em>
+            </p>
+            <div class="    text-start p-1 position-relative"
+                 style="min-height:150px; max-height:899px;">
 
-                        {% endwith %}
-                    </div>
-                </div>
+                {{ post.postContent }}
+                <a href="{% url 'feed:detail-post' post.pk %}" class="stretched-link"> </a>
             </div>
-        {% endfor %}
+
+
+        </div>
+
+
+
+        {% with allLikes=post.postLikes.count %}
+            <button class=" disabled fw-bold btn bg-white  col-md-5 text-danger">
+                <i class="fas fa-heart"></i> {{ allLikes }}
+            </button>
+
+        {% endwith %}
+
+
+
+    {% endfor %}
+
+    <div class="footer m-3">
+
+        <p class="font-italic fw-light"><em> © 2020-2021 myBooK  Dominik Czarnecki</em></p>
+
     </div>
+
 {% endblock %}

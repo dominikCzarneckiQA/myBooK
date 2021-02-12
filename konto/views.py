@@ -13,7 +13,6 @@ from .forms import LoginForm, UserRegisterForm, UserEditForm, ProfileUpdateForm
 from .models import Profile
 from django.contrib.auth.models import User
 
-
 from django.contrib.auth.mixins import UserPassesTestMixin
 
 
@@ -83,9 +82,8 @@ class UserProfileView(View):
         getProfile = Profile.objects.get(pk=pk)
         getUser = getProfile.user
         getPosts = Post.objects.filter(postAuthor=getUser).order_by('-postDate')
-
         friendsList = getProfile.friends.all()
-
+        getFriendsPosts = Post.objects.filter(postAuthor=friendsList).order_by('-postDate')
         if len(friendsList) == 0:
             is_friend = False
 
@@ -104,7 +102,8 @@ class UserProfileView(View):
             'getPosts': getPosts,
             'getNumberFriends': getNumberFriends,
             'is_friend': is_friend,
-            'friendsList' : friendsList ,
+            'friendsList': friendsList,
+            'getFriendsPosts': getFriendsPosts,
 
         })
 
@@ -141,6 +140,7 @@ class RemoveFriend(View):
         profile.friends.remove(request.user)
 
         return redirect('userProfile', pk=profile.pk)
+
 
 @method_decorator(login_required, name='dispatch')
 class PeopleListView(View):

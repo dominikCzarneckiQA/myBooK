@@ -20,3 +20,5 @@ class Profile(models.Model):
 
     def __str__(self):
         return str('Informacje o użytkowniku {}.'.format(self.user))
+
+

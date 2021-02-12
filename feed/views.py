@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.http import HttpResponseRedirect
+from konto.models import Profile
 
 
 @method_decorator(login_required, name='dispatch')
@@ -24,16 +25,19 @@ class AllPostView(View):
 
         return render(request, 'feed/allPost.html', {
             'allPosts': allPosts,
-            'form': formAllPost
+            'form': formAllPost,
+
         })
 
     def get(self, request, *args, **kwargs):
         formAllPost = PostCreateForm()
         allPosts = Post.objects.all().order_by('-postDate')
+        allUsers = Profile.objects.all()
 
         return render(request, 'feed/allPost.html', {
             'allPosts': allPosts,
-            'form': formAllPost
+            'form': formAllPost,
+            'allUsers': allUsers,
         })
 
 
@@ -49,14 +53,14 @@ class DetailPostView(View):
         ifLiked = False
 
         if something.postLikes.filter(id=self.request.user.id).exists():
-           ifLiked = True
+            ifLiked = True
 
         return render(request, 'feed/detailPost.html', {
             'post': postget,
             'form': formDetail,
             'comments': allComments,
             'something': something,
-            'ifLiked' : ifLiked,
+            'ifLiked': ifLiked,
         })
 
     def post(self, request, pk, *args, **kwargs):
@@ -70,8 +74,6 @@ class DetailPostView(View):
             newComment.save()
 
         allComments = Comment.objects.filter(post=postget).order_by('-commentDate')
-
-
 
         return render(request, 'feed/detailPost.html', {
             'post': postget,
@@ -127,5 +129,3 @@ def LikePostDetailView(request, pk):
         post.postLikes.add(request.user)
         ifLiked = True
     return HttpResponseRedirect(reverse_lazy('feed:detail-post', args=[str(pk)]))
-
-
