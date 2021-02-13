@@ -1,0 +1,41 @@
+{% extends 'mainPage.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="w-25 m-3 ">
+            <a href="{% url 'feed:all-posts' %}" class="btn btn-outline-secondary mt-2 "> Powrót </a>
+        </div>
+
+        <div class="row    ">
+            <div class="card-group  ">
+                {% for profile in getProfileList %}
+                    <div class="card ">
+                        <div class="card-body   ">
+
+                            <h5 class="card-title">
+                                <a class="text-secondary" href="{% url 'userProfile'  profile.pk %}">
+                                    {{ profile.user }}
+                                </a>
+                            </h5>
+
+                            {% if profile.user.first_name %}
+                                <p><strong class="h6">Imię: </strong>{{ profile.user.first_name }}</p>
+                            {% endif %}
+                            {% if profile.user.last_name %}
+                                <p><strong class="h6">Nazwisko:</strong> {{ profile.user.last_name }}</p>
+                            {% endif %}
+                            {% if profile.countryOrigin %}
+                                <p><strong class="h6">Kra pochodzenia:</strong> {{ profile.countryOrigin }}</p>
+                            {% endif %}
+                        </div>
+
+                        <button class="btn btn-primary disabled fw-bold">Liczba
+                            Obserwujacych: {{ profile.friends.all.count }}</button>
+                    </div>
+
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

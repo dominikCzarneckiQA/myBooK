@@ -39,13 +39,14 @@
     </button>
 
     <nav class="navbar navbar-light bg-light ">
-        <form class="form-inline">
+        <form class="form-inline" method="get" action="{% url 'user_search' %}">
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text align-content-center" id="basic-addon1">@</span>
                 </div>
                 <input type="text" class="form-control" placeholder="Szukaj" aria-label="Username"
-                       aria-describedby="basic-addon1">
+                       aria-describedby="basic-addon1" name="quest" value="{{ request.GET.quest }}">
+                <button class="btn bg-transparent "> <i class="fas fa-search"></i> </button>
             </div>
         </form>
     </nav>
@@ -68,7 +69,7 @@
             </li>
 
             <li class="  nav-item mx-3  {% if request.path == people %} active {% endif %}">
-                <a class="nav-link   " data-toggle="tab" href="{% url 'people' %}">
+                <a class="nav-link   " data-toggle="tab" href="{% url 'all_users' %}">
                     <i class="fas fa-user-friends h4"></i>
                 </a>
             </li>
@@ -100,7 +101,7 @@
     </a>
 
     <div class="dropdown   mx-3">
-        <button type="button " class=" btn btn-outline-danger   " data-bs-toggle="dropdown" aria-expanded="false">
+        <button  class=" btn btn-outline-danger   " data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fas fa-chevron-down"></i>
         </button>
         <ul class="dropdown-menu dropdown-menu-end">

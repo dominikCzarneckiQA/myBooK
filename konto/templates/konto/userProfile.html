@@ -39,14 +39,14 @@
 
 
 
-                                                <button class="btn  fw-bold p-2 btn-outline-primary disabled ">
-                                                    Obserwujący {{ getNumberFollowers }}
-                                                </button>
+                                            <button class="btn  fw-bold p-2 btn-outline-primary disabled ">
+                                                Obserwujący {{ getNumberFollowers }}
+                                            </button>
 
 
-                                                <button class="btn  fw-bold p-2 btn-outline-secondary disabled ">
-                                                    Obserwowani  1
-                                                </button>
+                                            <button class="btn  fw-bold p-2 btn-outline-secondary disabled ">
+                                                Obserwowani 1
+                                            </button>
 
 
                                         {% else %}
@@ -55,7 +55,7 @@
 
 
                                                 <form method="post"
-                                                      action="{% url 'friend_remove' getProfile.pk %}">
+                                                      action="{% url 'user_unfollow' getProfile.pk %}">
                                                     {% csrf_token %}
                                                     <button class="btn btn-danger" type="submit">
                                                         Nie obserwuj
@@ -65,7 +65,7 @@
                                             {% else %}
 
                                                 <form method="post"
-                                                      action="{% url 'friend_add' getProfile.pk %}">
+                                                      action="{% url 'user_follow' getProfile.pk %}">
                                                     {% csrf_token %}
                                                     <button class="btn btn-success" type="submit">
                                                         Obserwuj
@@ -173,16 +173,19 @@
 
                     </div>
                     <div class="col-md-12">
+
                         <div class="card mb-3">
+
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-12   " style="height: 269px">
                                         <button class="btn   float-end  card disabled">
                                             Obserwujący {{ getNumberFollowers }}</button>
-                                        <h6 class="m-0">Lista obserwujących</h6>
+                                        <h6 class=" ">Lista obserwujących</h6>
 
                                         {% for follower in followersList %}
-                                            <div class="p-4 card w-25 m-3 page-link  text-capitalize">
+                                            <div class="p-4 card w-25 m-2 page-link  text-capitalize template float-start"
+                                                 style="max-height: 600px">
 
                                                 <a class=" text-primary "
                                                    href="{% url 'userProfile' follower.profile.pk %}">
@@ -190,17 +193,17 @@
                                                 </a>
                                             </div>
                                         {% endfor %}
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-            </div>
 
+            </div>
         </div>
+
+    </div>
 
     </div>
 

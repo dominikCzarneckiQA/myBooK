@@ -1,6 +1,7 @@
 # Create your views here.
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -69,7 +70,7 @@ def editView(request):
             userForm.save()
     else:
         userForm = UserEditForm(instance=request.user)
-    return render(request, 'konto/updateUser.html',
+    return render(request, 'konto/userUpdate.html',
                   {
                       'userForm': userForm,
                   })
@@ -111,7 +112,7 @@ class UserProfileView(View):
 class UpdateProfileView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Profile
     form = ProfileUpdateForm
-    template_name = 'konto/updateProfileUser.html'
+    template_name = 'konto/userProfileUpdate.html'
 
     fields = ['biography', 'profileAvatar', 'birthDate', 'currentLocation', 'countryOrigin', 'github', 'snapchat',
               'instagram', 'facebook', 'twitter']
@@ -124,7 +125,7 @@ class UpdateProfileView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 
 @method_decorator(login_required, name='dispatch')
-class AddFriend(View):
+class UserFollow(View):
     def post(self, request, pk, *args, **kwargs):
         profile = Profile.objects.get(pk=pk)
         profile.friends.add(request.user)
@@ -133,7 +134,7 @@ class AddFriend(View):
 
 
 @method_decorator(login_required, name='dispatch')
-class RemoveFriend(View):
+class UserUnfollow(View):
     def post(self, request, pk, *args, **kwargs):
         profile = Profile.objects.get(pk=pk)
         profile.friends.remove(request.user)
@@ -150,4 +151,17 @@ class UsersListView(View):
         return render(request, self.template_name,
                       {
                           'users': users,
+                      })
+
+
+class UserSearchView(View):
+    def get(self, request, *args, **kwargs):
+        getQuest = self.request.GET.get('quest')
+        getProfileList = Profile.objects.filter(
+            Q(user__username__icontains=getQuest)
+        )
+
+        return render(request, 'konto/userSearch.html',
+                      {
+                          'getProfileList': getProfileList,
                       })
