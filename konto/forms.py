@@ -51,11 +51,8 @@ class ProfileUpdateForm(forms.ModelForm):
 
         widgets = {
             'biography': forms.Textarea(attrs={'class': 'form-control '}),
-            'profileAvatar': forms.TextInput(attrs={'class': 'form-control'}),
-            'birthDate': forms.DateInput(attrs={
-
-
-            }),
+            'profileAvatar': forms.ImageField(),
+            'birthDate': forms.DateInput(attrs={}),
             'currentLocation': forms.TextInput(attrs={'class': 'form-control'}),
             'countryOrigin': forms.Select(attrs={'class': 'form-control'}),
             'github': forms.URLInput(attrs={'class': 'form-control'}),

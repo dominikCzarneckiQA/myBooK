@@ -5,15 +5,15 @@ from .models import Post, Comment
 class PostCreateForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['postContent']
+        fields = ['postContent', 'postImages']
 
-    postContent = forms.CharField(label='',
-                                  widget=forms.TextInput(attrs={
-                                      'class': 'form-control',
-                                      'cols': '11',
+        widgets = {
+            'postContent': forms.Textarea(attrs={'class': 'form-control ',
+                                                 'rows': '2',
+                                                 'placeholder': 'Dodaj komentarz..'
+                                                 }),
 
-                                      'placeholder': 'Co u Ciebie użytkowniku...?',
-                                  }))
+        }
 
 
 class CommentCreateForm(forms.ModelForm):
@@ -21,10 +21,10 @@ class CommentCreateForm(forms.ModelForm):
         model = Comment
         fields = ['commentContent']
 
-    commentContent = forms.CharField(label='',
-                                     widget=forms.Textarea(attrs={
+        commentContent = forms.CharField(label='',
+                                         widget=forms.Textarea(attrs={
 
-                                         'rows': '7',
-                                         'class': 'form-control',
-                                         'placeholder': 'Dodaj komentarz..'
-                                     }))
+                                             'rows': '7',
+                                             'class': 'form-control',
+                                             'placeholder': 'Dodaj komentarz..'
+                                         }))

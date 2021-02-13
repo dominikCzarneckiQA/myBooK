@@ -2,6 +2,8 @@ from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from . import views
 from .views import UserProfileView, UpdateProfileView, UserFollow, UserUnfollow, UsersListView, UserSearchView
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('', views.entryPageView, name="stronaStartowa"),
 

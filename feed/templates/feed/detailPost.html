@@ -40,8 +40,14 @@
                     </div>
                 {% endif %}
 
-                <div class="card mt-3 border overflow-auto" style="min-height:150px; max-height:555px;">
-                    <p class="card-text   "> {{ post.postContent }}
+                <div class="card mt-3 border overflow-auto" style="min-height:150px; max-height:899px;">
+                    <p class="card-text   ">
+                        {{ post.postContent }}
+                    </p>
+
+                    {% if post.postImages %}
+                     <img  alt="img" src="{{ post.postImages.url }}">
+                    {% endif %}
                 </div>
 
                 <div class="m-2">

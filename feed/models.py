@@ -8,7 +8,7 @@ class Post(models.Model):
     postContent = models.TextField(default='Napisz cos.. ?')
     postDate = models.DateTimeField(default=timezone.now)
     postLikes = models.ManyToManyField(User, blank=True, related_name='postlikes')
-    postImages = models.ImageField(null=True, blank=True, upload_to="media/Images")
+    postImages = models.ImageField(null=True, blank=True, upload_to='images/')
 
 
 class Comment(models.Model):
