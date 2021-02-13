@@ -3,6 +3,10 @@ from .models import Post, Comment
 
 
 class PostCreateForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['postContent']
+
     postContent = forms.CharField(label='',
                                   widget=forms.TextInput(attrs={
                                       'class': 'form-control',
@@ -11,12 +15,12 @@ class PostCreateForm(forms.ModelForm):
                                       'placeholder': 'Co u Ciebie użytkowniku...?',
                                   }))
 
-    class Meta:
-        model = Post
-        fields = ['postContent']
-
 
 class CommentCreateForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['commentContent']
+
     commentContent = forms.CharField(label='',
                                      widget=forms.Textarea(attrs={
 
@@ -24,7 +28,3 @@ class CommentCreateForm(forms.ModelForm):
                                          'class': 'form-control',
                                          'placeholder': 'Dodaj komentarz..'
                                      }))
-
-    class Meta:
-        model = Comment
-        fields = ['commentContent']

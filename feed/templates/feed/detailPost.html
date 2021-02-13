@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container ">
         <div class="w-25 mt-3">
             <a href="{% url 'feed:all-posts' %}" class="btn btn-outline-secondary mt-2 "> Powrót </a>
         </div>
@@ -42,22 +42,19 @@
 
                 <div class="card mt-3 border overflow-auto" style="min-height:150px; max-height:555px;">
                     <p class="card-text   "> {{ post.postContent }}
-
-
                 </div>
+
                 <div class="m-2">
-
                     <form action="{% url 'feed:like-post' post.pk %}" method="post">
-
                         {% csrf_token %}
                         {% if ifLiked %}
-
                             <button type="submit" name="post.pk" value="{{ post.pk }}"
                                     class="btn btn-outline-secondary "><i class="fas fa-heart-broken"></i>
                                 {% with allLikes=post.postLikes.count %}
                                     {{ allLikes }}
                                 {% endwith %}
                             </button>
+
                         {% else %}
 
                             <button type="submit" name="post.pk" value="{{ post.pk }}"
@@ -66,6 +63,7 @@
                                     {{ allLikes }}
                                 {% endwith %}
                             </button>
+
                         {% endif %}
                     </form>
                 </div>
@@ -73,17 +71,12 @@
         </div>
     </div>
 
-
-
-
     <div class=" row justify-content-center   mt-3 mb-5">
         <div class=" col-md-3">
 
             <form method="post">
-
                 {% csrf_token %}
                 {{ form.as_p }}
-
                 <div class="">
                     <button class="btn btn-outline-success fw-bold mt-2">Dodaj Komentarz</button>
                 </div>
@@ -93,7 +86,7 @@
     </div>
 
     {% for comment in comments %}
-        <div class=" d-flex row mx-auto mt-3 mb-5 w-50 ">
+        <div class=" d-flex row mx-auto    w-50  ">
             <div class=" rounded border-bottom  card-body bg-white  ">
                 <a class="text-decoration-none text-capitalize
                             text-secondary "
@@ -101,7 +94,6 @@
                     <strong class="text-primary">
                         {{ comment.commentAuthor.get_full_name }}
                     </strong></a>
-
 
                 {% if request.user == post.postAuthor  and comment.commentAuthor %}
                     <a href="{% url 'feed:delete-comment' post.pk comment.pk %}">
@@ -121,9 +113,10 @@
                         </a>
                     {% endif %}
                 {% endif %}
-                <p class="text-secondary fw-light"><em>{{ comment.commentDate }}</em></p>
+                <p class="text-secondary fw-light "><em>{{ comment.commentDate }}</em></p>
                 <p class="blockquote ">{{ comment.commentContent }}</p>
             </div>
         </div>
+
     {% endfor %}
 {% endblock %}
