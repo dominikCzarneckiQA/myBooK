@@ -45,30 +45,30 @@
 
 
                 </div>
-             <div class="m-2">
+                <div class="m-2">
 
-                        <form action="{% url 'feed:like-post' post.pk %}" method="post">
+                    <form action="{% url 'feed:like-post' post.pk %}" method="post">
 
-                            {% csrf_token %}
-                            {% if ifLiked %}
+                        {% csrf_token %}
+                        {% if ifLiked %}
 
-                                <button type="submit" name="post.pk" value="{{ post.pk }}"
-                                        class="btn btn-outline-danger "><i class="fas fa-heart-broken"></i>
-                                </button>
-                            {% else %}
-
-                                <button type="submit" name="post.pk" value="{{ post.pk }}"
-                                        class="btn btn-outline-primary"><i class="fas fa-heart"></i>
-                                </button>
-                            {% endif %}
-
+                            <button type="submit" name="post.pk" value="{{ post.pk }}"
+                                    class="btn btn-outline-secondary "><i class="fas fa-heart-broken"></i>
                                 {% with allLikes=post.postLikes.count %}
-
-                                    <button class="btn btn-sm disabled  ">{{ allLikes }} </button>
+                                    {{ allLikes }}
                                 {% endwith %}
+                            </button>
+                        {% else %}
 
-                        </form>
-                    </div>
+                            <button type="submit" name="post.pk" value="{{ post.pk }}"
+                                    class="btn btn-outline-danger"><i class="fas fa-heart"></i>
+                                {% with allLikes=post.postLikes.count %}
+                                    {{ allLikes }}
+                                {% endwith %}
+                            </button>
+                        {% endif %}
+                    </form>
+                </div>
             </div>
         </div>
     </div>

@@ -142,8 +142,8 @@ class RemoveFriend(View):
 
 
 @method_decorator(login_required, name='dispatch')
-class PeopleListView(View):
-    template_name = '/feed/allPost.html'
+class UsersListView(View):
+    template_name = 'konto/userList.html'
 
     def get(self, request):
         users = User.objects.all()
