@@ -55,7 +55,7 @@
                         {% csrf_token %}
                         {% if ifLiked %}
                             <button type="submit" name="post.pk" value="{{ post.pk }}"
-                                    class="btn btn-outline-secondary "><i class="fas fa-heart-broken"></i>
+                                    class="btn btn-outline-secondary bg-white "><i class="fas fa-heart-broken"></i>
                                 {% with allLikes=post.postLikes.count %}
                                     {{ allLikes }}
                                 {% endwith %}

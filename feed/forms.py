@@ -13,6 +13,7 @@ class PostCreateForm(forms.ModelForm):
             'postContent': forms.Textarea(attrs={'class': 'form-control ',
                                                  'rows': '2',
                                                  'placeholder': "Co u Ciebie?",
+                                                 'style': 'resize:none'
                                                  }),
 
             'postUrl': forms.HiddenInput,
@@ -30,7 +31,8 @@ class CommentCreateForm(forms.ModelForm):
 
             'commentContent': forms.Textarea(attrs={'class': 'form-control',
                                                     'rows': '4',
-                                                    'placeholder': 'Dodaj komentarz..'
+                                                    'placeholder': 'Dodaj komentarz..',
+                                                    'style': 'resize:none',
 
                                                     })
         }
