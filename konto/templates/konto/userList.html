@@ -10,18 +10,13 @@
         <h1 class="display-2">Inni Użytkownicy</h1>
         <div class="col-md-12 mb-4 mt-4 ">
             <div class="mx-auto  card template  w-25 border-1 " style="min-width: 200px; max-width: 899px">
-
                 {% for user in users %}
                     <div class=" card  p-3  ">
-
-
                         <a class="text-secondary " href="{% url 'userProfile' user.profile.pk %}">
                             <h5>
                                 {{ user.first_name }} {{ user.last_name }}
                             </h5>
                         </a>
-
-
                     </div>
                 {% endfor %}
             </div>

@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
-
+from django_countries.fields import CountryField
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, on_delete=models.CASCADE)
@@ -10,7 +10,7 @@ class Profile(models.Model):
                                       blank=True, verbose_name='Img')
     birthDate = models.DateField(null=True, blank=True, verbose_name='Birthday')
     currentLocation = models.CharField(max_length=99, null=True, blank=True, verbose_name='Location')
-    countryOrigin = models.CharField(max_length=99, null=True, blank=True, verbose_name='Country')
+    countryOrigin = CountryField( blank=True, null=True )
     friends = models.ManyToManyField(User, blank=True, related_name='friends')
 
     github = models.URLField(null=True, blank=True, max_length=40)

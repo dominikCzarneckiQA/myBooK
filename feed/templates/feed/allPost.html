@@ -1,6 +1,5 @@
 {% extends "mainPage.html" %}
-{% load crispy_forms_filters %}
-{% load crispy_forms_tags %}
+
 {% block title %}
     Tablica
 {% endblock %}
@@ -10,44 +9,43 @@
 
     <div class="container ">
         <div class="mx-auto bg-white col-md-6 mb-2 ">
-            <form class="  fw-normal shadow-sm  p-2 mt-2  " method="post" enctype="multipart/form-data">
+            <form class="  fw-normal shadow-sm  p-2 mt-2" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-
                 {{ form.as_p }}
-                <button   class="btn  fw-bold  btn-outline-primary mb-2 ">Dodaj Post</button>
+                <button class="btn  fw-bold  btn-outline-primary mb-2 ">Dodaj Post</button>
             </form>
 
         </div>
 
 
-    {% for post in allPosts %}
-        <div class="col-md-6  shadow-sm    p-1 mx-auto card
+        {% for post in allPosts %}
+            <div class="col-md-6  shadow-sm    p-1 mx-auto card
                     overflow-auto" style="min-height:150px; max-height:555px">
 
-            <p class="card-header bg-white">
-                <a href="{% url 'userProfile' post.postAuthor.profile.pk %}">
-                    <strong class="text-primary"> <i class="fas fa-user text-dark"></i>
-                        {{ post.postAuthor.get_full_name }} </strong></a> -
-                <em class="text-secondary "> {{ post.postDate }} </em>
-            </p>
-            <div class="    text-start p-1 position-relative"
-                 style="min-height:150px; max-height:899px;">
+                <p class="card-header bg-white">
+                    <a href="{% url 'userProfile' post.postAuthor.profile.pk %}">
+                        <strong class="text-primary"> <i class="fas fa-user text-dark"></i>
+                            {{ post.postAuthor.get_full_name }} </strong></a> -
+                    <em class="text-secondary "> {{ post.postDate }} </em>
+                </p>
+                <div class="    text-start p-1 position-relative"
+                     style="min-height:150px; max-height:899px;">
 
-                {{ post.postContent }}
-                <a href="{% url 'feed:detail-post' post.pk %}" class="stretched-link"> </a>
+                    {{ post.postContent }}
+                    <a href="{% url 'feed:detail-post' post.pk %}" class="stretched-link"> </a>
+                </div>
             </div>
+
+            {% with allLikes=post.postLikes.count %}
+                <button class=" disabled fw-bold btn bg-white  col-md-6 text-danger">
+                    <i class="fas fa-heart"></i> {{ allLikes }}
+                </button>
+            {% endwith %}
+        {% endfor %}
+
+
+        <div class="footer m-3">
+            <p class="font-italic fw-light"><em> © 2020-2021 myBooK Dominik Czarnecki</em></p>
         </div>
-
-        {% with allLikes=post.postLikes.count %}
-            <button class=" disabled fw-bold btn bg-white  col-md-6 text-danger">
-                <i class="fas fa-heart"></i> {{ allLikes }}
-            </button>
-        {% endwith %}
-    {% endfor %}
-
-
-    <div class="footer m-3">
-        <p class="font-italic fw-light"><em> © 2020-2021 myBooK Dominik Czarnecki</em></p>
     </div>
- </div>
 {% endblock %}

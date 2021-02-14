@@ -48,11 +48,13 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = ['biography', 'profileAvatar', 'birthDate', 'currentLocation', 'countryOrigin', 'github', 'snapchat',
                   'instagram', 'facebook', 'twitter']
+        birthDate = forms.DateField(label='Jaka jest data Twoich urodzin?')
+        limit = [a for a in range(1955, 2021)]
+        widget = forms.SelectDateWidget(years=limit),
 
         widgets = {
             'biography': forms.Textarea(attrs={'class': 'form-control '}),
             'profileAvatar': forms.ImageField(),
-            'birthDate': forms.DateInput(attrs={}),
             'currentLocation': forms.TextInput(attrs={'class': 'form-control'}),
             'countryOrigin': forms.Select(attrs={'class': 'form-control'}),
             'github': forms.URLInput(attrs={'class': 'form-control'}),
