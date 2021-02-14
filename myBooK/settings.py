@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'feed.apps.FeedConfig',
 
-
 ]
 
 SITE_ID = 1
@@ -127,9 +126,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = "/konto/static"
+
 LOGIN_URL = '/konto/login/'
 LOGIN_REDIRECT_URL = '/feed/'
 
@@ -147,3 +144,6 @@ EMAIL_BECKEND = 'django.core.mail.backends.console.EmailBackend'
 MEDIA_URL = '/media/'
 # ścieżka lokalna plików multimedialnych
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = "/konto/static"

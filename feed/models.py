@@ -11,9 +11,15 @@ class Post(models.Model):
     postImages = models.ImageField(null=True, blank=True, upload_to='images/%Y/%m/%D/', verbose_name='')
     postUrl = models.URLField(null=True, blank=True)
 
+    def __str__(self):
+        return self.postAuthor.first_name
+
 
 class Comment(models.Model):
     post = models.ForeignKey('Post', on_delete=models.CASCADE)
     commentAuthor = models.ForeignKey(User, blank=True, null=False, on_delete=models.CASCADE)
     commentContent = models.TextField(verbose_name='')
     commentDate = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.commentAuthor.first_name

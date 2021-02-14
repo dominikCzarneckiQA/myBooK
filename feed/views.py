@@ -14,14 +14,14 @@ from konto.models import Profile
 @method_decorator(login_required, name='dispatch')
 class AllPostView(View):
     def post(self, request, *args, **kwargs):
-        form = PostCreateForm(request.POST)
+        form = PostCreateForm(request.POST, request.FILES)
         allPosts = Post.objects.all().order_by('-postDate')
-
-        if form.is_valid():
-            newPost = form.save(commit=False)
-            newPost.postAuthor = request.user
-            newPost.save()
-            form.save()
+        if request.method == 'POST':
+            if form.is_valid():
+                newPost = form.save(commit=False)
+                newPost.postAuthor = request.user
+                newPost.save()
+                form.save()
 
             return HttpResponseRedirect(reverse_lazy('feed:all-posts'))
 
