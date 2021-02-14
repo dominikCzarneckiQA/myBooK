@@ -8,19 +8,20 @@
         <div class="w-25 mt-3">
             <a href="{% url 'feed:all-posts' %}" class="btn btn-outline-secondary mt-2 "> Powrót </a>
         </div>
-        <div class="d-flex justify-content-center  mt-3  mb-3">
-            <div class="border-bottom col-md-5  rounded ">
-                <p class="text-capitalize fw-bold h5 text-primary bg-light border border-dark rounded-circle p-2 ">
-                    <a class="text-decoration-none text-capitalize
-                            text-secondary "
-                       href="{% url 'userProfile' post.postAuthor.profile.pk %}">
-                        <strong class="text-primary">
-                            {{ post.postAuthor.get_full_name }} </strong></a> <em
-                        class="text-secondary fw-normal h6"> {{ post.postDate }}</em>
-                <div class=""></div>
+        <div class="d-flex justify-content-center  ">
+                <div class="border-bottom col-md-5  rounded text-capitalize  bg-light border  p-2 ">
 
-                {% if request.user == post.postAuthor %}
-                    <div class="dropdown ">
+
+                <div class="dropdown ">
+                    <a class="text-decoration-none fw-bold  text-secondary "
+                       href="{% url 'userProfile' post.postAuthor.profile.pk %}">
+                        <strong class="link-primary">
+                            {{ post.postAuthor.get_full_name }} </strong></a> <em
+                        class="text-secondary fw-light"> {{ post.postDate }}</em>
+
+
+                    {% if request.user == post.postAuthor %}
+
                         <button type="button" class=" btn" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-caret-down"></i>
                         </button>
@@ -37,16 +38,16 @@
                                     <i class="fas fa-trash-alt   text-dark "></i> Delete</a>
                             </li>
                         </ul>
-                    </div>
-                {% endif %}
+                        </div>
+                    {% endif %}
 
-                <div class="card mt-3 border overflow-auto" style="min-height:150px; max-height:899px;">
-                    <p class="card-text   ">
+                <div class="card mt-3 border overflow-auto" style="min-height:150px; max-height:799px;">
+                    <p class="card-text    text-start mx-2 mt-2">
                         {{ post.postContent }}
                     </p>
 
                     {% if post.postImages %}
-                     <img src="{{ post.postImages.url }}"  alt="img">
+                        <img src="{{ post.postImages.url }}" alt="img">
                     {% endif %}
                 </div>
 
@@ -55,7 +56,7 @@
                         {% csrf_token %}
                         {% if ifLiked %}
                             <button type="submit" name="post.pk" value="{{ post.pk }}"
-                                    class="btn btn-outline-secondary bg-white "><i class="fas fa-heart-broken"></i>
+                                    class="btn btn-outline-secondary  "><i class="fas fa-heart-broken"></i>
                                 {% with allLikes=post.postLikes.count %}
                                     {{ allLikes }}
                                 {% endwith %}

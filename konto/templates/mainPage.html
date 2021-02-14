@@ -30,7 +30,7 @@
 
 <body class="text-center" style="background-image: url('{% static "backgrounds/tlo01.png" %}' );">
 {% if request.user.is_authenticated %}
-    <nav class="navbar m-4 sticky-top border border-2 shadow-sm  navbar-light bg-light navbar-expand-lg   text-decoration-none ">
+    <nav class="navbar m-3   sticky-top border border-2 shadow-sm  navbar-light bg-light navbar-expand-lg   text-decoration-none ">
     <a class="navbar-brand  text-decoration-none mx-3 " href="{% url 'feed:all-posts' %}"><h3 class="chewy ">
         myBooK</h3></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

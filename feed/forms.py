@@ -18,7 +18,6 @@ class PostCreateForm(forms.ModelForm):
 
             'postUrl': forms.HiddenInput,
 
-
         }
 
 

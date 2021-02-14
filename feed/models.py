@@ -8,7 +8,7 @@ class Post(models.Model):
     postContent = models.TextField(verbose_name='')
     postDate = models.DateTimeField(default=timezone.now)
     postLikes = models.ManyToManyField(User, blank=True, related_name='postlikes')
-    postImages = models.ImageField(null=True, blank=True, upload_to='images/%Y/%m/%D/', verbose_name='')
+    postImages = models.ImageField(null=True, blank=True, upload_to='images/%Y/%m/%d', verbose_name='')
     postUrl = models.URLField(null=True, blank=True)
 
     def __str__(self):
