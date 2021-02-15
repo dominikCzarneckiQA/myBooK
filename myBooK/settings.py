@@ -35,7 +35,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'konto.apps.KontoConfig',
     "crispy_forms",
-    "active_link",
     "crispy_bootstrap5",
     'django.contrib.admin',
     'django.contrib.auth',

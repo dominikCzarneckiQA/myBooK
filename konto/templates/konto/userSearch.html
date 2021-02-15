@@ -1,41 +1,49 @@
 {% extends 'mainPage.html' %}
 
 {% block content %}
+    <div class="w-25 m-3 ">
+        <a href="{% url 'feed:all-posts' %}" class="btn btn-outline-secondary mt-2 "> Powrót </a>
+    </div>
     <div class="container">
-        <div class="w-25 m-3 ">
-            <a href="{% url 'feed:all-posts' %}" class="btn btn-outline-secondary mt-2 "> Powrót </a>
-        </div>
 
-        <div class="row    ">
-            <div class="card-group  ">
-                {% for profile in getProfileList %}
-                    <div class="card ">
-                        <div class="card-body   ">
+        <div class="col-md-9  mt-3  mx-auto  ">
+            {% for profile in getProfileList %}
+                <div class="card-group  float-start p-2">
+                <div class="row">
+                <div class="  ">
+                    <div class="card" style="width: 222px; height:285px;">
+                        <img alt="userProfileImg" src="{{  profile.profileAvatar.url }}"
+                             class="rounded-circle mt-3 mx-auto" width="125px" height="125px"/>
+                        <div class="card-body">
+                            <div class="card-title">
+                                <div class=" h6 ">
+                                    <a class="text-secondary  text-capitalize"
+                                       href="{% url 'userProfile'  profile.pk %}">
+                                        {% if profile.user.first_name %}
+                                            {{ profile.user.first_name }}
+                                        {% endif %}
+                                        {% if profile.user.last_name %}
+                                            {{ profile.user.last_name }}
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                            <p class="card-text">
+                                {% if profile.countryOrigin %}
+                                    <strong class="h6">Kraj pochodzenia:</strong> {{ profile.countryOrigin }}
 
-                            <h5 class="card-title">
-                                <a class="text-secondary" href="{% url 'userProfile'  profile.pk %}">
-                                    {{ profile.user }}
-                                </a>
-                            </h5>
-
-                            {% if profile.user.first_name %}
-                                <p><strong class="h6">Imię: </strong>{{ profile.user.first_name }}</p>
-                            {% endif %}
-                            {% if profile.user.last_name %}
-                                <p><strong class="h6">Nazwisko:</strong> {{ profile.user.last_name }}</p>
-                            {% endif %}
-                            {% if profile.countryOrigin %}
-                                <p><strong class="h6">Kra pochodzenia:</strong> {{ profile.countryOrigin }}</p>
-                            {% endif %}
+                                {% endif %}
+                            </p>
                         </div>
-
                         <button class="btn btn-primary disabled fw-bold">Liczba
                             Obserwujacych: {{ profile.friends.all.count }}</button>
                     </div>
-
-                {% endfor %}
+                </div>
+</div>
             </div>
+            {% endfor %}
 
         </div>
     </div>
+
 {% endblock %}

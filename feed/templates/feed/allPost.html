@@ -18,13 +18,11 @@
 
                 <button class="btn  fw-bold  btn-outline-primary mb-2 ">Dodaj Post</button>
             </form>
-
         </div>
-
 
         {% for post in allPosts %}
 
-            <div class="col-md-5  shadow-sm    mx-auto card
+            <div class="col-md-5  mx-auto card
                     overflow-visible" style="min-height:150px; max-height:555px">
 
                 <p class="card-header border-0 bg-white">
@@ -48,7 +46,7 @@
             </div>
 
             {% with allLikes=post.postLikes.count %}
-                <button class=" disabled fw-bold btn bg-white  col-md-5 text-danger">
+                <button class=" disabled fw-bold btn bg-white   col-md-5 text-danger">
                     <i class="fas fa-heart"></i> {{ allLikes }}
                 </button>
             {% endwith %}
