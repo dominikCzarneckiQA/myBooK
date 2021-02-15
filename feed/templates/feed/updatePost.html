@@ -16,13 +16,21 @@
 
 
         <div class="d-flex justify-content-center">
-            <form class="   mt-4 w-50" method="post">
+            <form class="   mt-4 col-md-5 " method="post">
                 <div class="w-100">
                     {% csrf_token %}
-                    {{ form|crispy }}
+
+                    <div class="card img-thumbnail">
+                        {{ form|crispy }}
+                        {% if post.postImages %}
+                            <img src="{{ post.postImages.url }}" alt="img">
+                        {% endif %}
+
+
+                    </div>
                 </div>
                 <button type="submit" class="  btn btn-outline-success w-25  fw-bold  p-2 mb-3  rounded  ">
-                    Zaktualizuj Post
+                    Zaktualizuj
                 </button>
                 <br/><br/>
             </form>

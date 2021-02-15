@@ -23,19 +23,19 @@
                     {% if request.user == post.postAuthor %}
 
                         <button type="button" class=" btn" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-caret-down"></i>
+                            <i class="fas fa-ellipsis-h"></i>
                         </button>
                         <ul class="dropdown-menu ">
                             <li>
-                                <a class="dropdown-item fw-normal " href="{% url 'feed:update-post' post.pk %}">
-                                    <i class="far fa-edit  text-dark "></i> Edit</a>
+                                <a class="dropdown-item   link-success" href="{% url 'feed:update-post' post.pk %}">
+                                    <i class="far fa-edit "></i> Edit</a>
                             </li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item fw-normal" href="{% url 'feed:delete-post' post.pk %}">
-                                    <i class="fas fa-trash-alt   text-dark "></i> Delete</a>
+                                <a class="dropdown-item fw-normal link-danger" href="{% url 'feed:delete-post' post.pk %}">
+                                    <i class="fas fa-trash-alt    "></i> Delete</a>
                             </li>
                         </ul>
                         </div>
