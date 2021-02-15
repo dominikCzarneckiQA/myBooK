@@ -48,13 +48,13 @@ a:visited {
 
 a:focus {
     font-weight: bold;
-    color: #7D7461;
+    color: #333333;
 
 }
 
 a:hover {
     font-weight: bold;
-
+    color: #5b80b2;
 }
 
 /* ZNACZNIKI GLOBALNE */
