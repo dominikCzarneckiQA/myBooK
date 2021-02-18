@@ -76,7 +76,7 @@ def editView(request):
         userForm = UserEditForm(instance=request.user, data=request.POST)
         if userForm.is_valid():
             userForm.save()
-            messages.success(request,'Edycja przebiegła pomyślnie')
+            messages.success(request, 'Edycja przebiegła pomyślnie')
     else:
         userForm = UserEditForm(instance=request.user)
 
@@ -88,7 +88,9 @@ def editView(request):
 
 @method_decorator(login_required, name='dispatch')
 class UserProfileView(View):
-    def get(self, request, pk, *args, **kwargs):
+    @staticmethod
+    def get(request, pk, *args, **kwargs):
+
         global is_follower
         getProfile = Profile.objects.get(pk=pk)
         getUser = getProfile.user
@@ -108,11 +110,12 @@ class UserProfileView(View):
         getNumberFollowers = len(followersList)
 
         return render(request, 'konto/userProfile.html', {
+            'is_follower': is_follower,
             'getProfile': getProfile,
             'getUser': getUser,
             'getPosts': getPosts,
             'getNumberFollowers': getNumberFollowers,
-            'is_follower': is_follower,
+
             'followersList': followersList,
 
         })
@@ -134,10 +137,10 @@ class UpdateProfileView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.request.user == self.get_object().user
 
 
-
 @method_decorator(login_required, name='dispatch')
 class UserFollow(View):
-    def post(self, request, pk, *args, **kwargs):
+    @staticmethod
+    def post(request, pk, *args, **kwargs):
         profile = Profile.objects.get(pk=pk)
         profile.followers.add(request.user)
 
@@ -146,7 +149,8 @@ class UserFollow(View):
 
 @method_decorator(login_required, name='dispatch')
 class UserUnfollow(View):
-    def post(self, request, pk, *args, **kwargs):
+    @staticmethod
+    def post(request, pk, *args, **kwargs):
         profile = Profile.objects.get(pk=pk)
         profile.followers.remove(request.user)
 

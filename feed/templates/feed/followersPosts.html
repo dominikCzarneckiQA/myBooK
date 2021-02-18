@@ -20,10 +20,10 @@
             </form>
         </div>
 
-        {% for post in allPosts %}
+        {% for post in followersPosts %}
 
             <div class="col-md-5  mx-auto card
-                    overflow-visible" style="min-height:150px; max-height:555px">
+                    overflow-hidden" style="min-height:150px; max-height:500px">
 
                 <div class="card-header border-0 bg-white">
 
@@ -31,7 +31,7 @@
                         <strong class="link-primary">
                             {{ post.postAuthor.get_full_name }} </strong></a> -
                     <em class="text-secondary "> {{ post.postDate }} </em>
-                </div>>
+                </div>
                 <div class="img-thumbnail position-relative">
                     <div class=" card  border-0  text-start  "
                          style="min-height:150px; max-height:599px;">
@@ -53,8 +53,8 @@
         {% endfor %}
 
 
-        <div class="footer m-3">
-            <p class="font-italic fw-light"><em> © 2020-2021 myBooK Dominik Czarnecki</em></p>
-        </div>
     </div>
+    <footer class="bs-popover-bottom">
+        <p class=" font-italic fw-light"><em> © 2020-2021 myBooK Dominik Czarnecki</em></p>
+    </footer>
 {% endblock %}

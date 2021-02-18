@@ -12,10 +12,25 @@ from konto.models import Profile
 
 
 @method_decorator(login_required, name='dispatch')
-class AllPostView(View):
-    def post(self, request, *args, **kwargs):
+class FollowersPosts(View):
+    @staticmethod
+    def get(request, *args, **kwargs):
+        formFollowersPost = PostCreateForm()
+        followersPosts = Post.objects.filter(
+            postAuthor__profile__followers__in=[request.user.id]
+        ).order_by('-postDate')
+        allUsers = Profile.objects.all()
+
+        return render(request, 'feed/followersPosts.html', {
+            'followersPosts': followersPosts,
+            'form': formFollowersPost,
+            'allUsers': allUsers,
+        })
+
+    @staticmethod
+    def post(request, *args, **kwargs):
         form = PostCreateForm(request.POST, request.FILES)
-        allPosts = Post.objects.all().order_by('-postDate')
+        followersPosts = Post.objects.all().order_by('-postDate')
         if request.method == 'POST':
             if form.is_valid():
                 newPost = form.save(commit=False)
@@ -23,23 +38,12 @@ class AllPostView(View):
                 newPost.save()
                 form.save()
 
-            return HttpResponseRedirect(reverse_lazy('feed:all-posts'))
+            return HttpResponseRedirect(reverse_lazy('feed:followers-posts'))
 
-        return render(request, 'feed/allPost.html', {
-            'allPosts': allPosts,
+        return render(request, 'feed/followersPosts.html', {
+            'followersPosts': followersPosts,
             'form': form,
 
-        })
-
-    def get(self, request, *args, **kwargs):
-        formAllPost = PostCreateForm()
-        allPosts = Post.objects.all().order_by('-postDate')
-        allUsers = Profile.objects.all()
-
-        return render(request, 'feed/allPost.html', {
-            'allPosts': allPosts,
-            'form': formAllPost,
-            'allUsers': allUsers,
         })
 
 
@@ -65,7 +69,8 @@ class DetailPostView(View):
             'ifLiked': ifLiked,
         })
 
-    def post(self, request, pk, *args, **kwargs):
+    @staticmethod
+    def post(request, pk, *args, **kwargs):
         postget = Post.objects.get(pk=pk)
         formDetail = CommentCreateForm(request.POST)
 
@@ -101,7 +106,7 @@ class UpdatePostView(UserPassesTestMixin, UpdateView):
 class DeletePostView(UserPassesTestMixin, DeleteView):
     model = Post
     template_name = 'feed/deletePost.html'
-    success_url = reverse_lazy('feed:all-posts')
+    success_url = reverse_lazy('feed:followers-posts')
 
     def test_func(self):
         return self.request.user == self.get_object().postAuthor
