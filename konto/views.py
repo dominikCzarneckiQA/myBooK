@@ -37,6 +37,7 @@ def loginUserView(request):
                 else:
                     return HttpResponse("Niestety. To konto jest zablokowane :(")
             else:
+                messages.warning(request, 'Nieprawidłowe dane! Spróbuj ponownie.')
                 return HttpResponse("Nieprawidłowe dane! Spróbuj ponownie. ")
     else:
         form = LoginForm()
@@ -59,6 +60,7 @@ def registerView(request):
                     userForm.cleaned_data['password1'])
                 newUser.save()
                 Profile.objects.create(user=newUser)
+                messages.success(request, 'Rejestracja zakończyła się pomyślnie')
 
                 return render(request, 'konto/register_success.html',
                               {'nowy_uzytkownik': newUser})
@@ -74,8 +76,10 @@ def editView(request):
         userForm = UserEditForm(instance=request.user, data=request.POST)
         if userForm.is_valid():
             userForm.save()
+            messages.success(request,'Edycja przebiegła pomyślnie')
     else:
         userForm = UserEditForm(instance=request.user)
+
     return render(request, 'konto/userUpdate.html',
                   {
                       'userForm': userForm,
@@ -89,7 +93,7 @@ class UserProfileView(View):
         getProfile = Profile.objects.get(pk=pk)
         getUser = getProfile.user
         getPosts = Post.objects.filter(postAuthor=getUser).order_by('-postDate')
-        followersList = getProfile.friends.all()
+        followersList = getProfile.followers.all()
 
         if len(followersList) == 0:
             is_follower = False
@@ -130,11 +134,12 @@ class UpdateProfileView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.request.user == self.get_object().user
 
 
+
 @method_decorator(login_required, name='dispatch')
 class UserFollow(View):
     def post(self, request, pk, *args, **kwargs):
         profile = Profile.objects.get(pk=pk)
-        profile.friends.add(request.user)
+        profile.followers.add(request.user)
 
         return redirect('userProfile', pk=profile.pk)
 
@@ -143,7 +148,7 @@ class UserFollow(View):
 class UserUnfollow(View):
     def post(self, request, pk, *args, **kwargs):
         profile = Profile.objects.get(pk=pk)
-        profile.friends.remove(request.user)
+        profile.followers.remove(request.user)
 
         return redirect('userProfile', pk=profile.pk)
 

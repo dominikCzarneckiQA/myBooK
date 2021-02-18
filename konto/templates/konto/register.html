@@ -3,32 +3,26 @@
 {% block title %}Panel Rejestracyjny{% endblock %}
 {% block content %}
     <div class="container">
-     {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-            <h5>Komunikat</h5>{{message}}
-            <button type="button"  class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    {% endfor %}
+        <div class="row">
         <div class="w-25 mt-1">
             <a href="{% url 'login' %}" class="btn btn-outline-secondary mt-2 "> Powrót do Logowania </a>
         </div>
         <h1>Zarejestruj się</h1>
         <p>Aby utworzyć konto, proszę o wypełnienie poniższego formularza :</p>
-        <div class="d-flex justify-content-center ">
-            <form class=" row card   container w-25   fw-normal border border-1 p-2" method="post">
-                {{ user_form.as_p }}
+
+            <form class=" mx-auto card w-25  fw-normal border border-1 p-2 text-secondary" method="post">
                 {% csrf_token %}
+                {{ user_form.as_p }}
+
                 <div class="mb-2">
                     <button class=" btn   btn-success fw-normal  w-75" type="submit" value="zaloguj">Utwórz Konto
                     </button>
                 </div>
             </form>
         </div>
-        <footer class="mt-3  mb-3"><h1 class="display-2 text-dark chewy "> myBooK</h1></footer>
+        <footer class="mt-3  mb-3"><h1 class="display-4 text-dark chewy "> myBooK</h1></footer>
 
-    </div>
+</div>
 
 
 

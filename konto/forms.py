@@ -50,8 +50,6 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ['biography', 'profileAvatar', 'birthDate', 'currentLocation', 'countryOrigin', 'github', 'snapchat',
                   'instagram', 'facebook', 'twitter']
         birthDate = forms.DateField(label='Jaka jest data Twoich urodzin?')
-        limit = [a for a in range(1955, 2021)]
-        widget = forms.SelectDateWidget(years=limit),
 
         widgets = {
             'biography': forms.Textarea(attrs={'class': 'form-control '}),
