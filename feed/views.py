@@ -46,6 +46,38 @@ class FollowersPosts(View):
 
         })
 
+class AllPostView(View):
+    def post(self, request, *args, **kwargs):
+        form = PostCreateForm(request.POST, request.FILES)
+        allPosts = Post.objects.filter(
+            postAuthor__Profile__followers__in=[request.user.id])\
+            .order_by('-postDate')
+        if request.method == 'POST':
+            if form.is_valid():
+                newPost = form.save(commit=False)
+                newPost.postAuthor = request.user
+                newPost.save()
+                form.save()
+
+            return HttpResponseRedirect(reverse_lazy('feed:all-posts'))
+
+        return render(request, 'feed/allPosts.html', {
+            'allPosts': allPosts,
+            'form': form,
+
+        })
+
+    def get(self, request, *args, **kwargs):
+        formAllPost = PostCreateForm()
+        allPosts = Post.objects.all().order_by('-postDate')
+        allUsers = Profile.objects.all()
+
+        return render(request, 'feed/allPosts.html', {
+            'allPosts': allPosts,
+            'form': formAllPost,
+            'allUsers': allUsers,
+        })
+
 
 @method_decorator(login_required, name='dispatch')
 class DetailPostView(View):

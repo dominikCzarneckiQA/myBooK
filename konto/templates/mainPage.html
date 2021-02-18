@@ -31,15 +31,17 @@
 <body class="text-center" style="background-image: url('{% static "backgrounds/tlo01.png" %}' );">
 {% if request.user.is_authenticated %}
     <nav class="nav  nav-pills m-3  sticky-top border   bg-light navbar-expand-lg ">
-    <a class="navbar-brand  text-dark mx-3 " href="{% url 'feed:followers-posts' %}">
+    <a class="navbar-brand  text-dark mx-3 mt-2 " href="{% url 'feed:followers-posts' %}">
         <h3 class="chewy text-decoration-none ">
             myBooK
         </h3>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+    <button class=" navbar-toggler mx-auto" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <i class=" fas fa-grip-lines"></i>
     </button>
+
 
     <nav class="navbar navbar-light bg-light ">
         <form class="form-inline" method="get" action="{% url 'user_search' %}">
@@ -49,25 +51,25 @@
                 </div>
                 <input type="text" class="form-control" placeholder="Szukaj" aria-label="Username"
                        aria-describedby="basic-addon1" name="quest" value="{{ request.GET.quest }}">
-                <button class="btn bg-transparent text-decoration-none "><i class="fas fa-search link-primary"></i>
+                <button class="btn bg-transparent   text-decoration-none "><i class="fas fa-search link-primary"></i>
                 </button>
             </div>
         </form>
     </nav>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse mx-1" id="navbarSupportedContent">
     <div class="d-flex justify-content-center w-100">
 
-        <ul class=" nav  w-50">
+
+        <ul class=" nav  w-50 navbar-nav mt-2   mb-lg-0">
             <li class="nav-item  mx-3">
                 <a class="nav-link mx-auto" aria-current="page"
-                   href="#">
+                   href="{% url 'feed:followers-posts' %}">
                     <i class="fas fa-home h4 "></i>
                 </a>
             </li>
             <li class=" nav-item  active mx-3">
                 <a class="nav-link  " aria-current="page"
-                   href="{% url 'feed:followers-posts' %}">
+                   href="{% url 'feed:new-posts' %}">
                     <i class="fas h4 fa-clipboard"></i>
                 </a>
             </li>

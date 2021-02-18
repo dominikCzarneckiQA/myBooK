@@ -10,10 +10,10 @@
 
     <div class="container">
         <div class="  justify-content-center mt-4  ">
-            <div class="row gutters-sm  ">
-                <div class="col-md-4 mb-3   ">
-                    <div class="card ">
-                        <div class="card-body  border p-2">
+            <div class="row gutters-sm ">
+                <div class="col-md-4 mb-3  ">
+                    <div class="card">
+                        <div class="card-body  border  p-2">
                             <div class="d-flex flex-column align-items-center text-center">
                                 <img alt="userProfileImg" src="{{ getProfile.profileAvatar.url }}"
                                      class="rounded-circle mt-2 position-relative" width="100px" height="100px"/>
@@ -108,9 +108,9 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <div class="card mb-3">
-                        <div class="card-body">
+                        <div class="card p-2">
                             <div class="row ">
                                 <div class="col-sm-3">
                                     <h6 class="m-0 ">Imie</h6>
@@ -123,8 +123,8 @@
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-sm-3">
-                                    <h6>Nazwisko</h6>
+                                <div class="col-sm-3 ">
+                                    <h6 class="m-0">Nazwisko</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     {% if getUser.last_name %}
@@ -200,9 +200,9 @@
         </div>
     </div>
 
-    <div class="container mt-5 mb-5 overflow-auto border border-5" style="height: 800px">
+    <div class="container mt-5 mb-5  "  >
         {% for post in getPosts %}
-            <div class="col-md-6  shadow-sm  overflow-auto   p-1 mx-auto card
+            <div class="col-md-6  shadow-sm     p-1 mx-auto card
                     " style="min-height:150px; max-height:555px">
 
                 <p class="card-header bg-white">
