@@ -67,15 +67,6 @@ li, ul {
 }
 
 
-.komentarz {
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 20px 0;
-    align-items: center;
-
-}
 
 
 /* LOGOWANIE -login */

@@ -10,8 +10,8 @@ class Profile(models.Model):
                                       blank=True, verbose_name='Zdjęcie Profilowe')
     birthDate = models.DateField(null=True, blank=True, verbose_name='Data urodzin')
     currentLocation = models.CharField(max_length=99, null=True, blank=True, verbose_name='Miejscowość')
-    countryOrigin = CountryField(blank=True, null=True, default='Poland')
-    friends = models.ManyToManyField(User, blank=True, related_name='friends')
+    countryOrigin = CountryField(blank=True, null=True,verbose_name='Kraj pochodzenia')
+    followers = models.ManyToManyField(User, blank=True, related_name='followers')
 
     github = models.URLField(null=True, blank=True, max_length=40)
     snapchat = models.CharField(null=True, blank=True, max_length=40)

@@ -10,7 +10,7 @@ class LoginForm(forms.Form):
 
 
 class UserRegisterForm(forms.ModelForm):
-    password1 = forms.CharField(label='Haslo', widget=forms.PasswordInput(attrs={'class': 'form-control col'}))
+    password1 = forms.CharField(label='Haslo', widget=forms.PasswordInput(attrs={'class': 'form-control  '}))
     password2 = forms.CharField(label='Potwierdz Haslo', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     class Meta:
@@ -40,6 +40,7 @@ class UserEditForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
+
         }
 
 

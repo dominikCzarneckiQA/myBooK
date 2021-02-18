@@ -16,9 +16,9 @@
 
                     {{ userForm.as_p }}
                     {% csrf_token %}
-                    <h4>Chcesz zmienić hasło?</h4>
+                    <h4 class="text-info fw-normal">Chcesz zmienić hasło?</h4>
 
-                    <a href="{% url "password_change" %}"><h6>Zmiana Hasła</h6></a>
+                    <a  class="link-primary" href="{% url "password_change" %}"><h6>Zmiana Hasła</h6></a>
                     <div class="card-footer bg-white">
                         <button class="btn btn-secondary w-50" type="submit">Zapisz</button>
                     </div>

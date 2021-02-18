@@ -4,6 +4,7 @@ from . import views
 from .views import UserProfileView, UpdateProfileView, UserFollow, UserUnfollow, UsersListView, UserSearchView
 from django.conf import settings
 from django.conf.urls.static import static
+
 urlpatterns = [
     path('', views.entryPageView, name="stronaStartowa"),
 
@@ -31,11 +32,10 @@ urlpatterns = [
     path('profil/<int:pk>/przyjaciele/usun', UserUnfollow.as_view(), name='user_unfollow'),
 
     path('uzytkownicy/', UsersListView.as_view(), name='all_users'),
-    path('wyszukaj/' , UserSearchView.as_view(), name='user_search'),
-
-
+    path('wyszukaj/', UserSearchView.as_view(), name='user_search'),
 
     path('login/', auth_views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
+
 
 
 ]

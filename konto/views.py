@@ -1,6 +1,7 @@
 # Create your views here.
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -47,15 +48,20 @@ def loginUserView(request):
 def registerView(request):
     if request.method == 'POST':
         userForm = UserRegisterForm(request.POST)
-        if userForm.is_valid():
-            newUser = userForm.save(commit=False)
-            newUser.set_password(
-                userForm.cleaned_data['password1'])
-            newUser.save()
-            Profile.objects.create(user=newUser)
+        email = request.POST.get('email')
+        if User.objects.filter(email=email).exists():
+            messages.warning(request, 'Ten adres jest już używany przez innego użytkownika')
+            return redirect('register')
+        else:
+            if userForm.is_valid():
+                newUser = userForm.save(commit=False)
+                newUser.set_password(
+                    userForm.cleaned_data['password1'])
+                newUser.save()
+                Profile.objects.create(user=newUser)
 
-            return render(request, 'konto/register_success.html',
-                          {'nowy_uzytkownik': newUser})
+                return render(request, 'konto/register_success.html',
+                              {'nowy_uzytkownik': newUser})
     else:
         userForm = UserRegisterForm()
     return render(request, 'konto/register.html',

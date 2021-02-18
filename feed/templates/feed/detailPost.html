@@ -9,7 +9,7 @@
             <a href="{% url 'feed:all-posts' %}" class="btn btn-outline-secondary mt-2 "> Powrót </a>
         </div>
         <div class="d-flex justify-content-center  ">
-                <div class="border-bottom col-md-7   text-capitalize  bg-light border  p-2 ">
+            <div class="border-bottom col-md-7   text-capitalize  bg-light border  p-2 ">
 
 
                 <div class="dropdown ">
@@ -34,7 +34,8 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item fw-normal link-danger" href="{% url 'feed:delete-post' post.pk %}">
+                                <a class="dropdown-item fw-normal link-danger"
+                                   href="{% url 'feed:delete-post' post.pk %}">
                                     <i class="fas fa-trash-alt    "></i> Delete</a>
                             </li>
                         </ul>
@@ -92,38 +93,38 @@
         </div>
     </div>
 
-    {% for comment in comments %}
-        <div class=" d-flex row mx-auto    w-50  ">
-            <div class=" rounded border-bottom  card-body bg-white  ">
-                <a class="text-decoration-none text-capitalize
-                            text-secondary "
-                   href="{% url 'userProfile' comment.commentAuthor.profile.pk %}">
-                    <strong class="text-primary">
-                        {{ comment.commentAuthor.get_full_name }}
-                    </strong></a>
-
-                {% if request.user == post.postAuthor  and comment.commentAuthor %}
-                    <a href="{% url 'feed:delete-comment' post.pk comment.pk %}">
-                        <i class="fas fa-trash-alt h6 text-dark "></i>
+    <div class=" row mb-4">
+        {% for comment in comments %}
+                <div class="col-md-8 card mx-auto  ">
+                    <a class="text-decoration-none text-capitalize"
+                       href="{% url 'userProfile' comment.commentAuthor.profile.pk %}">
+                        <strong class="text-primary">
+                            {{ comment.commentAuthor.get_full_name }}
+                            {% if request.user == post.postAuthor  and comment.commentAuthor %}
+                                <a href="{% url 'feed:delete-comment' post.pk comment.pk %}">
+                                    <i class="fas fa-trash-alt h6 text-dark "></i>
+                                </a>
+                            {% else %}
+                                {% if request.user == post.postAuthor %}
+                                    <a href="{% url 'feed:delete-comment' post.pk comment.pk %}">
+                                        <i class="fas fa-trash-alt h6 text-dark "></i>
+                                    </a>
+                                {% endif %}
+                                {% if request.user == comment.commentAuthor %}
+                                    <a href="{% url 'feed:delete-comment' post.pk comment.pk %}">
+                                        <i class="fas fa-trash-alt h6 text-dark "></i>
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                        </strong>
                     </a>
+                    <p class="text-secondary fw-light "><em>{{ comment.commentDate }}</em></p>
+                    <p class="blockquote ">{{ comment.commentContent }}</p>
 
-                {% else %}
 
-                    {% if request.user == post.postAuthor %}
-                        <a href="{% url 'feed:delete-comment' post.pk comment.pk %}">
-                            <i class="fas fa-trash-alt h6 text-dark "></i>
-                        </a>
-                    {% endif %}
-                    {% if request.user == comment.commentAuthor %}
-                        <a href="{% url 'feed:delete-comment' post.pk comment.pk %}">
-                            <i class="fas fa-trash-alt h6 text-dark "></i>
-                        </a>
-                    {% endif %}
-                {% endif %}
-                <p class="text-secondary fw-light "><em>{{ comment.commentDate }}</em></p>
-                <p class="blockquote ">{{ comment.commentContent }}</p>
-            </div>
-        </div>
+</div>
+        {% endfor %}
 
-    {% endfor %}
+ </div>
+
 {% endblock %}
