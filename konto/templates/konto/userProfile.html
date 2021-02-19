@@ -175,15 +175,17 @@
 
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-sm-12   " style="height: 269px">
-                                        <button class="btn   float-end  card disabled">
-                                            Obserwujący {{ getNumberFollowers }}</button>
-                                        <h6 class=" ">Lista obserwujących</h6>
+                                    <div class="mx-auto col-sm-11  overflow-auto " style="height: 246px">
+
+                                        <h6 class="  card-header card-header-tabs link-dark fw-bold">Obserwujący
+                                           ({{ getNumberFollowers }})
+                                        </h6>
 
                                         {% for follower in followersList %}
-                                            <div class="p-4 card w-25 m-2 page-link  text-capitalize template float-start"
-                                                 style="max-height: 600px">
-
+                                            <div class=" card mx-2  mt-4 page-link  text-capitalize template float-start">
+                                                <img alt="userProfileImg" src="{{ user.profile.profileAvatar.url }}"
+                                                     class="rounded-circle mt-2 position-relative" width="40px"
+                                                     height="40px"/>
                                                 <a class=" text-primary "
                                                    href="{% url 'userProfile' follower.profile.pk %}">
                                                     {{ follower.get_full_name }}
@@ -200,7 +202,7 @@
         </div>
     </div>
 
-    <div class="container mt-5 mb-5  "  >
+    <div class="container mt-5 mb-5  ">
         {% for post in getPosts %}
             <div class="col-md-6  shadow-sm     p-1 mx-auto card
                     " style="min-height:150px; max-height:555px">
