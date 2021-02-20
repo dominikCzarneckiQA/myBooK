@@ -5,11 +5,11 @@ from django_countries.fields import CountryField
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, on_delete=models.CASCADE)
-    biography = models.TextField(max_length=150, null=True, blank=True, verbose_name='O mnie')
+    biography = models.CharField(max_length=150, null=True, blank=True, verbose_name='O mnie')
     profileAvatar = models.ImageField(upload_to='profilePhoto', default='profilePhoto/default.jpg',
                                       blank=True, verbose_name='Zdjęcie Profilowe')
     birthDate = models.DateField(null=True, blank=True, verbose_name='Data urodzin')
-    currentLocation = models.CharField(max_length=99, null=True, blank=True, verbose_name='Miejscowość')
+    city = models.CharField(max_length=99, null=True, blank=True, verbose_name='Miejscowość')
     countryOrigin = CountryField(blank=True, null=True,verbose_name='Kraj pochodzenia')
     followers = models.ManyToManyField(User, blank=True, related_name='followers')
 

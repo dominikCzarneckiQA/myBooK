@@ -127,7 +127,7 @@ class UpdateProfileView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     form = ProfileUpdateForm
     template_name = 'konto/userProfileUpdate.html'
 
-    fields = ['biography', 'profileAvatar', 'birthDate', 'currentLocation', 'countryOrigin', 'github', 'snapchat',
+    fields = ['biography', 'profileAvatar', 'birthDate', 'city', 'countryOrigin', 'github', 'snapchat',
               'instagram', 'facebook', 'twitter']
 
     def get_success_url(self):

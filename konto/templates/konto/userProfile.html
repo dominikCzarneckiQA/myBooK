@@ -9,11 +9,11 @@
 {% block content %}
 
     <div class="container">
-        <div class="  justify-content-center mt-4  ">
+        <div class="   mt-4  ">
             <div class="row gutters-sm ">
                 <div class="col-md-4 mb-3  ">
-                    <div class="card">
-                        <div class="card-body  border  p-2">
+                    <div class="card shadow-sm  border border-3">
+                        <div class="card-body    p-2">
                             <div class="d-flex flex-column align-items-center text-center">
                                 <img alt="userProfileImg" src="{{ getProfile.profileAvatar.url }}"
                                      class="rounded-circle mt-2 position-relative" width="100px" height="100px"/>
@@ -33,24 +33,17 @@
                                     {% endif %}
                                     <div class="p-2">
                                         {% if getUser == request.user %}
-
-
-
                                             <button class="btn  fw-bold p-2 btn-outline-primary disabled ">
                                                 Obserwujący {{ getNumberFollowers }}
                                             </button>
-
 
                                             <button class="btn  fw-bold p-2 btn-outline-secondary disabled ">
                                                 Obserwowani 1
                                             </button>
 
-
                                         {% else %}
 
                                             {% if is_follower %}
-
-
                                                 <form method="post"
                                                       action="{% url 'user_unfollow' getProfile.pk %}">
                                                     {% csrf_token %}
@@ -68,19 +61,15 @@
                                                         Obserwuj
                                                     </button>
                                                 </form>
-
-
                                             {% endif %}
-
                                         {% endif %}
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 
-                    <div class="card  p-2 mt-3 border border-3">
+                    <div class="card  p-2 mt-3 border border-3 shadow-sm">
                         <ul class="list-group list-group-flush border">
                             <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
                                 <h6 class=""><i class="fab fa-github"></i> Github</h6>
@@ -108,14 +97,14 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-7">
-                    <div class="card mb-3">
-                        <div class="card p-2">
-                            <div class="row ">
-                                <div class="col-sm-3">
-                                    <h6 class="m-0 ">Imie</h6>
+                <div class="col-md-8 ">
+                    <div class="card mb-3 shadow-sm  border border-3">
+                        <div class=" ">
+                            <div class="row  ">
+                                <div class="col-sm-3 text-end mt-3">
+                                    <h6 class="m-0 ">Imie :</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-9 mt-3 text-secondary">
                                     {% if getUser.first_name %}
                                         {{ getUser.first_name }}
                                     {% endif %}
@@ -123,8 +112,8 @@
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-sm-3 ">
-                                    <h6 class="m-0">Nazwisko</h6>
+                                <div class="col-sm-3 text-end ">
+                                    <h6 class="m-0">Nazwisko :</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     {% if getUser.last_name %}
@@ -133,57 +122,66 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="m-0">Data Urodzin</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    {% if getProfile.birthDate %}
-                                        {{ getProfile.birthDate }}
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="m-0">Miejsce Zamieszkania</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
+                            {% if getProfile.birthDate %}
 
-                                    {% if getProfile.currentLocation %}
-                                        {{ getProfile.currentLocation }}
-                                    {% endif %}
+
+                                <div class="row">
+                                    <div class="col-sm-3 text-end">
+                                        <h6 class="m-0">Data Urodzin :</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+
+                                        {{ getProfile.birthDate }}
+
+                                    </div>
                                 </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="m-0">Kraj Pochodzenia</h6>
+                                <hr>
+                            {% endif %}
+                            {% if getProfile.city %}
+                                <div class="row">
+                                    <div class=" col-sm-3 text-end">
+                                        <h6 class="m-0"> Miejscowość :</h6>
+                                    </div>
+                                    <div class=" col-sm-9 text-secondary">
+                                        {{ getProfile.city }}
+                                    </div>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
-                                    {% if getProfile.countryOrigin %}
+
+                                <hr>
+                            {% endif %}
+                            {% if getProfile.countryOrigin %}
+                                <div class="row">
+                                    <div class="col-sm-3 mb-3 text-end">
+
+                                        <h6 class="m-0"> Kraj Pochodzenia :</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+
                                         {{ getProfile.countryOrigin }}
-                                    {% endif %}
+
+                                    </div>
                                 </div>
-                            </div>
+                            {% endif %}
                         </div>
 
                     </div>
                     <div class="col-md-12">
 
-                        <div class="card mb-3">
+                        <div class="card mb-3 border border-3">
 
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="mx-auto col-sm-11  overflow-auto " style="height: 246px">
-
-                                        <h6 class="  card-header card-header-tabs link-dark fw-bold">Obserwujący
-                                           ({{ getNumberFollowers }})
+                            <h6 class="  card-header card-header-tabs link-dark mb-3 fw-bold">Obserwujący
+                                            ({{ getNumberFollowers }})
                                         </h6>
+                                <div class="row">
+                                    <div class="mx-auto col-sm-11  overflow-auto " style="height: 240px">
+
+
 
                                         {% for follower in followersList %}
-                                            <div class=" card mx-2  mt-4 page-link  text-capitalize template float-start">
-                                                <img alt="userProfileImg" src="{{ user.profile.profileAvatar.url }}"
+                                            <div class=" float-start  card mx-2  mt-4 page-link  text-capitalize template float-start"
+                                                 style="height: 65px;width: 222px">
+                                                <img alt="userProfileImg" src="{{  follower.profile.profileAvatar.url }}"
                                                      class="rounded-circle mt-2 position-relative" width="40px"
                                                      height="40px"/>
                                                 <a class=" text-primary "

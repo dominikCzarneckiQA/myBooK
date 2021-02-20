@@ -1,4 +1,6 @@
 from django import forms
+from django.forms import SelectDateWidget
+
 from .models import Profile
 
 from django.contrib.auth.models import User
@@ -47,14 +49,15 @@ class UserEditForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['biography', 'profileAvatar', 'birthDate', 'currentLocation', 'countryOrigin', 'github', 'snapchat',
+        fields = ['biography', 'profileAvatar', 'birthDate', 'city', 'countryOrigin', 'github', 'snapchat',
                   'instagram', 'facebook', 'twitter']
-        birthDate = forms.DateField(label='Jaka jest data Twoich urodzin?')
 
         widgets = {
-            'biography': forms.Textarea(attrs={'class': 'form-control '}),
+
+            'biography': forms.Textarea(attrs={'class': 'form-control ',}),
             'profileAvatar': forms.ImageField(),
-            'currentLocation': forms.TextInput(attrs={'class': 'form-control'}),
+            'birthDate' : forms.DateInput(attrs={'type': 'date'}),
+            'city': forms.TextInput(attrs={'class': 'form-control'}),
             'countryOrigin': forms.Select(attrs={'class': 'form-control'}),
             'github': forms.URLInput(attrs={'class': 'form-control'}),
             'snapchat': forms.TextInput(attrs={'class': 'form-control'}),

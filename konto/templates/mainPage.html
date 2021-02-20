@@ -36,76 +36,78 @@
             myBooK
         </h3>
     </a>
-    <button class=" navbar-toggler mx-auto" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class=" fas fa-grip-lines"></i>
-    </button>
 
 
-    <nav class="navbar navbar-light bg-light ">
-        <form class="form-inline" method="get" action="{% url 'user_search' %}">
+    <nav class="navbar navbar-light bg-light mx-auto">
+        <form class="form-inline " method="get" action="{% url 'user_search' %}">
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text align-content-center text-primary fw-bold" id="basic-addon1">@</span>
                 </div>
                 <input type="text" class="form-control" placeholder="Szukaj" aria-label="Username"
                        aria-describedby="basic-addon1" name="quest" value="{{ request.GET.quest }}">
-                <button class="btn bg-transparent   text-decoration-none "><i class="fas fa-search link-primary"></i>
+                <button class="btn bg-transparent   "><i class="fas fa-search link-primary"></i>
                 </button>
             </div>
         </form>
     </nav>
+       <button class=" navbar-toggler mx-auto btn  btn-outline-secondary m-2" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class=" fas fa-grip-lines"></i>
+    </button>
+
     <div class="collapse navbar-collapse mx-1" id="navbarSupportedContent">
-    <div class="d-flex justify-content-center w-100">
+    <div class=" justify-content-center  col-md-10">
+        <div class="row">
+            <ul class=" nav  nav-navbar mt-2    col-md-10 justify-content-center  mb-lg-0  ">
+                <li class="nav-item   mx-3">
+                    <a class="nav-link   " aria-current="page"
+                       href="{% url 'feed:followers-posts' %}">
+                        <i class="fas fa-home h4 "></i>
+                    </a>
+                </li>
+                <li class=" nav-item mx-3">
+                    <a class="nav-link" aria-current="page"
+                       href="{% url 'feed:new-posts' %}">
+                        <i class="fas h4 fa-clipboard"></i>
+                    </a>
+                </li>
 
+                <li class="nav-item mx-3  ">
+                    <a class="nav-link " data-toggle="tab" href="{% url 'all_users' %}">
+                        <i class="fas fa-user-friends h4"></i>
+                    </a>
+                </li>
 
-        <ul class=" nav  w-50 navbar-nav mt-2   mb-lg-0">
-            <li class="nav-item  mx-3">
-                <a class="nav-link mx-auto" aria-current="page"
-                   href="{% url 'feed:followers-posts' %}">
-                    <i class="fas fa-home h4 "></i>
-                </a>
-            </li>
-            <li class=" nav-item  active mx-3">
-                <a class="nav-link  " aria-current="page"
-                   href="{% url 'feed:new-posts' %}">
-                    <i class="fas h4 fa-clipboard"></i>
-                </a>
-            </li>
-
-            <li class="nav-item mx-3 active">
-                <a class="nav-link " data-toggle="tab" href="{% url 'all_users' %}">
-                    <i class="fas fa-user-friends h4"></i>
-                </a>
-            </li>
-
-            <li class="nav-item dropdown  activemx-3">
-                <a class="nav-link   " href="#"
-                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-user-circle h4 "></i>
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    {% url 'userProfile' user.profile.pk as url %}
-                    <li class="nav-item">
-                        <a class="dropdown-item link-primary" href="{{ url }}">Profil</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    {% url 'profile_edit' user.profile.pk as url %}
-                    <li>
-                        <a class="dropdown-item nav-link" href="{{ url }}">Edycja Profilu</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+                <li class="nav-item dropdown  active  ">
+                    <a class="nav-link" href="#"
+                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle h4 "></i>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% url 'userProfile' user.profile.pk as url %}
+                        <li class="nav-item">
+                            <a class="dropdown-item link-primary" href="{{ url }}">Profil</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        {% url 'profile_edit' user.profile.pk as url %}
+                        <li>
+                            <a class="dropdown-item nav-link" href="{{ url }}">Edycja Profilu</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
+
 {% endif %}
 
 
 {% if request.user.is_authenticated %}
     {% url 'userProfile' user.profile.pk as url %}
-    <a class="  fw-normal  text-secondary" href="{{ url }} ">
+    <a class="  fw-normal  link" href="{{ url }} ">
         {{ request.user.first_name }} {{ request.user.last_name }}
     </a>
 
@@ -134,7 +136,9 @@
         </ul>
     </div>
     </div>
+
 {% endif %}
+
 </nav>
 
 {% block content %}
