@@ -36,21 +36,16 @@ body {
 a:link {
     text-decoration: none;
     font-weight: bold;
+    color: #333333;
 }
 
 a:visited {
-    color: #39393A;
+
     text-decoration: none;
     font-weight: bold;
-
-
 }
 
-a:focus {
-    font-weight: bold;
-    color: #333333;
 
-}
 
 a:hover {
     font-weight: bold;
