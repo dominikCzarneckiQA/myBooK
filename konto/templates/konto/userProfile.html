@@ -24,7 +24,7 @@
                                     </a>
                                 {% endif %}
 
-                                <div class="">
+                                <div class=" ">
                                     <h5>{{ getUser.first_name }} {{ getUser.last_name }}</h5>
                                     {% if getProfile.biography %}
                                         <p class="text-muted  py-2  ">
@@ -170,7 +170,7 @@
                         <div class="card mb-3 border border-3">
 
                             <div class="card-body">
-                            <h6 class="  card-header card-header-tabs link-dark mb-3 fw-bold">Obserwujący
+                            <h6 class=" border card-header card-header-tabs link-dark mb-3 fw-bold">Obserwujący
                                             ({{ getNumberFollowers }})
                                         </h6>
                                 <div class="row">
@@ -179,7 +179,7 @@
 
 
                                         {% for follower in followersList %}
-                                            <div class=" float-start  card mx-2  mt-4 page-link  text-capitalize template float-start"
+                                            <div class=" float-start  card border mx-2  mt-4 page-link  text-capitalize template float-start"
                                                  style="height: 65px;width: 222px">
                                                 <img alt="userProfileImg" src="{{  follower.profile.profileAvatar.url }}"
                                                      class="rounded-circle mt-2 position-relative" width="40px"

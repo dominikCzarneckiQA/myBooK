@@ -46,11 +46,12 @@ class FollowersPosts(View):
 
         })
 
+
 class AllPostView(View):
     def post(self, request, *args, **kwargs):
         form = PostCreateForm(request.POST, request.FILES)
         allPosts = Post.objects.filter(
-            postAuthor__Profile__followers__in=[request.user.id])\
+            postAuthor__Profile__followers__in=[request.user.id]) \
             .order_by('-postDate')
         if request.method == 'POST':
             if form.is_valid():

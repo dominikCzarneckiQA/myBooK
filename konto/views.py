@@ -171,9 +171,10 @@ class UsersListView(View):
 
 class UserSearchView(View):
     def get(self, request, *args, **kwargs):
+
         getQuest = self.request.GET.get('quest')
         getProfileList = Profile.objects.filter(
-            Q(user__username__icontains=getQuest)
+            Q(user__username__icontains=getQuest, followers__first_name__isnull=False)
         )
 
         return render(request, 'konto/userSearch.html',
