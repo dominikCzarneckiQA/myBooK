@@ -5,89 +5,91 @@
 
 {% block content %}
     <div class="container ">
-        <div class="w-25 mt-3">
-            <a href="{% url 'feed:followers-posts' %}" class="btn btn-outline-secondary mt-2 "> Powrót </a>
-        </div>
-        <div class=" col-md-12  mt-3  ">
+    <div class="w-25 mt-3">
+        <a href="{% url 'feed:followers-posts' %}" class="btn btn-outline-secondary mt-2 "> Powrót </a>
+    </div>
+    <div class=" col-md-12  mt-3  ">
 
-            {% if post.postImages %}
-                <div class="card row  float-end  col-md-4  bg-white   ">
-                    <div class="  text-start float-end ">
-                        <p class="  overflow-auto mt-4 " style="height: 357px">
-                            {{ post.postContent }}
-                        </p>
+        {% if post.postImages %}
+            <div class="card border   row  float-end  col-md-4  bg-white   ">
+                <div class="  text-start float-end ">
+                    <p class=" overflow-auto mt-4 " style="height: 357px">
+                        {{ post.postContent }}
+                    </p>
+                </div>
+                <form method="post" class="  ">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="mb-2">
+                        <button class="btn btn-outline-success fw-bold mt-2">Dodaj Komentarz</button>
                     </div>
-                    <form method="post" class=" ">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <div class="mb-2">
-                            <button class="btn btn-outline-success fw-bold mt-2">Dodaj Komentarz</button>
-                        </div>
-                    </form>
-                </div>
-                </div>
-                <div class="border-bottom   bg-light border col-md-8  ">
-            {% else %}
-                <div class="border-bottom   bg-light border col-md-7  mx-auto">
+                </form>
+            </div>
+            </div>
+            <div class="border-bottom   bg-light border col-md-8  ">
+        {% else %}
+            <div class="border-bottom   bg-light border col-md-7  mx-auto">
 
+        {% endif %}
+
+
+
+        <div class="dropdown  m-2">
+            <a class="text-decoration-none fw-bold   text-capitalize text-secondary "
+               href="{% url 'userProfile' post.postAuthor.profile.pk %}">
+                <strong class="link-primary">
+                    {{ post.postAuthor.get_full_name }} </strong></a> <em
+                class="text-secondary fw-light"> {{ post.postDate }}</em>
+
+            {% if request.user == post.postAuthor %}
+
+                <button type="button" class=" btn" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-ellipsis-h"></i>
+                </button>
+                <ul class="dropdown-menu ">
+                    <li>
+                        <a class="dropdown-item   link-success" href="{% url 'feed:update-post' post.pk %}">
+                            <i class="far fa-edit "></i> Edit</a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <a class="dropdown-item fw-normal link-danger"
+                           href="{% url 'feed:delete-post' post.pk %}">
+                            <i class="fas fa-trash-alt    "></i> Delete</a>
+                    </li>
+                </ul>
+                </div>
+            {% endif %}
+        </div>
+        <div class=" card bg-white border-0     text-start    " style="min-height:150px; max-height:488px;">
+            {% if post.postImages %}
+
+                <div class=" mx-auto card border-0  " style="height: 484px">
+
+                {% load thumbnail %}
+                {% thumbnail post.postImages "824" as im %}
+                    <a href="{{ post.postImages.url }}" class="img-thumbnail">
+                        <img src="{{ im.url }}" alt="img" class="img-thumbnail">
+                    </a>
+                {% endthumbnail %}
+            {% else %}
+                <div class=" card bg-white border-0     text-start    " style="min-height:150px; max-height:488px;">
+                <p class="p-1 ">
+                    {{ post.postContent }}
+                </p>
             {% endif %}
 
-
-
-            <div class="dropdown  m-2">
-                <a class="text-decoration-none fw-bold   text-capitalize text-secondary "
-                   href="{% url 'userProfile' post.postAuthor.profile.pk %}">
-                    <strong class="link-primary">
-                        {{ post.postAuthor.get_full_name }} </strong></a> <em
-                    class="text-secondary fw-light"> {{ post.postDate }}</em>
-
-                {% if request.user == post.postAuthor %}
-
-                    <button type="button" class=" btn" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </button>
-                    <ul class="dropdown-menu ">
-                        <li>
-                            <a class="dropdown-item   link-success" href="{% url 'feed:update-post' post.pk %}">
-                                <i class="far fa-edit "></i> Edit</a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <a class="dropdown-item fw-normal link-danger"
-                               href="{% url 'feed:delete-post' post.pk %}">
-                                <i class="fas fa-trash-alt    "></i> Delete</a>
-                        </li>
-                    </ul>
-                    </div>
-                {% endif %}
             </div>
-            <div class=" card border-0   bg-white text-start    " style="min-height:150px; max-height:488px;">
-                {% if post.postImages %}
-
-                    <div class=" mx-auto card border-0 ">
-
-                    {% load thumbnail %}
-                    {% thumbnail post.postImages "824" as im %}
-                        <a href="{{ post.postImages.url }}" class="img-thumbnail">
-                            <img src="{{ im.url }}" alt="img" class="img-thumbnail">
-                        </a>
-                    {% endthumbnail %}
-                {% else %}
-                    {{ post.postContent }}
-
-                {% endif %}
-
-                </div>
 
             </div>
-            <div class="m-2">
+            <div class="mx-auto col-md-7 p-2">
                 <form action="{% url 'feed:like-post' post.pk %}" method="post">
                     {% csrf_token %}
                     {% if ifLiked %}
                         <button type="submit" name="post.pk" value="{{ post.pk }}"
-                                class="btn btn-outline-secondary  "><i class="fas fa-heart-broken"></i>
+                                class="btn btn-outline-secondary    "><i class="fas fa-heart-broken"></i>
                             {% with allLikes=post.postLikes.count %}
                                 {{ allLikes }}
                             {% endwith %}
@@ -104,27 +106,27 @@
 
                     {% endif %}
                 </form>
-
             </div>
+        </div>
+        </div>
+
+
+
+
+    {% if post.postImages %}
+        <div class=" row mb-4 mt-3 ">
+    {% else %}
+        <div class=" row mb-4 mt-4 ">
+        <form method="post" class=" mx-auto col-md-3">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="mb-2">
+                <button class="btn btn-outline-success fw-bold mt-2 ">Dodaj Komentarz</button>
             </div>
-    </div>
-    <div>
-
-
-        {% if post.postImages %}
-            <div class=" row mb-4 mt-3 ">
-        {% else %}
-            <div class=" row mb-4 mt-4 ">
-            <form method="post" class=" mx-auto col-md-5">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <div class="mb-2">
-                    <button class="btn btn-outline-success fw-bold mt-2 ">Dodaj Komentarz</button>
-                </div>
-            </form>
-        {% endif %}
-        <div class=" h5 d-flex justify-content-center  mt-2 mb-3">
-            <div class="buttons ">
+        </form>
+    {% endif %}
+    <div class=" h5 d-flex justify-content-center  mt-2 mb-3">
+        <div class="buttons ">
                     <span class="badge bg-white d-flex flex-row align-items-center">
                         <span class="link-primary mx-2">
                             <h5>Komentarze (
@@ -146,74 +148,72 @@
                                    aria-controls="comments" checked>
                         </div>
                     </span>
-            </div>
         </div>
-        <div class=" ">
-            <div class="accordion-item  ">
+    </div>
+    <div class=" ">
+        <div class="accordion-item  ">
 
-                <div id="comments" class="accordion-collapse border-0 collapse" aria-labelledby="flexSwitchCheckChecked"
-                     data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body  ">
-                        {% for comment in comments %}
-                            <div class="col-md-5 mx-auto">
-                                <div class="card p-3 mt-2">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="user-select-auto  align-items-center">
-                                            <img alt="userProfileImg"
-                                                 src="{{ comment.commentAuthor.profile.profileAvatar.url }}"
-                                                 class="   rounded-circle  mx-auto"
-                                                 width="44px"
-                                                 height="44px"/>
-                                            <small class=" text-primary">
-                                                <a class="h6 text-decoration-none fw-normal text-capitalize mx-2"
-                                                   href="{% url 'userProfile' comment.commentAuthor.profile.pk %}">
-                                                    <strong class=" link-primary">
-                                                        {{ comment.commentAuthor.get_full_name }}
-                                                    </strong>
-                                                </a>
-                                            </small>
-                                            {{ comment.commentContent }}
-                                        </div>
-                                        <small class="fw-light text-end  text-secondary"> {{ comment.commentDate }}</small>
+            <div id="comments" class="accordion-collapse border-0 collapse" aria-labelledby="flexSwitchCheckChecked"
+                 data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body  ">
+                    {% for comment in comments %}
+                        <div class="col-md-5 mx-auto">
+                            <div class="card p-3 mt-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="user-select-auto  align-items-center">
+                                        <img alt="userProfileImg"
+                                             src="{{ comment.commentAuthor.profile.profileAvatar.url }}"
+                                             class="   rounded-circle  mx-auto"
+                                             width="44px"
+                                             height="44px"/>
+                                        <small class=" text-primary">
+                                            <a class="h6 text-decoration-none fw-normal text-capitalize mx-2"
+                                               href="{% url 'userProfile' comment.commentAuthor.profile.pk %}">
+                                                <strong class=" link-primary">
+                                                    {{ comment.commentAuthor.get_full_name }}
+                                                </strong>
+                                            </a>
+                                        </small>
+                                        {{ comment.commentContent }}
                                     </div>
+                                    <small class="fw-light text-end  text-secondary"> {{ comment.commentDate }}</small>
+                                </div>
 
-                                    <div class=" mx-5 text-start text-secondary">
-                                        {% if request.user == post.postAuthor  and comment.commentAuthor %}
+                                <div class=" mx-5 text-start text-secondary">
+                                    {% if request.user == post.postAuthor  and comment.commentAuthor %}
+                                        <a href="{% url 'feed:delete-comment' post.pk comment.pk %}">
+                                            <p class="link-danger > px-3  ">delete</p>
+                                        </a>
+                                    {% else %}
+                                        {% if request.user == post.postAuthor %}
                                             <a href="{% url 'feed:delete-comment' post.pk comment.pk %}">
                                                 <p class="link-danger > px-3  ">delete</p>
                                             </a>
-                                        {% else %}
-                                            {% if request.user == post.postAuthor %}
-                                                <a href="{% url 'feed:delete-comment' post.pk comment.pk %}">
-                                                    <p class="link-danger > px-3  ">delete</p>
-                                                </a>
-                                            {% endif %}
-                                            {% if request.user == comment.commentAuthor %}
-                                                <a href="{% url 'feed:delete-comment' post.pk comment.pk %}">
-                                                    <small class=" link-danger   ">delete </small>
-                                                </a>
-                                            {% endif %}
                                         {% endif %}
-
-                                    </div>
-
+                                        {% if request.user == comment.commentAuthor %}
+                                            <a href="{% url 'feed:delete-comment' post.pk comment.pk %}">
+                                                <small class=" link-danger   ">delete </small>
+                                            </a>
+                                        {% endif %}
+                                    {% endif %}
 
                                 </div>
 
+
                             </div>
 
-                        {% endfor %}</div>
-                </div>
+                        </div>
+
+                    {% endfor %}</div>
             </div>
         </div>
-
-
-
-
-        </div>
-
-        </div>
     </div>
+
+
+
+
+
+
 
 
 
