@@ -11,6 +11,7 @@ from django.views.generic.edit import UpdateView
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from feed.models import Post
+
 from .forms import LoginForm, UserRegisterForm, UserEditForm, ProfileUpdateForm
 from .models import Profile
 from django.contrib.auth.models import User
@@ -58,13 +59,14 @@ def registerView(request):
                 newUser = userForm.save(commit=False)
                 newUser.set_password(
                     userForm.cleaned_data['password1'])
+                messages.success(request, 'Rejestracja zakończyła się pomyślnie')
                 newUser.save()
                 Profile.objects.create(user=newUser)
-                messages.success(request, 'Rejestracja zakończyła się pomyślnie')
 
                 return render(request, 'konto/register_success.html',
                               {'nowy_uzytkownik': newUser})
     else:
+        messages.warning(request, 'Coś poszło nie tak..')
         userForm = UserRegisterForm()
     return render(request, 'konto/register.html',
                   {'user_form': userForm})
@@ -75,8 +77,9 @@ def editView(request):
     if request.method == 'POST':
         userForm = UserEditForm(instance=request.user, data=request.POST)
         if userForm.is_valid():
-            userForm.save()
             messages.success(request, 'Edycja przebiegła pomyślnie')
+            userForm.save()
+
     else:
         userForm = UserEditForm(instance=request.user)
 
@@ -95,6 +98,7 @@ class UserProfileView(View):
         getProfile = Profile.objects.get(pk=pk)
         getUser = getProfile.user
         getPosts = Post.objects.filter(postAuthor=getUser).order_by('-postDate')
+
         followersList = getProfile.followers.all()
 
         if len(followersList) == 0:
@@ -115,7 +119,6 @@ class UserProfileView(View):
             'getUser': getUser,
             'getPosts': getPosts,
             'getNumberFollowers': getNumberFollowers,
-
             'followersList': followersList,
 
         })
@@ -171,7 +174,6 @@ class UsersListView(View):
 
 class UserSearchView(View):
     def get(self, request, *args, **kwargs):
-
         getQuest = self.request.GET.get('quest')
         getProfileList = Profile.objects.filter(
             Q(user__username__icontains=getQuest, followers__first_name__isnull=False)

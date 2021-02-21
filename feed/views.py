@@ -9,7 +9,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.http import HttpResponseRedirect
 from konto.models import Profile
-
+from django.contrib import messages
 
 @method_decorator(login_required, name='dispatch')
 class FollowersPosts(View):
@@ -35,6 +35,7 @@ class FollowersPosts(View):
             if form.is_valid():
                 newPost = form.save(commit=False)
                 newPost.postAuthor = request.user
+                messages.success(request, 'Pomyślnie dodano Post!')
                 newPost.save()
                 form.save()
 
@@ -57,6 +58,7 @@ class AllPostView(View):
             if form.is_valid():
                 newPost = form.save(commit=False)
                 newPost.postAuthor = request.user
+                messages.success(request, 'Pomyślnie dodano Post!')
                 newPost.save()
                 form.save()
 
@@ -111,6 +113,7 @@ class DetailPostView(View):
             newComment = formDetail.save(commit=False)
             newComment.commentAuthor = request.user
             newComment.post = postget
+            messages.success(request, 'Pomyślnie dodano Komentarz!')
             newComment.save()
 
         allComments = Comment.objects.filter(post=postget).order_by('-commentDate')

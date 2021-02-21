@@ -13,7 +13,7 @@
             <div class="row gutters-sm ">
                 <div class="col-md-4 mb-3  ">
                     <div class="card shadow-sm  border border-3">
-                        <div class="card-body    p-2">
+                        <div class="card-body   p-2">
                             <div class="d-flex flex-column align-items-center text-center">
                                 <img alt="userProfileImg" src="{{ getProfile.profileAvatar.url }}"
                                      class="rounded-circle mt-2 position-relative" width="100px" height="100px"/>
@@ -38,7 +38,9 @@
                                             </button>
 
                                             <button class="btn  fw-bold p-2 btn-outline-secondary disabled ">
-                                                Obserwowani 1
+
+                                                Obserwowani 3
+
                                             </button>
 
                                         {% else %}
@@ -211,10 +213,16 @@
                             {{ post.postAuthor.get_full_name }} </strong></a> -
                     <em class="text-secondary "> {{ post.postDate }} </em>
                 </p>
-                <div class="    text-start p-1 position-relative"
+                <div class="   overflow-hidden text-start p-1 position-relative"
                      style="min-height:150px; max-height:899px;">
-
+                    <div class=" card  border-0  text-start  "
+                         style="min-height:150px; max-height:599px;">
                     {{ post.postContent }}
+
+                    {% if post.postImages %}
+                            <img src="{{ post.postImages.url }}" alt="img">
+                        {% endif %}
+                    </div>
                     <a href="{% url 'feed:detail-post' post.pk %}" class="stretched-link"> </a>
                 </div>
             </div>

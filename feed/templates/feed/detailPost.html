@@ -4,6 +4,8 @@
 {% endblock %}
 
 {% block content %}
+
+
     <div class="container ">
     <div class="w-25 mt-3">
         <a href="{% url 'feed:followers-posts' %}" class="btn btn-outline-secondary mt-2 "> Powrót </a>
@@ -12,12 +14,12 @@
 
         {% if post.postImages %}
             <div class="card border   row  float-end  col-md-4  bg-white   ">
-                <div class="  text-start float-end ">
-                    <p class=" overflow-auto mt-4 " style="height: 357px">
+                <div class="  text-start float-end  mt-3 ">
+                    <p class=" overflow-auto  mt-4 border p-1 rounded" style="height: 343px">
                         {{ post.postContent }}
                     </p>
                 </div>
-                <form method="post" class="  ">
+                <form method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <div class="mb-2">
@@ -63,20 +65,20 @@
                 </div>
             {% endif %}
         </div>
-        <div class=" card bg-white border-0     text-start    " style="min-height:150px; max-height:488px;">
+        <div class="    card   text-start    " style="min-height:150px; max-height:488px;">
             {% if post.postImages %}
 
-                <div class=" mx-auto card border-0  " style="height: 484px">
+                <div class="  card border-0  " style="height: 484px;">
 
                 {% load thumbnail %}
-                {% thumbnail post.postImages "824" as im %}
-                    <a href="{{ post.postImages.url }}" class="img-thumbnail">
-                        <img src="{{ im.url }}" alt="img" class="img-thumbnail">
+                {% thumbnail post.postImages "621x484" as im %}
+                    <a href="{{ post.postImages.url }}" class="mx-auto border-0 img-thumbnail">
+                        <img src="{{ im.url }}" alt="img" class="  img-thumbnail">
                     </a>
                 {% endthumbnail %}
             {% else %}
-                <div class=" card bg-white border-0     text-start    " style="min-height:150px; max-height:488px;">
-                <p class="p-1 ">
+                <div class=" card bg-white border-0    text-start    " style="min-height:150px; max-height:488px;">
+                <p class="p-1  ">
                     {{ post.postContent }}
                 </p>
             {% endif %}
@@ -84,7 +86,7 @@
             </div>
 
             </div>
-            <div class="mx-auto col-md-7 p-2">
+            <div class="mx-auto col-md-7 p-2 ">
                 <form action="{% url 'feed:like-post' post.pk %}" method="post">
                     {% csrf_token %}
                     {% if ifLiked %}
@@ -157,7 +159,7 @@
                  data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body  ">
                     {% for comment in comments %}
-                        <div class="col-md-5 mx-auto">
+                        <div class="col-md-5 mx-auto " style="height: 555px">
                             <div class="card p-3 mt-2">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="user-select-auto  align-items-center">
@@ -196,15 +198,11 @@
                                             </a>
                                         {% endif %}
                                     {% endif %}
-
                                 </div>
-
-
                             </div>
-
                         </div>
-
-                    {% endfor %}</div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

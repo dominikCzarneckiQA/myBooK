@@ -19,16 +19,14 @@
             <div class="form-row  border-3 border    ">
                 <div class="   input-group  col-md-12 mb-0">
                     <div class="mt-4 ">
-                        <div class=" border mx-auto  " style="height: 250px;width: 250px;">
-                             <img alt="userProfileImg" src="{{ user.profile.profileAvatar.url }}"
-                                         class="r mt-3 mx-auto" style="height: 250px;width: 250px;"/>
-
+                        <div class="   mx-auto  " style="height: 250px;width: 250px;">
+                            <img alt="userProfileImg" src="{{ user.profile.profileAvatar.url }}"
+                                 class="r mt-3 mx-auto" style="height: 250px;width: 250px;"/>
                         </div>
-
-
-                        {{ form.profileAvatar |as_crispy_field }}
+                        <p>
+                            {{ form.profileAvatar |as_crispy_field }}
+                        </p>
                     </div>
-
                     <div class=" col-md-8 m-3   ">
                         {{ form.biography | as_crispy_field }}
                         <div class="col-md-12 ">

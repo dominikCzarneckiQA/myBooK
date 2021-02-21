@@ -65,6 +65,12 @@ li, ul {
     list-style-type: none;
 
 }
+.colorOrReCr{
+    color: #FE5F55;
+}
+.colorGr{
+    color: #40916c;
+}
 
 
 /* LOGOWANIE -login */
