@@ -1,0 +1,3 @@
+    {% load thumbnail %}
+                        {% thumbnail image.image "300" as im %}
+                        <a href="{{  }}"
