@@ -15,12 +15,12 @@
                 <div class="col-md-4 mb-3  ">
                     <div class="card shadow-sm  border border-3">
                         <div class="card-body   ">
-                            <div class="d-flex flex-column align-items-center text-center" style="height: 350px ">
+                            <div class="d-flex flex-column align-items-center text-center" style="height: 290px ">
 
 
 
                                     <a href="{{ getProfile.profileAvatar.url }}">
-                                        <img src="{{ getProfile.profileAvatar.url }}" alt="img" class="rounded-circle  " width="145px" height="157px"/>
+                                        <img src="{{ getProfile.profileAvatar.url }}" alt="img" class="rounded-circle  " width="145px" height="145px"/>
                                     </a>
 
                                 {% if request.user == getProfile.user %}
@@ -32,7 +32,7 @@
                                 <div class=" ">
                                     <h5 class="card-header  bg-transparent">{{ getUser.first_name }} {{ getUser.last_name }}</h5>
                                     {% if getProfile.biography %}
-                                            <em class="card card-text border-0 mx-auto" style="width:220px;height: 90px">{{ getProfile.biography }}</em>
+                                            <em class="card card-text border-0 mx-auto" style="width:220px;height: 40px">{{ getProfile.biography }}</em>
                                     {% endif %}
                                     <div class=" p-1">
                                         {% if getUser == request.user %}
@@ -183,14 +183,14 @@
 
 
                                         {% for follower in followersList %}
-                                            <div class=" float-start  card border mx-2  mt-4 page-link  text-capitalize template float-start"
+                                            <div class=" float-start  card border mx-2   page-link  text-capitalize  "
                                                  style="height: 65px;width: 222px">
                                                 <img alt="userProfileImg" src="{{ follower.profile.profileAvatar.url }}"
-                                                     class="rounded-circle mt-2 position-relative" width="40px"
-                                                     height="40px"/>
-                                                <a class=" text-primary "
+                                                     class="float-start  rounded-circle position-relative " width="45px"
+                                                     height="45px"/>
+                                                <a class=" text-primary card mt-3 bg-transparent border-0 "
                                                    href="{% url 'userProfile' follower.profile.pk %}">
-                                                    {{ follower.get_full_name }}
+                                                 {{ follower.get_full_name }}
                                                 </a>
                                             </div>
                                         {% endfor %}

@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, DeleteView
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from feed.models import Post
@@ -127,7 +127,7 @@ class UserProfileView(View):
 @method_decorator(login_required, name='dispatch')
 class UpdateProfileView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Profile
-    form = ProfileUpdateForm
+    updateform = ProfileUpdateForm
     template_name = 'konto/userProfileUpdate.html'
 
     fields = ['biography', 'profileAvatar', 'birthDate', 'city', 'countryOrigin', 'github', 'snapchat',
@@ -138,6 +138,8 @@ class UpdateProfileView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         return self.request.user == self.get_object().user
+
+
 
 
 @method_decorator(login_required, name='dispatch')

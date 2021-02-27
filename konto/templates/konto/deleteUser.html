@@ -1,0 +1,27 @@
+{% extends "mainPage.html" %}
+{% block title %}
+    Edycja Postu
+{% endblock %}
+
+
+{% block content %}
+    <div class="container ">
+        <div class="w-25">
+            <div class="mt-3">
+                <a href="{% url 'feed:followers-posts' object.post.pk %}" class="btn btn-outline-secondary mt-2"> Powrót do strony głównej</a>
+            </div>
+        </div>
+
+        <div class="">
+            <form method="post">
+                <h4 class="display-2">Czy jesteś pewien?</h4>
+                {% csrf_token %}
+                <p>Usuniętego użytkownika nie da sie przywrócić</p>
+                <button class="btn btn-danger">Potwierdz</button>
+            </form>
+        </div>
+    </div>
+     <footer class="fixed-bottom">
+        <p class="font-italic fw-light"><em> © 2020-2021 myBooK Dominik Czarnecki</em></p>
+    </footer>
+{% endblock %}

@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import SelectDateWidget
+from django.contrib.admin.widgets import AdminDateWidget
 
 from .models import Profile
 
@@ -54,10 +54,11 @@ class ProfileUpdateForm(forms.ModelForm):
 
         widgets = {
 
-            'biography': forms.Textarea(attrs={'class': 'form-control ',}),
+            'biography': forms.Textarea(attrs={'class': 'form-control ', }),
             'profileAvatar': forms.ImageField(),
-            'birthDate' : forms.SelectDateWidget(attrs={'type': 'date',
-                                                        'id': 'datepickerr'}),
+
+            'birthDate': forms.DateField(widget=AdminDateWidget()),
+
             'city': forms.TextInput(attrs={'class': 'form-control'}),
             'countryOrigin': forms.Select(attrs={'class': 'form-control'}),
             'github': forms.URLInput(attrs={'class': 'form-control'}),

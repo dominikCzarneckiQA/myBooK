@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 from django.utils import timezone
-
+from konto.models import Profile
 
 class Post(models.Model):
     postAuthor = models.ForeignKey(User, default=None, blank=True, null=False, on_delete=models.CASCADE)
@@ -12,7 +14,7 @@ class Post(models.Model):
     postUrl = models.URLField(null=True, blank=True)
 
     def __str__(self):
-        return self.postAuthor.first_name
+        return self.postAuthor
 
 
 class Comment(models.Model):
@@ -22,4 +24,14 @@ class Comment(models.Model):
     commentDate = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.commentAuthor.first_name
+        return self.commentAuthor
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender,instance,created,**kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender,instance,**kwargs):
+    instance.profile.save()

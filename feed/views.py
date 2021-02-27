@@ -148,6 +148,7 @@ class DeletePostView(UserPassesTestMixin, DeleteView):
         return self.request.user == self.get_object().postAuthor
 
 
+
 # UserPassesTestMixin
 @method_decorator(login_required, name='dispatch')
 class DeleteCommentView(DeleteView):
