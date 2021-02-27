@@ -9,7 +9,7 @@ class Profile(models.Model):
     biography = models.CharField(max_length=80, null=True, blank=True, verbose_name='O mnie')
     profileAvatar = models.ImageField(upload_to='profilePhoto', default='profilePhoto/default.jpg',
                                       blank=True, verbose_name='Zdjęcie Profilowe')
-    birthDate = models.DateField( null=True, auto_now_add=False, auto_now=False, blank=True,
+    birthDate = models.DateField(null=True, auto_now_add=False, auto_now=False, blank=True,
                                  verbose_name='Data urodzin')
     city = models.CharField(max_length=99, null=True, blank=True, verbose_name='Miejscowość')
     countryOrigin = CountryField(blank=True, null=True, verbose_name='Kraj pochodzenia')
