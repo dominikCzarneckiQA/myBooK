@@ -61,7 +61,6 @@ class AllPostView(View):
                 messages.success(request, 'Pomyślnie dodano Post!')
                 newPost.save()
                 form.save()
-
             return HttpResponseRedirect(reverse_lazy('feed:all-posts'))
 
         return render(request, 'feed/allPosts.html', {
@@ -148,8 +147,6 @@ class DeletePostView(UserPassesTestMixin, DeleteView):
         return self.request.user == self.get_object().postAuthor
 
 
-
-# UserPassesTestMixin
 @method_decorator(login_required, name='dispatch')
 class DeleteCommentView(DeleteView):
     model = Comment

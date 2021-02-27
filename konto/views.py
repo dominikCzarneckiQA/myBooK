@@ -66,7 +66,6 @@ def registerView(request):
                 return render(request, 'konto/register_success.html',
                               {'nowy_uzytkownik': newUser})
     else:
-        messages.warning(request, 'Coś poszło nie tak..')
         userForm = UserRegisterForm()
     return render(request, 'konto/register.html',
                   {'user_form': userForm})
@@ -140,14 +139,13 @@ class UpdateProfileView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.request.user == self.get_object().user
 
 
-
-
 @method_decorator(login_required, name='dispatch')
 class UserFollow(View):
     @staticmethod
     def post(request, pk, *args, **kwargs):
         profile = Profile.objects.get(pk=pk)
         profile.followers.add(request.user)
+        messages.success(request,'Pomyslnie zaobserwowano użytkownika')
 
         return redirect('userProfile', pk=profile.pk)
 
@@ -158,7 +156,7 @@ class UserUnfollow(View):
     def post(request, pk, *args, **kwargs):
         profile = Profile.objects.get(pk=pk)
         profile.followers.remove(request.user)
-
+        messages.error(request, 'Nie obserwujesz już tego użytkownika.')
         return redirect('userProfile', pk=profile.pk)
 
 
@@ -180,7 +178,7 @@ class UserSearchView(View):
         getProfileList = Profile.objects.filter(
             Q(user__username__icontains=getQuest, followers__first_name__isnull=False)
         )
-
+        messages.success(request,'Znaleziono następujących użytkowników')
         return render(request, 'konto/userSearch.html',
                       {
                           'getProfileList': getProfileList,
