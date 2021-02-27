@@ -54,4 +54,4 @@ class Activity(models.Model):
     creation_date = models.DateField(auto_now_add=True, db_index=True)
 
     class Meta:
-        ordering = ['-create_date']
+        ordering = ['-creation_date']
