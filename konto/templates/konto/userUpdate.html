@@ -10,7 +10,7 @@
         <h1 class="fw-normal mt-4">Edytuj dane systemowe</h1>
         <div class="d-flex justify-content-center 3   ">
             <div class=" w-25 ">
-                <form class="text-capitalize  border   card-body mt-5 " method="post" enctype="multipart/form-data">
+                <form class="text-capitalize  border  card  card-body mt-5 " method="post" enctype="multipart/form-data">
 
                     {{ userForm.as_p }}
                     {% csrf_token %}
@@ -18,7 +18,7 @@
 
                     <a  class="link-primary" href="{% url "password_change" %}"><h6>Zmiana Hasła</h6></a>
                     <div class="card-footer bg-white">
-                        <button class="btn btn-secondary w-50" type="submit">Zapisz</button>
+                        <button class="btn mt-3 btn-outline-secondary w-50" type="submit">Zapisz</button>
                     </div>
                 </form>
             </div>

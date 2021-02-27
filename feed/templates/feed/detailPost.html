@@ -15,7 +15,7 @@
         {% if post.postImages %}
             <div class="card border   row  float-end  col-md-4  bg-white   ">
                 <div class="  text-start float-end  mt-3 ">
-                    <p class=" overflow-auto  mt-4 border p-1 rounded" style="height: 343px">
+                    <p class=" overflow-auto  mt-4 border p-1 rounded " style="height: 343px">
                         {{ post.postContent }}
                     </p>
                 </div>
@@ -36,7 +36,7 @@
 
 
 
-        <div class="dropdown  m-2">
+        <div class="   m-2">
             <a class="text-decoration-none fw-bold   text-capitalize text-secondary "
                href="{% url 'userProfile' post.postAuthor.profile.pk %}">
                 <strong class="link-primary">
@@ -44,7 +44,6 @@
                 class="text-secondary fw-light"> {{ post.postDate }}</em>
 
             {% if request.user == post.postAuthor %}
-
                 <button type="button" class=" btn" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fas fa-ellipsis-h"></i>
                 </button>
@@ -57,15 +56,17 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <a class="dropdown-item fw-normal link-danger"
+                        <a class="dropdown-item  link-danger"
                            href="{% url 'feed:delete-post' post.pk %}">
                             <i class="fas fa-trash-alt    "></i> Delete</a>
                     </li>
                 </ul>
-                </div>
+
             {% endif %}
+
         </div>
-        <div class="    card   text-start    " style="min-height:150px; max-height:488px;">
+
+        <div class=" card mx-auto  text-start     " style="min-height:150px; max-height:488px;    ">
             {% if post.postImages %}
 
                 <div class="  card border-0  " style="height: 484px;">
