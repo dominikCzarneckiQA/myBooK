@@ -169,4 +169,11 @@ def LikePostDetailView(request, pk):
     else:
         post.postLikes.add(request.user)
         ifLiked = True
+
+    context ={
+        'post': post,
+        'ifLiked': ifLiked,
+
+    }
+
     return HttpResponseRedirect(reverse_lazy('feed:detail-post', args=[str(pk)]))

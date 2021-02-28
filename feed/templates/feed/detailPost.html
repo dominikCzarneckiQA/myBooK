@@ -93,32 +93,19 @@
 
     </div>
     <div class="mx-auto col-md-7 p-2 ">
-        <div class="col-md-2 float-start overflow-auto" style="height: 55px">
-                {% for user in post.postLikes.all %}
-                {{ user.username }}
+        <div class="col-md-2 float-start overflow-auto" style="height: 35px;width: 100px">
+            {% for user in post.postLikes.all %}
+                <a class=" " href="{% url 'userProfile' user.profile.pk %}">
+                    <strong class=" link-primary">
+                        {{ user.username }}
+                    </strong>
+                </a>
+
             {% endfor %}
         </div>
-        <form action="{% url 'feed:like-post' post.pk %}" method="post">
-            {% csrf_token %}
-            {% if ifLiked %}
-                <button type="submit" name="post.pk" value="{{ post.pk }}"
-                        class="btn btn-outline-secondary    "><i class="fas fa-heart-broken"></i>
-                    {% with allLikes=post.postLikes.count %}
-                        {{ allLikes }}
-                    {% endwith %}
-                </button>
-
-            {% else %}
-
-                <button type="submit" name="post.pk" value="{{ post.pk }}"
-                        class="btn btn-outline-danger"><i class="fas fa-heart"></i>
-                    {% with allLikes=post.postLikes.count %}
-                        {{ allLikes }}
-                    {% endwith %}
-                </button>
-
-            {% endif %}
-        </form>
+        <div id="like-container">
+            {% include 'feed/likes-container.html' %}
+        </div>
     </div>
 </div>
 </div>
@@ -220,13 +207,4 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
 {% endblock %}
