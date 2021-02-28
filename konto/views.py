@@ -7,12 +7,12 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic.edit import UpdateView, DeleteView
+from django.views.generic.edit import UpdateView
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from feed.models import Post
 
-from .forms import LoginForm, UserRegisterForm, UserEditForm, ProfileUpdateForm
+from .forms import LoginForm, UserRegisterForm, EditForm, ProfileUpdateForm
 from .models import Profile
 from django.contrib.auth.models import User
 
@@ -74,13 +74,13 @@ def registerView(request):
 @login_required()
 def editView(request):
     if request.method == 'POST':
-        userForm = UserEditForm(instance=request.user, data=request.POST)
+        userForm = EditForm(instance=request.user, data=request.POST)
         if userForm.is_valid():
             messages.success(request, 'Edycja przebiegła pomyślnie')
             userForm.save()
 
     else:
-        userForm = UserEditForm(instance=request.user)
+        userForm = EditForm(instance=request.user)
 
     return render(request, 'konto/userUpdate.html',
                   {

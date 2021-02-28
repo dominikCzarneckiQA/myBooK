@@ -33,7 +33,7 @@ class UserRegisterForm(forms.ModelForm):
         return cd['password2']
 
 
-class UserEditForm(forms.ModelForm):
+class EditForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'email')

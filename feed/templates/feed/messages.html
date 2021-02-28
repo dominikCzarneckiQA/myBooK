@@ -2,7 +2,8 @@
 <div class="container-fluid p-0" id="message">
   <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
 
-    {{ message }}
+    {{ message|safe }}
+
   </div>
 </div>
 {% endfor %}

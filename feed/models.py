@@ -17,7 +17,7 @@ class Post(models.Model):
     postUrl = models.URLField(null=True, blank=True)
 
     def __str__(self):
-        return self.postAuthor
+        return 'Post użytkownika {}'.format(self.postAuthor)
 
 
 class Comment(models.Model):
@@ -27,8 +27,7 @@ class Comment(models.Model):
     commentDate = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.commentAuthor
-
+        return 'Komentarz użytkownika {}'.format(self.commentAuthor)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -55,3 +54,4 @@ class Activity(models.Model):
 
     class Meta:
         ordering = ['-creation_date']
+
