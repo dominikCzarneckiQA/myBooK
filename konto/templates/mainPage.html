@@ -67,21 +67,21 @@
     <div class=" justify-content-center  col-md-10">
         <div class="row">
             <ul class=" nav  nav-navbar     col-md-10 justify-content-center  mb-lg-0  ">
-                <li class="nav-item mx-3">
+                <li class="nav-item mx-2 col-md-2">
                     <a class="nav-link    {% if request.path == home %} active shadow  bg-secondary     {% endif %}"
                        href="{% url 'feed:followers-posts' %}">
                         <i class="fas fa-home h3 "></i>
                     </a>
                 </li>
 
-                <li class=" nav-item mx-3">
+                <li class=" nav-item mx-2 col-md-2 ">
                     <a class="nav-link {% if request.path == news %} active shadow   bg-secondary {% endif %}"
                        href="{% url 'feed:new-posts' %}">
                         <i class="fas h3 fa-clipboard"></i>
                     </a>
                 </li>
 
-                <li class="nav-item  mx-3 ">
+                <li class="nav-item  mx-2 col-md-2 ">
                     <a class="nav-link {% if request.path == people %} active shadow    bg-secondary {% endif %} "
 
                        data-toggle="tab"
@@ -90,7 +90,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item dropdown  mx-3">
+                <li class="nav-item dropdown  col-md-2 mx-2">
                     <a class="nav-link  {% if request.path == profiledropdown %} active shadow   bg-secondary {% endif %}"
                        href="#"
                        role="button" data-bs-toggle="dropdown" aria-expanded="false">

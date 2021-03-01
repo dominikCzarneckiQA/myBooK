@@ -61,15 +61,14 @@ a:hover {
 
 li
 {
-    width: 125px;
+
 }
 
 
 
 li:hover {
     font-weight: bold;
-    border: 4px #4f4f4f;
-    background: #EBEBEB;
+
 
 }
 
