@@ -11,6 +11,7 @@ from django.http import HttpResponseRedirect
 from konto.models import Profile
 from django.contrib import messages
 
+
 @method_decorator(login_required, name='dispatch')
 class FollowersPosts(View):
     @staticmethod
@@ -152,8 +153,8 @@ class DeleteCommentView(DeleteView):
     model = Comment
     template_name = 'feed/deleteComment.html'
 
-    # def test_func(self):
-    #    return self.request.user == self.get_object().commentAuthor
+    def test_func(self):
+        return self.request.user == self.get_object().commentAuthor or self.user == self.get_object().postAuthor
 
     def get_success_url(self):
         return reverse_lazy('feed:detail-post', kwargs={'pk': self.kwargs['post_pk']})
@@ -170,7 +171,7 @@ def LikePostDetailView(request, pk):
         post.postLikes.add(request.user)
         ifLiked = True
 
-    context ={
+    context = {
         'post': post,
         'ifLiked': ifLiked,
 

@@ -13,7 +13,7 @@
     <div class=" col-md-12  mt-3  ">
 
         {% if post.postImages %}
-            <div class="card border   row  float-end  col-md-4  bg-white   ">
+            <div class="card border container-fluid  row  float-end  col-md-4  bg-white   ">
                 <div class="  text-start float-end  mt-3 ">
                     <p class=" overflow-auto  mt-4 border p-1 rounded " style="height: 343px">
                         {{ post.postContent }}
@@ -74,12 +74,12 @@
 <div class=" card mx-auto  text-start     " style="min-height:150px; max-height:488px;    ">
     {% if post.postImages %}
 
-        <div class="  card border-0 mx-auto  " style="height: 484px; width: 638px   ">
+        <div class="container-fluid     img-fluid card border-0 mx-auto  justify-content-center" style="height: 485px; width:auto   ">
 
         {% load thumbnail %}
-        {% thumbnail post.postImages "695x484" as im %}
-            <a href="{{ post.postImages.url }}" class="mx-auto border-0 img-thumbnail">
-                <img src="{{ im.url }}" alt="img" class="  img-thumbnail">
+        {% thumbnail post.postImages "885x465" as im %}
+            <a href="{{ post.postImages.url }}" class="mx-auto border-0">
+                <img src="{{ im.url }}" alt="img" class="  text-center img-fluid img-thumbnail card-img  ">
             </a>
         {% endthumbnail %}
     {% else %}
@@ -92,8 +92,8 @@
     </div>
 
     </div>
-    <div class="mx-auto col-md-7 p-2 ">
-        <div class="col-md-2 float-start overflow-auto" style="height: 35px;width: 100px">
+    <div class="mx-auto col-md-11 p-2 ">
+        <div class="col-md-5 float-start overflow-auto" style="height: 35px;width: 100px">
             {% for user in post.postLikes.all %}
                 <a class=" " href="{% url 'userProfile' user.profile.pk %}">
                     <strong class=" link-primary">
