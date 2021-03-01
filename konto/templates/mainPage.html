@@ -38,7 +38,7 @@
 {% if request.user.is_authenticated %}
     <nav class="nav nav-pills m-3  sticky-top border   bg-light navbar-expand-lg ">
     <a class="navbar-brand  text-dark mx-3 mt-2 " href="{% url 'feed:followers-posts' %}">
-        <h3 class="chewy text-decoration-none ">
+        <h3 class="chewy  text-decoration-none">
             myBooK
         </h3>
     </a>
@@ -67,9 +67,8 @@
     <div class=" justify-content-center  col-md-10">
         <div class="row">
             <ul class=" nav  nav-navbar     col-md-10 justify-content-center  mb-lg-0  ">
-
                 <li class="nav-item mx-3">
-                    <a class="nav-link    {% if request.path == home %} active shadow    bg-secondary {% endif %}"
+                    <a class="nav-link    {% if request.path == home %} active shadow  bg-secondary     {% endif %}"
                        href="{% url 'feed:followers-posts' %}">
                         <i class="fas fa-home h3 "></i>
                     </a>
@@ -82,7 +81,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item mx-3  ">
+                <li class="nav-item  mx-3 ">
                     <a class="nav-link {% if request.path == people %} active shadow    bg-secondary {% endif %} "
 
                        data-toggle="tab"
@@ -91,7 +90,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item dropdown ">
+                <li class="nav-item dropdown  mx-3">
                     <a class="nav-link  {% if request.path == profiledropdown %} active shadow   bg-secondary {% endif %}"
                        href="#"
                        role="button" data-bs-toggle="dropdown" aria-expanded="false">

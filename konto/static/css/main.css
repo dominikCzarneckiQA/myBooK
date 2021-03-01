@@ -34,12 +34,12 @@ body {
 /* PSEUDO-KLASY  HIPERLACZA */
 
 a:active {
-   color: #5b80b2;
+    color: #5b80b2;
 }
 
 a:link {
     text-decoration: none;
-    outline-color: #205067  ;
+    outline-color: #205067;
     color: #333333;
 }
 
@@ -51,18 +51,25 @@ a:visited {
 }
 
 
-
 a:hover {
     font-weight: bold;
-    color: #5b80b2;
+
+
 }
 
 /* ZNACZNIKI GLOBALNE */
 
+li
+{
+    width: 125px;
+}
 
-li, ul {
 
-    list-style-type: none;
+
+li:hover {
+    font-weight: bold;
+    border: 4px #4f4f4f;
+    background: #EBEBEB;
 
 }
 
@@ -72,14 +79,12 @@ li, ul {
 .formularz-logowanie {
 
 
-
     min-width: 250px;
     max-width: 500px;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
 
 
 }
