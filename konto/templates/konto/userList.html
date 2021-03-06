@@ -9,16 +9,16 @@
     <div class="container ">
         <h3 class=" mx-auto display-5">Inni Użytkownicy</h3>
         <div class="row mt-3  ">
-            <div class="col-md-7   bg-white mx-auto   overflow-auto" style="height:800px" >
+            <div class="col-md-7   bg-white mx-auto   overflow-auto" style="height:800px">
                 {% for user in users %}
-                    <div class="card-group   float-start p-2">
-                        <div class="row">
-                            <div class="  ">
-                                <div class="card mt-1" style="width: 222px; height:255px;">
+                    <div class="card-group mx-1  float-start p-2">
+                        <div class="row ">
+                            <div class="mx-auto  ">
+                                <div class="card mt-1  " style="width: 222px; height:255px;">
                                     <img alt="userProfileImg" src="{{ user.profile.profileAvatar.url }}"
                                          class="rounded-circle mt-3 mx-auto" width="95px" height="95px"/>
                                     <div class="card-body">
-                                        <div class="card-title">
+                                        <div class="card-title ">
                                             <div class=" h6 ">
                                                 <a class="text-secondary  text-capitalize"
                                                    href="{% url 'userProfile' user.profile.pk %}">
@@ -31,15 +31,17 @@
                                                 </a>
                                             </div>
                                         </div>
-
-                                        {% if user.profile.countryOrigin %}
-
-                                            <p class="card-text">
-                                                <strong>Kraj pochodzenia:</strong>
-                                                {{ user.profile.countryOrigin }}
-                                            </p>
+                                        {% if user.profile.city %}
+                                            <strong class="float-start">Miejscowość:</strong>
+                                            <p class="float-end fw-normal m-0"> {{ user.profile.city }}</p>
 
                                         {% endif %}
+
+                                        {% if user.profile.countryOrigin %}
+                                            <strong class="float-start">Kraj pochodzenia:</strong>
+                                            <p class="float-end fw-normal m-0">{{ user.profile.countryOrigin }}</p>
+                                        {% endif %}
+
 
                                     </div>
 
@@ -57,7 +59,7 @@
 
         </div>
     </div>
-    <footer class="bs-popover-bottom fixed-bottom">
+    <footer class="bs-popover-bottom">
         <p class=" font-italic fw-light"><em> © 2020-2021 myBooK Dominik Czarnecki</em></p>
-</footer>
+    </footer>
 {% endblock %}
