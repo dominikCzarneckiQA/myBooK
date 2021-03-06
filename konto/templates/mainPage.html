@@ -3,6 +3,8 @@
 {% url 'feed:new-posts' as news %}
 {% url 'all_users' as people %}
 {% url 'profile_edit' user.profile.pk as edit %}
+
+
 {% url 'wyloguj'  as logout %}
 {% url 'userProfile' user.profile.pk as profile %}
 {% url 'userProfile' user.profile.pk as profiledropdown %}
@@ -91,7 +93,7 @@
                 </li>
 
                 <li class="nav-item dropdown  col-md-2 mx-2">
-                    <a class="nav-link  {% if request.path == profiledropdown or edit %} active shadow   bg-secondary {% endif %}"
+                    <a class="nav-link  {% if request.path == profiledropdown %} active shadow   bg-secondary {% endif %}"
                        href="#"
                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-user-circle h3 "></i>
@@ -105,7 +107,7 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item nav-link  " href="{{ edit }}">Edycja Profilu</a>
+                            <a class="dropdown-item nav-link  " href="{{ profEdit }}">Edycja Profilu</a>
                         </li>
                     </ul>
                 </li>
@@ -163,7 +165,12 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<script>
+    $(document).ready(function (){
+        {% block domready %}
+        {% endblock %}
+    });
+</script>
 </body>
 </html>
 

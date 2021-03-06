@@ -160,6 +160,7 @@ class DeleteCommentView(DeleteView):
         return reverse_lazy('feed:detail-post', kwargs={'pk': self.kwargs['post_pk']})
 
 
+@login_required()
 def LikePostDetailView(request, pk):
     post = get_object_or_404(Post, id=request.POST.get('post.pk'))
 
@@ -169,7 +170,8 @@ def LikePostDetailView(request, pk):
         ifLiked = False
     else:
         post.postLikes.add(request.user)
-        ifLiked = True
+    ifLiked = True
+
 
     context = {
         'post': post,
