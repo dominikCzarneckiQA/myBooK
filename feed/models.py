@@ -4,8 +4,6 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.utils import timezone
 from konto.models import Profile
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.fields import GenericForeignKey
 
 
 class Post(models.Model):
@@ -34,24 +32,6 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
 
-
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
-
-
-class Activity(models.Model):
-    user = models.ForeignKey(User, related_name='activity', db_index=True, on_delete=models.CASCADE)
-    action = models.CharField(max_length=200)
-
-    targetContentType = models.ForeignKey(ContentType, blank=True, null=True, related_name='targetOBJ',
-                                          on_delete=models.CASCADE)
-    targetID = models.PositiveIntegerField(null=True,
-                                           blank=True,
-                                           db_index=True)
-    track = GenericForeignKey('targetContentType', 'targetID')
-    creation_date = models.DateField(auto_now_add=True, db_index=True)
-
-    class Meta:
-        ordering = ['-creation_date']
-
