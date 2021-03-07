@@ -10,6 +10,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.http import HttpResponseRedirect
 from konto.models import Profile
 from django.contrib import messages
+from feed.newObjects import new_action
 
 
 @method_decorator(login_required, name='dispatch')
@@ -22,7 +23,7 @@ class FollowersPosts(View):
         ).order_by('-postDate')
         allUsers = Profile.objects.all()
 
-        return render(request, 'feed/followersPosts.html', {
+        return render(request, 'feed/post/followersPosts.html', {
             'followersPosts': followersPosts,
             'form': formFollowersPost,
             'allUsers': allUsers,
@@ -39,10 +40,11 @@ class FollowersPosts(View):
                 messages.success(request, 'Pomyślnie dodano Post!')
                 newPost.save()
                 form.save()
+                new_action(request.user, 'dodał nowy post.', newPost)
 
             return HttpResponseRedirect(reverse_lazy('feed:followers-posts'))
 
-        return render(request, 'feed/followersPosts.html', {
+        return render(request, 'feed/post/followersPosts.html', {
             'followersPosts': followersPosts,
             'form': form,
 
@@ -50,7 +52,8 @@ class FollowersPosts(View):
 
 
 class AllPostView(View):
-    def post(self, request, *args, **kwargs):
+    @staticmethod
+    def post(request, *args, **kwargs):
         form = PostCreateForm(request.POST, request.FILES)
         allPosts = Post.objects.filter(
             postAuthor__Profile__followers__in=[request.user.id]) \
@@ -64,18 +67,19 @@ class AllPostView(View):
                 form.save()
             return HttpResponseRedirect(reverse_lazy('feed:all-posts'))
 
-        return render(request, 'feed/allPosts.html', {
+        return render(request, 'feed/post/allPosts.html', {
             'allPosts': allPosts,
             'form': form,
 
         })
 
-    def get(self, request, *args, **kwargs):
+    @staticmethod
+    def get(request, *args, **kwargs):
         formAllPost = PostCreateForm()
         allPosts = Post.objects.all().order_by('-postDate')
         allUsers = Profile.objects.all()
 
-        return render(request, 'feed/allPosts.html', {
+        return render(request, 'feed/post/allPosts.html', {
             'allPosts': allPosts,
             'form': formAllPost,
             'allUsers': allUsers,
@@ -96,7 +100,7 @@ class DetailPostView(View):
         if something.postLikes.filter(id=self.request.user.id).exists():
             ifLiked = True
 
-        return render(request, 'feed/detailPost.html', {
+        return render(request, 'feed/post/detailPost.html', {
             'post': postget,
             'form': formDetail,
             'comments': allComments,
@@ -113,12 +117,13 @@ class DetailPostView(View):
             newComment = formDetail.save(commit=False)
             newComment.commentAuthor = request.user
             newComment.post = postget
+            new_action(request.user, 'dodał komentarz ', newComment)
             messages.success(request, 'Pomyślnie dodano Komentarz!')
             newComment.save()
 
         allComments = Comment.objects.filter(post=postget).order_by('-commentDate')
 
-        return render(request, 'feed/detailPost.html', {
+        return render(request, 'feed/post/detailPost.html', {
             'post': postget,
             'form': formDetail,
             'comments': allComments,
@@ -128,7 +133,7 @@ class DetailPostView(View):
 @method_decorator(login_required, name='dispatch')
 class UpdatePostView(UserPassesTestMixin, UpdateView):
     model = Post
-    template_name = 'feed/updatePost.html'
+    template_name = 'feed/post/updatePost.html'
     fields = ['postContent']
 
     def test_func(self):
@@ -141,7 +146,7 @@ class UpdatePostView(UserPassesTestMixin, UpdateView):
 @method_decorator(login_required, name='dispatch')
 class DeletePostView(UserPassesTestMixin, DeleteView):
     model = Post
-    template_name = 'feed/deletePost.html'
+    template_name = 'feed/post/deletePost.html'
     success_url = reverse_lazy('feed:followers-posts')
 
     def test_func(self):
@@ -170,8 +175,8 @@ def LikePostDetailView(request, pk):
         ifLiked = False
     else:
         post.postLikes.add(request.user)
+        new_action(request.user, 'polubił.', post)
     ifLiked = True
-
 
     context = {
         'post': post,
@@ -179,4 +184,4 @@ def LikePostDetailView(request, pk):
 
     }
 
-    return HttpResponseRedirect(reverse_lazy('feed:detail-post', args=[str(pk)]))
+    return HttpResponseRedirect(context, reverse_lazy('feed:detail-post', args=[str(pk)]))

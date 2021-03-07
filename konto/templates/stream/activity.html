@@ -1,0 +1,42 @@
+{% load thumbnail %}
+<h3>siema</h3>
+{% with user=action.user profile=action.user.profile.pk  %}
+<div class="card">
+  <div class="card-img">
+    {% if user.profile.profileAvatar  %}
+      {% thumbnail user.profile.profileAvatar.url "80x80" crop="100%" as im %}
+        <a href="{{ user.get_absolute_url }}">
+          <img src="{{ im.url }}" alt="{{ user.get_full_name }}" class="item-img">
+        </a>
+      {% endthumbnail %}
+       {% endif %}
+
+   {% if action.track %}
+      {% with track=action.track %}
+        {% if track.image %}
+          {% thumbnail track.image "80x80" crop="100%" as im %}
+            <a href="{{ track.get_absolute_url }}">
+              <img src="{{ im.url }}" class="item-img" alt="zdj">
+            </a>
+          {% endthumbnail %}
+        {% endif %}
+      {% endwith %}
+       {% endif %}
+  </div>
+  <div class="info">
+    <p>
+      <span class="date">{{ action.created|timesince }} temu</span>
+      <br />
+      <a href="{{ user.get_absolute_url }}">
+        {{ user.first_name }}
+      </a>
+      {{ action.verb }}
+      {% if action.track %}
+        {% with track=action.track %}
+          <a href="{{ track.get_absolute_url }}">{{ track }}</a>
+        {% endwith %}
+      {% endif %}
+    </p>
+  </div>
+</div>
+{% endwith %}

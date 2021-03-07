@@ -17,6 +17,8 @@ from .models import Profile
 from django.contrib.auth.models import User
 
 from django.contrib.auth.mixins import UserPassesTestMixin
+from feed.newObjects import new_action
+from feed.models import Activity
 
 
 def entryPageView(request):
@@ -62,6 +64,7 @@ def registerView(request):
                 messages.success(request, 'Rejestracja zakończyła się pomyślnie')
                 newUser.save()
                 Profile.objects.create(user=newUser)
+                new_action(request.user, 'utworzył konto.')
 
                 return render(request, 'konto/register_success.html',
                               {'nowy_uzytkownik': newUser})
@@ -145,8 +148,8 @@ class UserFollow(View):
     def post(request, pk, *args, **kwargs):
         profile = Profile.objects.get(pk=pk)
         profile.followers.add(request.user)
-        messages.success(request,'Pomyslnie zaobserwowano użytkownika')
-
+        new_action(request.user, 'zaobserwował ', profile)
+        messages.success(request, 'Pomyslnie zaobserwowano użytkownika')
         return redirect('userProfile', pk=profile.pk)
 
 
@@ -178,8 +181,19 @@ class UserSearchView(View):
         getProfileList = Profile.objects.filter(
             Q(user__username__icontains=getQuest))
 
-        messages.success(request,'Znaleziono następujących użytkowników')
+        messages.success(request, 'Znaleziono następujących użytkowników')
         return render(request, 'konto/userSearch.html',
                       {
                           'getProfileList': getProfileList,
                       })
+
+
+@method_decorator(login_required, name='dispatch')
+def activityStream(request):
+    activity = Activity.objects.exclude(user=request.user)
+    following = request.user.followers.values_list('id', flat=True)
+
+    if following:
+        activity = activity.filter(user_id__in=following)
+    activity = activity.select_related('user', 'user__profile').prefetch_related('track')[:8]
+    return render(request, 'feed/post/followersPosts.html', {'section': 'followers-posts', 'activity': activity})

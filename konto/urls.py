@@ -24,12 +24,14 @@ urlpatterns = [
     path('zaloguj/', auth_views.LoginView.as_view(), name='login'),
     path('wyloguj/', auth_views.LogoutView.as_view(), name='wyloguj'),
 
+    path('profil/<int:pk>/przyjaciele/dodaj', UserFollow.as_view(), name='user_follow'),
+    path('profil/<int:pk>/przyjaciele/usun', UserUnfollow.as_view(), name='user_unfollow'),
+
     path('feed/', include('feed.urls')),
 
     path('profil/<int:pk>', UserProfileView.as_view(), name='userProfile'),
     path('profil/edycja/<int:pk>/', UpdateProfileView.as_view(), name='profile_edit'),
-    path('profil/<int:pk>/przyjaciele/dodaj', UserFollow.as_view(), name='user_follow'),
-    path('profil/<int:pk>/przyjaciele/usun', UserUnfollow.as_view(), name='user_unfollow'),
+
 
     path('uzytkownicy/', UsersListView.as_view(), name='all_users'),
     path('wyszukaj/', UserSearchView.as_view(), name='user_search'),
