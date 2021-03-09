@@ -72,6 +72,20 @@ li:hover {
 
 }
 
+.test:hover {
+
+ border: none;
+  background: #ff7a59;
+  color: #fff;
+
+  font-size: 16px;
+  border-radius: 5px;
+  position: relative;
+  box-sizing: border-box;
+  transition: all 500ms ease;
+
+
+}
 
 /* LOGOWANIE -login */
 

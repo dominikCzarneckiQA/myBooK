@@ -69,7 +69,7 @@
     <div class=" justify-content-center  col-md-10">
         <div class="row">
             <ul class=" nav  nav-navbar  mx-2   col-md-11 justify-content-center  mb-lg-0  ">
-                <li class="nav-item mx-2 col-md-2">
+                <li class="nav-item mx-2 col-md-2 test"  >
                     <a class="nav-link    {% if request.path == home %} active shadow  bg-secondary     {% endif %}"
                        href="{% url 'feed:followers-posts' %}">
                         <i class="fas fa-home h3 "></i>
@@ -119,7 +119,7 @@
 
 {% if request.user.is_authenticated %}
 <img alt="userProfileImg" src="{{ user.profile.profileAvatar.url }}"
-                                         class="rounded-circle  " width="37px" height="37px"/>
+                                         class="rounded-circle shadow-sm " width="37px" height="37px"/>
     <a class="  fw-normal   col-md-1 link" href="{{ profile }} ">
 
         {{ request.user.first_name }} {{ request.user.last_name }}
