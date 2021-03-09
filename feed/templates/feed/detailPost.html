@@ -74,7 +74,8 @@
 <div class=" card mx-auto  text-start     " style="min-height:150px; max-height:488px;    ">
     {% if post.postImages %}
 
-        <div class="container-fluid     img-fluid card border-0 mx-auto  justify-content-center" style="height: 485px; width:auto   ">
+        <div class="container-fluid     img-fluid card border-0 mx-auto  justify-content-center"
+             style="height: 485px; width:auto   ">
 
         {% load thumbnail %}
         {% thumbnail post.postImages "885x465" as im %}
@@ -92,19 +93,40 @@
     </div>
 
     </div>
-    <div class="mx-auto col-md-11 p-2 ">
-        <div class="col-md-5 float-start overflow-auto" style="height: 35px;width: 100px">
-            {% for user in post.postLikes.all %}
-                <a class=" " href="{% url 'userProfile' user.profile.pk %}">
-                    <strong class=" link-primary">
-                        {{ user.username }}
-                    </strong>
-                </a>
 
-            {% endfor %}
-        </div>
-        <div>
+    <div class="mx-auto col-md-11 p-2 ">
+
+
+
+            <div class=" dropdown float-start  mt-2 ">
+             <i class="float-start link-danger fas mt-1 mx-1 fa-heart"></i>
+                <a class=" link-primary " href="#" data-bs-toggle="dropdown" aria-expanded="false">
+
+
+                    {% with allLikes=post.postLikes.count %}
+                        {{ allLikes }}
+                    {% endwith %}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end active">
+
+                    {% for user in post.postLikes.all %}
+                        <li class=" overflow" style="width: 75px; height: 25px ">
+                        <a class="dropdown-item   text-dark " href="{% url 'userProfile' user.profile.pk %}">
+                            <strong class=" link-primary">
+                                <img alt="userProfileImg" src="{{ user.profile.profileAvatar.url }}"
+                                         class="rounded-circle " width="23px" height="23px"/> {{ user.username }}
+                            </strong>
+                        </a>
+                    {% endfor %}
+
+                    </li>
+
+
+                </ul>
+            </div>
+
             {% include 'feed/likes-container.html' %}
+
         </div>
     </div>
 </div>
