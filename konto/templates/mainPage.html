@@ -118,8 +118,10 @@
 
 
 {% if request.user.is_authenticated %}
+<img alt="userProfileImg" src="{{ user.profile.profileAvatar.url }}"
+                                         class="rounded-circle  " width="37px" height="37px"/>
+    <a class="  fw-normal   col-md-1 link" href="{{ profile }} ">
 
-    <a class="  fw-normal  mx-4 col-md-1 link" href="{{ profile }} ">
         {{ request.user.first_name }} {{ request.user.last_name }}
     </a>
 

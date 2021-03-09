@@ -34,103 +34,100 @@
 
         {% endif %}
 
-    {% if request.user == post.postAuthor %}
+        {% if request.user == post.postAuthor %}
 
-        <div>
-    {% else %}
-        <div class="  p-2">
-    {% endif %}
-
-
-<a class="text-decoration-none fw-bold   text-capitalize text-secondary "
-   href="{% url 'userProfile' post.postAuthor.profile.pk %}">
-    <strong class="link-primary">
-        {{ post.postAuthor.get_full_name }} </strong></a> <em
-        class="text-secondary fw-light"> {{ post.postDate }}</em>
-
-{% if request.user == post.postAuthor %}
-    <button type="button" class=" btn" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fas fa-ellipsis-h"></i>
-    </button>
-    <ul class="dropdown-menu ">
-        <li>
-            <a class="dropdown-item   link-success" href="{% url 'feed:update-post' post.pk %}">
-                <i class="far fa-edit "></i> Edit</a>
-        </li>
-        <li>
-            <hr class="dropdown-divider">
-        </li>
-        <li>
-            <a class="dropdown-item  link-danger"
-               href="{% url 'feed:delete-post' post.pk %}">
-                <i class="fas fa-trash-alt    "></i> Delete</a>
-        </li>
-    </ul>
-
-{% endif %}
-
-</div>
-
-<div class=" card mx-auto  text-start     " style="min-height:150px; max-height:488px;    ">
-    {% if post.postImages %}
-
-        <div class="container-fluid     img-fluid card border-0 mx-auto  justify-content-center"
-             style="height: 485px; width:auto   ">
-
-        {% load thumbnail %}
-        {% thumbnail post.postImages "885x465" as im %}
-            <a href="{{ post.postImages.url }}" class="mx-auto border-0">
-                <img src="{{ im.url }}" alt="img" class="  text-center img-fluid img-thumbnail card-img  ">
-            </a>
-        {% endthumbnail %}
-    {% else %}
-        <div class=" card bg-white border-0    text-start    " style="min-height:150px; max-height:488px;">
-        <p class="p-1  ">
-            {{ post.postContent }}
-        </p>
-    {% endif %}
-
-    </div>
-
-    </div>
-
-    <div class="mx-auto col-md-11 p-2 ">
+            <div>
+        {% else %}
+            <div class="  p-2">
+        {% endif %}
 
 
+        <a class="text-decoration-none fw-bold   text-capitalize text-secondary "
+           href="{% url 'userProfile' post.postAuthor.profile.pk %}">
+            <strong class="link-primary">
+                {{ post.postAuthor.get_full_name }} </strong></a> <em
+            class="text-secondary fw-light"> {{ post.postDate }}</em>
 
-            <div class=" dropdown float-start  mt-2 ">
-             <i class="float-start link-danger fas mt-1 mx-1 fa-heart"></i>
-                <a class=" link-primary " href="#" data-bs-toggle="dropdown" aria-expanded="false">
+        {% if request.user == post.postAuthor %}
+            <button type="button" class=" btn" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-ellipsis-h"></i>
+            </button>
+            <ul class="dropdown-menu ">
+                <li>
+                    <a class="dropdown-item   link-success" href="{% url 'feed:update-post' post.pk %}">
+                        <i class="far fa-edit "></i> Edit</a>
+                </li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li>
+                    <a class="dropdown-item  link-danger"
+                       href="{% url 'feed:delete-post' post.pk %}">
+                        <i class="fas fa-trash-alt    "></i> Delete</a>
+                </li>
+            </ul>
 
-
-                    {% with allLikes=post.postLikes.count %}
-                        {{ allLikes }}
-                    {% endwith %}
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end active">
-
-                    {% for user in post.postLikes.all %}
-                        <li class=" overflow" style="width: 75px; height: 25px ">
-                        <a class="dropdown-item   text-dark " href="{% url 'userProfile' user.profile.pk %}">
-                            <strong class=" link-primary">
-                                <img alt="userProfileImg" src="{{ user.profile.profileAvatar.url }}"
-                                         class="rounded-circle " width="23px" height="23px"/> {{ user.username }}
-                            </strong>
-                        </a>
-                    {% endfor %}
-
-                    </li>
-
-
-                </ul>
-            </div>
-
-            {% include 'feed/likes-container.html' %}
+        {% endif %}
 
         </div>
-    </div>
-</div>
-</div>
+
+        <div class=" card mx-auto  text-start     " style="min-height:150px; max-height:488px;    ">
+            {% if post.postImages %}
+
+                <div class="container-fluid     img-fluid card border-0 mx-auto  justify-content-center"
+                     style="height: 485px; width:auto   ">
+
+                {% load thumbnail %}
+                {% thumbnail post.postImages "885x465" as im %}
+                    <a href="{{ post.postImages.url }}" class="mx-auto border-0">
+                        <img src="{{ im.url }}" alt="img" class="  text-center img-fluid img-thumbnail card-img  ">
+                    </a>
+                {% endthumbnail %}
+            {% else %}
+                <div class=" card bg-white border-0    text-start    " style="min-height:150px; max-height:488px;">
+                <p class="p-1  ">
+                    {{ post.postContent }}
+                </p>
+            {% endif %}
+
+            </div>
+
+            </div>
+
+            <div class="mx-auto col-md-11 p-2 ">
+                <div class=" dropdown float-start  mt-2 ">
+                    <i class="float-start link-danger fas mt-1 mx-1 fa-heart"></i>
+                    <a class=" link-primary " href="#" data-bs-toggle="dropdown" aria-expanded="false">
+
+
+                        {% with allLikes=post.postLikes.count %}
+                            {{ allLikes }}
+                        {% endwith %}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end active">
+
+                        {% for user in post.postLikes.all %}
+                            <li style="width: 55px; height: 27px ">
+                            <a class="dropdown-item   text-dark " href="{% url 'userProfile' user.profile.pk %}">
+                                <strong class=" link-primary">
+                                    <img alt="userProfileImg" src="{{ user.profile.profileAvatar.url }}"
+                                         class="rounded-circle " width="23px" height="23px"/> {{ user.username }}
+                                </strong>
+                            </a>
+                        {% endfor %}
+
+                        </li>
+
+
+                    </ul>
+                </div>
+
+                {% include 'feed/likes-container.html' %}
+
+            </div>
+        </div>
+        </div>
+        </div>
 
 
 
