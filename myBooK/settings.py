@@ -136,7 +136,7 @@ MESSAGE_TAGS = {
         messages.SUCCESS: 'alert-success',
         messages.WARNING: 'alert-warning',
         messages.ERROR: 'alert-danger',
- }
+}
 
 LOGIN_URL = '/konto/login/'
 LOGIN_REDIRECT_URL = '/feed/'

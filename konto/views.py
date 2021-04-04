@@ -19,7 +19,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import UserPassesTestMixin
 
 
-
 def entryPageView(request):
     return render(request, 'entryPage.html', {})
 
@@ -63,7 +62,6 @@ def registerView(request):
                 messages.success(request, 'Rejestracja zakończyła się pomyślnie')
                 newUser.save()
                 Profile.objects.create(user=newUser)
-
 
                 return render(request, 'konto/register_success.html',
                               {'nowy_uzytkownik': newUser})
@@ -185,5 +183,3 @@ class UserSearchView(View):
                       {
                           'getProfileList': getProfileList,
                       })
-
-
