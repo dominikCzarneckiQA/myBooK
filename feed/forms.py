@@ -5,7 +5,7 @@ from .models import Post, Comment
 class PostCreateForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['postContent', 'postImages', 'postUrl']
+        fields = ['postContent', 'postImages']
 
         postImages = forms.ImageField(),
         widgets = {
@@ -16,7 +16,7 @@ class PostCreateForm(forms.ModelForm):
                                                  'style': 'resize:none'
                                                  }),
 
-            'postUrl': forms.HiddenInput,
+
 
         }
 
