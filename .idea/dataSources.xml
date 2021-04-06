@@ -7,11 +7,11 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db.sqlite3</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="MySQL - @localhost" uuid="c5e80413-bdb9-4d74-a45d-9f6669a9d41f">
-      <driver-ref>mysql.8</driver-ref>
+    <data-source source="LOCAL" name="app_data" uuid="68c577d5-5dff-4e44-84d8-4c8fa442ff02">
+      <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
     </data-source>
   </component>
 </project>
