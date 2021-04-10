@@ -27,11 +27,12 @@ SECRET_KEY = '8bu)c=!(q&44zrcal6hc!u1jotebgen^lhg!poi3p8ar6=apht'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 THUMBNAIL_DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
 # aktywowanie aplikacji
+
 
 INSTALLED_APPS = [
     'konto.apps.KontoConfig',
@@ -94,6 +95,7 @@ DATABASES = {
         'PORT':'5432',
 
     },
+
 
 }
 

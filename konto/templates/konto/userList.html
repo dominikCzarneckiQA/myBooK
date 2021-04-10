@@ -7,12 +7,14 @@
 {% block content %}
 
     <div class="container ">
+                <h1 class="card  mx-auto   col-md-7  p-1 bg-transparent">Inni Użytkownicy</h1>
 
         <div class="row mt-3  ">
+
+
             <div class="col-md-7   bg-white mx-auto   overflow-auto" style="height:800px">
-                <h3 class=" mx-auto display-4 card-header bg-transparent">Inni Użytkownicy</h3>
                 {% for user in users %}
-                    <div class="card-group mx-1  float-start p-2">
+                    <div class="card-group   float-start p-2">
                         <div class="row ">
                             <div class="mx-auto  ">
                                 <div class="card mt-1  " style="width: 222px; height:255px;">
@@ -42,8 +44,6 @@
                                             <strong class="float-start">Kraj pochodzenia:</strong>
                                             <p class="float-end fw-normal m-0">{{ user.profile.countryOrigin }}</p>
                                         {% endif %}
-
-
                                     </div>
 
                                     <button class=" btn btn-primary disabled fw-bold">Liczba
