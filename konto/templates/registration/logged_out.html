@@ -1,5 +1,5 @@
 {% extends "mainPage.html" %}
-
+{% load static %}
 {% block title %}
     Wylogowano
 {% endblock %}
@@ -11,8 +11,12 @@
                 aby zalogować się ponownie kliknij <a href="{% url "login" %}"> <i class="fas fa-sign-in-alt"></i>
                     ZALOGUJ </a>
             </p>
-            <h1 class="display-4 fw-bold  ">ZAJRZYJ TU PONOWNIE ! <i class="far fa-smile-beam"></i></h1>
+            <h1 class="display-4 fw-bold  ">ZAJRZYJ TU PONOWNIE ! </h1>
+        </div>
+        <div class="mt-5 card-img rounded-pill">
+            <img src="{% static '/characters/stickman.png ' %}" class="rounded-3 border border-2 shadow    " alt="stickman"/>
+
         </div>
     </div>
-    <h1 class="display-2 text-dark chewy  fixed-bottom"> myBooK</h1>
+    <h1 class="display-4  text-dark chewy  fixed-bottom"> myBooK</h1>
 {% endblock %}

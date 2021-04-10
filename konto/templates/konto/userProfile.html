@@ -11,190 +11,215 @@
 
     <div class="container">
 
-            <div class="row gutters-sm ">
-                <div class="col-md-4 mb-3  ">
-                    <div class="card shadow-sm  border border-3">
-                        <div class="card-body   ">
-                            <div class="d-flex flex-column align-items-center text-center" style="height: 290px ">
+        <div class="row gutters-sm ">
+            <div class="col-md-4 mb-3  ">
+                <div class="card shadow-sm  border border-3">
+                    <div class="card-body   ">
+                        <div class="d-flex flex-column align-items-center text-center" style="height: 290px ">
 
 
+                            <a href="{{ getProfile.profileAvatar.url }}">
+                                <img src="{{ getProfile.profileAvatar.url }}" alt="img" class="rounded-circle  "
+                                     width="145px" height="145px"/>
+                            </a>
 
-                                    <a href="{{ getProfile.profileAvatar.url }}">
-                                        <img src="{{ getProfile.profileAvatar.url }}" alt="img" class="rounded-circle  " width="145px" height="145px"/>
-                                    </a>
+                            {% if request.user == getProfile.user %}
+                                <a class="link-primary  " href="{% url 'profile_edit' getProfile.pk %}">
+                                    <p class=" h6"> Edytuj Profil <i class="far fa-edit  link  "></i></p>
+                                </a>
+                            {% endif %}
 
-                                {% if request.user == getProfile.user %}
-                                    <a class="link  " href="{% url 'profile_edit' getProfile.pk %}">
-                                        <p class=" h6"> Edytuj Profil <i class="far fa-edit  link  "></i></p>
-                                    </a>
+                            <div class=" ">
+                                <h5 class="card-header  bg-transparent">{{ getUser.first_name }} {{ getUser.last_name }}</h5>
+                                {% if getProfile.biography %}
+                                    <em class="card card-text border-0 mx-auto"
+                                        style="width:220px;height: 40px">{{ getProfile.biography }}</em>
                                 {% endif %}
+                                <div class=" p-1">
+                                    {% if getUser == request.user %}
+                                        <button class="btn  fw-bold p-2 btn-outline-primary disabled ">
+                                            Obserwujący {{ getNumberFollowers }}
+                                        </button>
 
-                                <div class=" ">
-                                    <h5 class="card-header  bg-transparent">{{ getUser.first_name }} {{ getUser.last_name }}</h5>
-                                    {% if getProfile.biography %}
-                                            <em class="card card-text border-0 mx-auto" style="width:220px;height: 40px">{{ getProfile.biography }}</em>
-                                    {% endif %}
-                                    <div class=" p-1">
-                                        {% if getUser == request.user %}
-                                            <button class="btn  fw-bold p-2 btn-outline-primary disabled ">
-                                                Obserwujący {{ getNumberFollowers }}
-                                            </button>
+                                        <button class="btn  fw-bold p-2 btn-outline-secondary disabled ">
 
-                                            <button class="btn  fw-bold p-2 btn-outline-secondary disabled ">
+                                            Obserwowani 3
 
-                                                Obserwowani 3
+                                        </button>
 
-                                            </button>
+                                    {% else %}
+
+                                        {% if is_follower %}
+                                            <form method="post" class="mt-4  "
+                                                  action="{% url 'user_unfollow' getProfile.pk %}">
+                                                {% csrf_token %}
+                                                <button class="btn btn-danger btn" type="submit" style="width: 200px">
+                                                    Nie obserwuj
+                                                </button>
+                                            </form>
 
                                         {% else %}
 
-                                            {% if is_follower %}
-                                                <form method="post" class="mt-4  "
-                                                      action="{% url 'user_unfollow' getProfile.pk %}">
-                                                    {% csrf_token %}
-                                                    <button class="btn btn-danger btn" type="submit"  style="width: 200px">
-                                                        Nie obserwuj
-                                                    </button>
-                                                </form>
-
-                                            {% else %}
-
-                                                <form method="post" class="mt-4  "
-                                                      action="{% url 'user_follow' getProfile.pk %}" >
-                                                    {% csrf_token %}
-                                                    <button class="btn btn-success " type="submit" style="width: 200px">
-                                                        Obserwuj
-                                                    </button>
-                                                </form>
-                                            {% endif %}
+                                            <form method="post" class="mt-4  "
+                                                  action="{% url 'user_follow' getProfile.pk %}">
+                                                {% csrf_token %}
+                                                <button class="btn btn-success " type="submit" style="width: 200px">
+                                                    Obserwuj
+                                                </button>
+                                            </form>
                                         {% endif %}
-                                    </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="card  p-2 mt-3 border border-3 shadow-sm">
-                        <ul class="list-group list-group-flush border">
-                            <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
-                                <h6 class=""><i class="fab fa-github"></i> Github</h6>
-                                <span class="text-secondary"><a class="page-link border-0">  {{ getProfile.github }}</a>   </span>
-                            </li>
-                            <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
-                                <h6 class=""><i class="fab fa-snapchat-ghost"></i> Snapchat</h6>
-                                <span class="text-secondary"> <a
-                                        class="page-link border-0">{{ getProfile.snapchat }} </a> </span>
-                            </li>
-                            <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
-                                <h6 class=""><i class="fab fa-instagram"></i> Instagram</h6>
-                                <span class="text-secondary"> <a
-                                        class="page-link border-0"> {{ getProfile.instagram }}</a>  </span>
-                            </li>
-                            <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
-                                <h6 class=""><i class="fab fa-facebook"></i> Facebook</h6>
-                                <span class="text-secondary"> <a
-                                        class="page-link border-0">{{ getProfile.facebook }}</a>  </span>
-                            </li>
-                            <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap">
-                                <h6 class=""><i class="fab fa-twitter"></i> Twitter</h6>
-                                <span class="text-secondary"><a class="page-link border-0"> {{ getProfile.twitter }}</a>  </span>
-
-                        </ul>
                     </div>
                 </div>
-                <div class="col-md-8 ">
-                    <div class="card mb-3 shadow-sm  border border-3">
-                        <div class=" ">
-                            <div class="row  ">
-                                <div class="col-sm-3 text-end mt-3">
-                                    <h6 class="m-0 ">Imie :</h6>
-                                </div>
-                                <div class="col-sm-9 mt-3 text-secondary">
-                                    {% if getUser.first_name %}
-                                        {{ getUser.first_name }}
-                                    {% endif %}
-                                </div>
+                {% if getProfile.github or getProfile.snapchat or getProfile.instagram or getProfile.facebook or getProfile.twitter %}
+                    <div class="card  p-2 mt-3 border border-3 shadow-sm">
+                        <ul class="list-group list-group-flush border">
+                            {% if getProfile.github %}
+                                <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
+                                    <h6 class=""><i class="fab fa-github"></i> Github</h6>
+                                    <span class="text-secondary">
+                                        <a href="{{ getProfile.github }}"
+                                           class="page-link border-0">  {{ getProfile.github }}
+                                    </a>
+                                    </span>
+                                </li>
+                            {% endif %}
+                            {% if getProfile.snapchat %}
+                                <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
+                                    <h6 class=""><i class="fab fa-snapchat-ghost"></i> Snapchat</h6>
+                                    <span class="text-secondary"> <a href="{{ getProfile.snapchat }}"
+                                                                     class=" stretched-link page-link border-0">
+
+                                     {{ getProfile.snapchat }}
+
+                                  </a> </span>
+                                </li>
+                            {% endif %}
+                            {% if getProfile.instagram %}
+                                <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
+                                    <h6 class=""><i class="fab fa-instagram"></i> Instagram</h6>
+                                    <span class="text-secondary">
+                                <a href="{{ getProfile.instagram }}" class="page-link border-0">
+
+                                      {{ getProfile.instagram }}
+
+                                </a>
+                            </span>
+                                </li>
+                            {% endif %}
+                            {% if getProfile.facebook %}
+                                <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap ">
+                                    <h6 class=""><i class="fab fa-facebook"></i> Facebook</h6>
+                                    <span class="text-secondary"> <a href {{ getProfile.facebook }}
+                                                                     class="page-link border-0">{{ getProfile.facebook }}</a>  </span>
+                                </li>
+                            {% endif %}
+                            {% if getProfile.twitter %}
+                                <li class="list-group-item align-items-center d-flex justify-content-between flex-wrap">
+                                    <h6 class=""><i class="fab fa-twitter"></i> Twitter</h6>
+                                    <span class="text-secondary"><a href="{{ getProfile.twitter }}"
+                                                                    class="page-link border-0"> {{ getProfile.twitter }}</a>  </span>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-8 ">
+                <div class="card mb-3 shadow-sm  border border-3">
+                    <div class=" ">
+                        <div class="row  ">
+                            <div class="col-sm-3 text-end mt-3">
+                                <h6 class="m-0 ">Imie :</h6>
                             </div>
-                            <hr>
+                            <div class="col-sm-9 mt-3 text-secondary">
+                                {% if getUser.first_name %}
+                                    {{ getUser.first_name }}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3 text-end ">
+                                <h6 class="m-0">Nazwisko :</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {% if getUser.last_name %}
+                                    {{ getUser.last_name }}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <hr>
+                        {% if getProfile.birthDate %}
+
+
                             <div class="row">
-                                <div class="col-sm-3 text-end ">
-                                    <h6 class="m-0">Nazwisko :</h6>
+                                <div class="col-sm-3 text-end">
+                                    <h6 class="m-0">Data Urodzin :</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    {% if getUser.last_name %}
-                                        {{ getUser.last_name }}
-                                    {% endif %}
+
+                                    {{ getProfile.birthDate }}
+
                                 </div>
                             </div>
                             <hr>
-                            {% if getProfile.birthDate %}
-
-
-                                <div class="row">
-                                    <div class="col-sm-3 text-end">
-                                        <h6 class="m-0">Data Urodzin :</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-
-                                        {{ getProfile.birthDate }}
-
-                                    </div>
+                        {% endif %}
+                        {% if getProfile.city %}
+                            <div class="row">
+                                <div class=" col-sm-3 text-end">
+                                    <h6 class="m-0"> Miejscowość :</h6>
                                 </div>
-                                <hr>
-                            {% endif %}
-                            {% if getProfile.city %}
-                                <div class="row">
-                                    <div class=" col-sm-3 text-end">
-                                        <h6 class="m-0"> Miejscowość :</h6>
-                                    </div>
-                                    <div class=" col-sm-9 text-secondary">
-                                        {{ getProfile.city }}
-                                    </div>
+                                <div class=" col-sm-9 text-secondary">
+                                    {{ getProfile.city }}
                                 </div>
+                            </div>
 
-                                <hr>
-                            {% endif %}
-                            {% if getProfile.countryOrigin %}
-                                <div class="row">
-                                    <div class="col-sm-3 mb-3 text-end">
+                            <hr>
+                        {% endif %}
+                        {% if getProfile.countryOrigin %}
+                            <div class="row">
+                                <div class="col-sm-3 mb-3 text-end">
 
-                                        <h6 class="m-0"> Kraj Pochodzenia :</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-
-                                        {{ getProfile.countryOrigin }}
-
-                                    </div>
+                                    <h6 class="m-0"> Kraj Pochodzenia :</h6>
                                 </div>
-                            {% endif %}
-                        </div>
+                                <div class="col-sm-9 text-secondary">
 
+                                    {{ getProfile.countryOrigin }}
+
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
-                    <div class="col-md-12">
 
-                        <div class="card mb-3 border border-3">
+                </div>
+                <div class="col-md-12">
 
-                            <div class="card-body">
-                                <h6 class=" border card-header card-header-tabs link-dark mb-3 fw-bold">Obserwujący
-                                    ({{ getNumberFollowers }})
-                                </h6>
-                                <div class="row">
-                                    <div class="mx-auto col-sm-11  overflow-auto " style="height: 236px">
+                    <div class="card mb-3 border border-3">
+
+                        <div class="card-body">
+                            <h6 class=" border card-header card-header-tabs link-dark mb-3 fw-bold">Obserwujący
+                                ({{ getNumberFollowers }})
+                            </h6>
+                            <div class="row">
+                                <div class="mx-auto col-sm-11  overflow-auto " style="height: 236px">
 
 
-                                        {% for follower in followersList %}
-                                            <div class=" float-start  card border mx-2   page-link  text-capitalize  "
-                                                 style="height: 65px;width: 222px">
-                                                <img alt="userProfileImg" src="{{ follower.profile.profileAvatar.url }}"
-                                                     class="float-start  rounded-circle position-relative " width="45px"
-                                                     height="45px"/>
-                                                <a class=" text-primary card mt-3 bg-transparent border-0 "
-                                                   href="{% url 'userProfile' follower.profile.pk %}">
-                                                 {{ follower.get_full_name }}
-                                                </a>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
+                                    {% for follower in followersList %}
+                                        <div class=" float-start  card border mx-2   page-link  text-capitalize  "
+                                             style="height: 65px;width: 222px">
+                                            <img alt="userProfileImg" src="{{ follower.profile.profileAvatar.url }}"
+                                                 class="float-start  rounded-circle position-relative " width="45px"
+                                                 height="45px"/>
+                                            <a class=" text-primary card mt-3 bg-transparent border-0 "
+                                               href="{% url 'userProfile' follower.profile.pk %}">
+                                                {{ follower.get_full_name }}
+                                            </a>
+                                        </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -202,6 +227,7 @@
                 </div>
             </div>
         </div>
+    </div>
 
 
     <div class="container mt-5 mb-5  ">
@@ -209,12 +235,33 @@
             <div class="col-md-6  shadow-sm     p-1 mx-auto card
                     " style="min-height:150px; max-height:400px">
 
-                <p class="card-header bg-white">
+                <div class="card-header bg-white p-1">
                     <a href="{% url 'userProfile' post.postAuthor.profile.pk %}">
                         <strong class="text-primary"> <i class="fas fa-user text-dark"></i>
                             {{ post.postAuthor.get_full_name }} </strong></a> -
                     <em class="text-secondary "> {{ post.postDate }} </em>
-                </p>
+                    {% if request.user == post.postAuthor %}
+                        <button type="button" class=" btn btn-sm" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                        <ul class="dropdown-menu ">
+                            <li>
+                                <a class="dropdown-item   link-success" href="{% url 'feed:update-post' post.pk %}">
+                                    <i class="far fa-edit "></i> Edit</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item  link-danger"
+                                   href="{% url 'feed:delete-post' post.pk %}">
+                                    <i class="fas fa-trash-alt    "></i> Delete</a>
+                            </li>
+                        </ul>
+
+                    {% endif %}
+                </div>
+
                 <div class="   overflow-hidden text-start p-1 position-relative"
                      style="min-height:150px; max-height:899px;">
                     <div class=" card  border-0  text-start  "

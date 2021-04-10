@@ -60,14 +60,12 @@ a:hover {
 /* ZNACZNIKI GLOBALNE */
 
 
-
-
-
-li:hover {
-    font-weight: bold;
-
-
+li{
+    list-style: none;
 }
+
+
+
 
 .test:hover {
 
