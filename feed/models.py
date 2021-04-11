@@ -26,10 +26,11 @@ class Comment(models.Model):
     def __str__(self):
         return 'Komentarz użytkownika {}'.format(self.commentAuthor)
 
+
 @receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
+def create_user_profile(sender, instance, **kwargs):
+    Profile.objects.get_or_create(user=instance)
+
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):

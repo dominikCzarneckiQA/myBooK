@@ -61,7 +61,6 @@ def registerView(request):
                     userForm.cleaned_data['password1'])
                 messages.success(request, 'Rejestracja zakończyła się pomyślnie')
                 newUser.save()
-                Profile.objects.create(user=newUser)
 
                 return render(request, 'konto/register_success.html',
                               {'nowy_uzytkownik': newUser})
