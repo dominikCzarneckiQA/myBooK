@@ -55,7 +55,7 @@
             <ul class="dropdown-menu ">
                 <li>
                     <a class="dropdown-item   link-success" href="{% url 'feed:update-post' post.pk %}">
-                        <i class="far fa-edit "></i> Edit</a>
+                        <i class="far fa-edit "></i> Edycja</a>
                 </li>
                 <li>
                     <hr class="dropdown-divider">
@@ -63,7 +63,7 @@
                 <li>
                     <a class="dropdown-item  link-danger"
                        href="{% url 'feed:delete-post' post.pk %}">
-                        <i class="fas fa-trash-alt    "></i> Delete</a>
+                        <i class="fas fa-trash-alt    "></i> Usun</a>
                 </li>
             </ul>
 
@@ -111,7 +111,7 @@
                             <a class="dropdown-item   text-dark " href="{% url 'userProfile' user.profile.pk %}">
                                 <strong class=" link-primary">
                                     <img alt="userProfileImg" src="{{ user.profile.profileAvatar.url }}"
-                                         class="rounded-circle " width="23px" height="23px"/> {{ user.username }}
+                                         class="rounded-circle " width="23px" height="23px"/> {{ user.first_name }}
                                 </strong>
                             </a>
                         {% endfor %}

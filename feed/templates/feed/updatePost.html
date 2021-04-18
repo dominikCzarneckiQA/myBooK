@@ -21,13 +21,13 @@
                     {% csrf_token %}
 
                     <div class="card img-thumbnail">
-                        {{ form|crispy }}
+                        {{ form | crispy }}
                         {% if post.postImages %}
                             <img src="{{ post.postImages.url }}" alt="img">
                         {% endif %}
                     </div>
                 </div>
-                <button type="submit" class="  btn btn-outline-success w-25  fw-bold  p-2 mb-3  rounded  ">
+                <button type="submit" class="mt-2  btn btn-outline-success w-25  fw-bold  p-2 mb-3  rounded  ">
                     Zaktualizuj
                 </button>
                 <br/><br/>

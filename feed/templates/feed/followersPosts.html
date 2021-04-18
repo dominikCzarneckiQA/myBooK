@@ -8,7 +8,7 @@
 {% block content %}
 
     <div class="container ">
-        <div class="mx-auto bg-white col-md-5    mb-2 ">
+        <div class="mx-auto bg-white col-md-5    mb-3 ">
 
             <form class="fw-normal shadow-sm  p-2 mt-2" method="POST" enctype="multipart/form-data">
 
@@ -21,7 +21,7 @@
 
         {% for post in followersPosts %}
 
-            <div class="col-md-5  mx-auto card
+            <div class="col-md-5   shadow mx-auto card
                     overflow-hidden" style="min-height:150px; max-height:500px">
 
                 <div class="card-header border-0  ">
@@ -49,7 +49,7 @@
 
 
             {% with allLikes=post.postLikes.count %}
-                <button class=" disabled fw-bold btn bg-white  border  col-md-5 text-danger">
+                <button class=" disabled fw-bold btn bg-white  border  col-md-5 col-12 text-danger">
                     <i class="fas fa-heart"></i> {{ allLikes }}
                 </button>
             {% endwith %}

@@ -73,14 +73,14 @@
                 <li class="nav-item mx-2 col-md-2 test"  >
                     <a class="nav-link    {% if request.path == home %} active shadow  bg-secondary     {% endif %}"
                        href="{% url 'feed:followers-posts' %}">
-                        <i class="fas fa-home h3 "></i>
+                        <i class="fas fa-home h2 "></i>
                     </a>
                 </li>
 
                 <li class=" nav-item mx-2 col-md-2 ">
                     <a class="nav-link {% if request.path == news %} active shadow   bg-secondary {% endif %}"
                        href="{% url 'feed:new-posts' %}">
-                        <i class="fas h3 fa-clipboard"></i>
+                        <i class="fas h2  fa-newspaper"></i>
                     </a>
                 </li>
 
@@ -89,7 +89,7 @@
 
                        data-toggle="tab"
                        href="{% url 'all_users' %}">
-                        <i class="fas fa-user-friends h3"></i>
+                        <i class="fas fa-user-friends h2"></i>
                     </a>
                 </li>
 
@@ -97,7 +97,7 @@
                     <a class="nav-link  {% if request.path == profiledropdown %} active shadow   bg-secondary {% endif %}"
                        href="#"
                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-circle h3 "></i>
+                        <i class="fas fa-user-circle h2 "></i>
                     </a>
                     <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
 
@@ -128,7 +128,7 @@
 
     <div class="dropdown ">
         <button class=" btn  btn-sm btn-outline-danger   " data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-chevron-down"></i>
+            <i class="fas fa-chevron-down  "></i>
         </button>
         <ul class="dropdown-menu dropdown-menu-end active">
             <li>

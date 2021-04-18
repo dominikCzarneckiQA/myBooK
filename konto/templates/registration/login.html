@@ -1,4 +1,5 @@
 {% extends "mainPage.html" %}
+{% load crispy_forms_filters %}
 {% block title %}
     Logowanie
 {% endblock %}
@@ -10,15 +11,15 @@
                 <input type="hidden" name="{{ redirect_field_name }}" value="{ redirect_field_name }"/>
             {% endif %}
 
-            <div class="formularz-logowanie p-4">
+            <div class="mx-auto col-md-5 p-4 mt-5">
                 <div class="card p-2  bg-transparent shadow-sm">
                     <div class="card  p-2">
-                        <h1 class="card-header border-secondary">Zaloguj sie</h1>
+                        <h1 class="card-header border border-secondary">Zaloguj sie</h1>
                         <form action="{% url 'login' %}" method="post" class=" card-body">
                             <p>Nie masz konta?<a href="{% url 'register' %}"> Zarejestruj się </a></p>
                             <div class="d-flex justify-content-center ">
-                                <div class=" row w-50   ">
-                                    {{ form.as_table }}
+                                <div class=" row    ">
+                                    {{ form | crispy}}
                                     {% csrf_token %}
                                 </div>
                             </div>

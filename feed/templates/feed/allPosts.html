@@ -12,7 +12,7 @@
 
         {% for post in allPosts %}
 
-            <div class="col-md-5   mx-auto card
+            <div class="col-md-5   shadow  mx-auto card
                     overflow-hidden" style="min-height:150px; max-height:500px">
 
                 <div class="card-header border-0   bg-white">
@@ -43,7 +43,7 @@
                     {% endif %}
                 </div>
                 <div class="img-thumbnail position-relative">
-                    <div class=" card  border-0  text-start  "
+                    <div class=" card rounded border-0  text-start  "
                          style="min-height:150px; max-height:599px;">
                         {{ post.postContent }}
 
@@ -57,7 +57,7 @@
 
 
             {% with allLikes=post.postLikes.count %}
-                <button class=" disabled fw-bold btn bg-white   col-md-5 text-danger">
+                <button class=" disabled fw-bold btn bg-white  border  col-md-5 col-12  text-danger">
                     <i class="fas fa-heart"></i> {{ allLikes }}
                 </button>
             {% endwith %}

@@ -15,7 +15,7 @@
             <div class="col-md-4 mb-3  ">
                 <div class="card shadow-sm  border border-3">
                     <div class="card-body   ">
-                        <div class="d-flex flex-column align-items-center text-center" style="height: 290px ">
+                        <div class="d-flex flex-column align-items-center text-center" style="height: 295px ">
 
 
                             <a href="{{ getProfile.profileAvatar.url }}">
@@ -24,7 +24,7 @@
                             </a>
 
                             {% if request.user == getProfile.user %}
-                                <a class="link-primary  " href="{% url 'profile_edit' getProfile.pk %}">
+                                <a class="link-primary mt-1 " href="{% url 'profile_edit' getProfile.pk %}">
                                     <p class=" h6"> Edytuj Profil <i class="far fa-edit  link  "></i></p>
                                 </a>
                             {% endif %}
@@ -37,15 +37,10 @@
                                 {% endif %}
                                 <div class=" p-1">
                                     {% if getUser == request.user %}
-                                        <button class="btn  fw-bold p-2 btn-outline-primary disabled ">
+                                        <button class="btn mt-1 fw-bold p-2 btn-outline-primary disabled ">
                                             Obserwujący {{ getNumberFollowers }}
                                         </button>
 
-                                        <button class="btn  fw-bold p-2 btn-outline-secondary disabled ">
-
-                                            Obserwowani 3
-
-                                        </button>
 
                                     {% else %}
 
@@ -128,14 +123,14 @@
                     </div>
                 {% endif %}
             </div>
-            <div class="col-md-8 ">
+            <div class="col-md-8  col-sm-8 ">
                 <div class="card mb-3 shadow-sm  border border-3">
-                    <div class=" ">
+                    <div class="mt-3">
                         <div class="row  ">
-                            <div class="col-sm-3 text-end mt-3">
+                            <div class="col-md-3 text-center ">
                                 <h6 class="m-0 ">Imie :</h6>
                             </div>
-                            <div class="col-sm-9 mt-3 text-secondary">
+                            <div class="col-md-9  text-secondary">
                                 {% if getUser.first_name %}
                                     {{ getUser.first_name }}
                                 {% endif %}
@@ -143,7 +138,7 @@
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-sm-3 text-end ">
+                            <div class="col-sm-3 text-center ">
                                 <h6 class="m-0">Nazwisko :</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
@@ -153,11 +148,10 @@
                             </div>
                         </div>
                         <hr>
+
                         {% if getProfile.birthDate %}
-
-
                             <div class="row">
-                                <div class="col-sm-3 text-end">
+                                <div class="col-sm-3 text-center">
                                     <h6 class="m-0">Data Urodzin :</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
@@ -170,7 +164,7 @@
                         {% endif %}
                         {% if getProfile.city %}
                             <div class="row">
-                                <div class=" col-sm-3 text-end">
+                                <div class=" col-sm-3 text-center">
                                     <h6 class="m-0"> Miejscowość :</h6>
                                 </div>
                                 <div class=" col-sm-9 text-secondary">
@@ -181,13 +175,12 @@
                             <hr>
                         {% endif %}
                         {% if getProfile.countryOrigin %}
-                            <div class="row">
-                                <div class="col-sm-3 mb-3 text-end">
+                            <div class="row mb-3">
+                                <div class="col-sm-3  text-center">
 
                                     <h6 class="m-0"> Kraj Pochodzenia :</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-
                                     {{ getProfile.countryOrigin }}
 
                                 </div>
@@ -196,31 +189,30 @@
                     </div>
 
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12  ">
 
                     <div class="card mb-3 border border-3">
 
-                        <div class="card-body">
-                            <h6 class=" border card-header card-header-tabs link-dark mb-3 fw-bold">Obserwujący
+                        <div class="card-body mx-sm-auto">
+                            <h6 class="  card-header card-header-tabs link-dark mb-3 fw-bold">Obserwujący
                                 ({{ getNumberFollowers }})
                             </h6>
-                            <div class="row">
-                                <div class="mx-auto col-sm-11  overflow-auto " style="height: 236px">
+
+                            <div class="   mx-5   overflow-auto " style="height: 236px">
 
 
-                                    {% for follower in followersList %}
-                                        <div class=" float-start  card border mx-2 mt-2  page-link  text-capitalize  "
-                                             style="height: 65px;width: 222px">
-                                            <img alt="userProfileImg" src="{{ follower.profile.profileAvatar.url }}"
-                                                 class="float-start  rounded-circle position-relative " width="45px"
-                                                 height="45px"/>
-                                            <a class=" text-primary card mt-3 bg-transparent border-0 "
-                                               href="{% url 'userProfile' follower.profile.pk %}">
-                                                {{ follower.get_full_name }}
-                                            </a>
-                                        </div>
-                                    {% endfor %}
-                                </div>
+                                {% for follower in followersList %}
+                                    <div class=" float-start    card border  mt-2 mx-2  page-link  text-capitalize  "
+                                         style="height: 65px;width: 222px">
+                                        <img alt="userProfileImg" src="{{ follower.profile.profileAvatar.url }}"
+                                             class="float-start  rounded-circle position-relative " width="45px"
+                                             height="45px"/>
+                                        <a class=" text-primary card mt-3 bg-transparent border-0 "
+                                           href="{% url 'userProfile' follower.profile.pk %}">
+                                            {{ follower.get_full_name }}
+                                        </a>
+                                    </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -247,7 +239,7 @@
                         <ul class="dropdown-menu ">
                             <li>
                                 <a class="dropdown-item   link-success" href="{% url 'feed:update-post' post.pk %}">
-                                    <i class="far fa-edit "></i> Edit</a>
+                                    <i class="far fa-edit "></i> Edycja</a>
                             </li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -255,7 +247,7 @@
                             <li>
                                 <a class="dropdown-item  link-danger"
                                    href="{% url 'feed:delete-post' post.pk %}">
-                                    <i class="fas fa-trash-alt    "></i> Delete</a>
+                                    <i class="fas fa-trash-alt    "></i> Usuń</a>
                             </li>
                         </ul>
 
@@ -277,13 +269,15 @@
             </div>
 
             {% with allLikes=post.postLikes.count %}
-                <button class=" disabled fw-bold btn bg-white border border-2 col-md-6 text-danger">
+
+                <button class=" disabled fw-bold btn bg-white border border-2    col-md-6 col-12 text-danger">
                     <i class="fas fa-heart"></i> {{ allLikes }}
                 </button>
+
             {% endwith %}
         {% endfor %}
     </div>
-    <footer class="bs-popover-bottom">
+    <footer class="bs-popover-bottom ">
         <p class=" font-italic fw-light"><em> © 2020-2021 myBooK Dominik Czarnecki</em></p>
     </footer>
 {% endblock %}

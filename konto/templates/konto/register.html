@@ -3,14 +3,14 @@
 {% block title %}Panel Rejestracyjny{% endblock %}
 {% block content %}
     <div class="container">
-        <div class="row">
+        <div class="row col-md-12 ">
         <div class="w-25 mt-1">
             <a href="{% url 'login' %}" class="btn btn-outline-secondary mt-2 "> Powrót do Logowania </a>
         </div>
         <h1>Zarejestruj się</h1>
         <p>Aby utworzyć konto, proszę o wypełnienie poniższego formularza :</p>
 
-            <form class=" mx-auto card w-25  fw-normal border border-1 p-2 text-secondary" method="post">
+            <form class=" mx-auto card col-md-4  fw-normal border border-1 p-2 text-secondary" method="post">
                 {% csrf_token %}
                 {{ user_form.as_p }}
 

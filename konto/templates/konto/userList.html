@@ -9,15 +9,15 @@
     <div class="container ">
                 <h1 class="card  mx-auto   col-md-7  p-1 bg-transparent">Inni Użytkownicy</h1>
 
-        <div class="row mt-3  ">
+        <div class="row mt-3 ">
 
 
-            <div class="col-md-7   bg-white mx-auto   overflow-auto" style="height:800px">
+            <div class="col-md-9  bg-white mx-auto " >
                 {% for user in users %}
-                    <div class="card-group   float-start p-2">
-                        <div class="row ">
-                            <div class="mx-auto  ">
-                                <div class="card mt-1  " style="width: 222px; height:255px;">
+                    <div class="card-group mx-auto  float-md-start p-2">
+                        <div class="row  ">
+                            <div class="   ">
+                                <div class="card mt-1    " style="width: 222px; height:255px;">
                                     <img alt="userProfileImg" src="{{ user.profile.profileAvatar.url }}"
                                          class="rounded-circle mt-3 mx-auto" width="95px" height="95px"/>
                                     <div class="card-body">
@@ -46,7 +46,7 @@
                                         {% endif %}
                                     </div>
 
-                                    <button class=" btn btn-primary disabled fw-bold">Liczba
+                                    <button class=" btn btn-primary disabled  fw-bold">Liczba
                                         Obserwujacych: {{ user.profile.followers.all.count }}</button>
                                 </div>
                             </div>
